@@ -234,14 +234,12 @@ Clock skew = 0.74 - 0.60
 
 สูตรทั่วไปคือ
 
-[
-T_{skew}=T_{latest}-T_{earliest}
-]
+$$T_{skew}=T_{latest}-T_{earliest}$$
 
 โดย
 
-* (T_{latest}) คือ clock arrival time ที่ช้าที่สุด
-* (T_{earliest}) คือ clock arrival time ที่เร็วที่สุด
+* $$T_{latest}$$ คือ clock arrival time ที่ช้าที่สุด
+* $$T_{earliest}$$ คือ clock arrival time ที่เร็วที่สุด
 
 Clock skew เป็นปัจจัยสำคัญต่อ setup และ hold timing โดย LibreLane ระบุว่า hold violation จำนวนมากมีความสัมพันธ์กับ clock skew และแนะนำให้ตรวจสอบ clock skew report เมื่อพบ hold violation หลัง CTS ([LibreLane][2])
 
@@ -527,15 +525,11 @@ create_clock -period 10.000 [get_ports clk_i]
 
 กำหนด clock period เท่ากับ 10 ns
 
-[
-f=\frac{1}{T}
-]
+$$f=\frac{1}{T}$$
 
 ดังนั้น
 
-[
-f=\frac{1}{10\text{ ns}}=100\text{ MHz}
-]
+$$f=\frac{1}{10\text{ ns}}=100\text{ MHz}$$
 
 ### `set_clock_uncertainty`
 
@@ -1302,15 +1296,11 @@ Clock core_clk
 
 คำนวณ
 
-[
-0.742-0.681=0.061\text{ ns}
-]
+$$0.742-0.681=0.061\text{ ns}$$
 
 หรือ
 
-[
-0.061\text{ ns}=61\text{ ps}
-]
+$$0.061\text{ ns}=61\text{ ps}$$
 
 ---
 
