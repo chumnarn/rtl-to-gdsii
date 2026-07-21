@@ -1,5 +1,5 @@
 
-# Lab 1  
+# Lab 01  
 # การติดตั้งสภาพแวดล้อมและตรวจสอบเครื่องมือ  
 ## Environment Setup and Tool Verification
 
