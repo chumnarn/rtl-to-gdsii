@@ -1975,25 +1975,7 @@ make run 2>&1 | tee simulation.log
 
 ---
 
-## 2.32 เกณฑ์การประเมิน
-
-| หัวข้อ | คะแนน |
-|---|---:|
-| โครงสร้าง directory ถูกต้อง | 5 |
-| RTL ถูกต้องและ lint ผ่าน | 15 |
-| Clock และ reset generation | 10 |
-| Normal counting test | 10 |
-| Reset test | 10 |
-| Overflow test | 10 |
-| Self-checking mechanism | 15 |
-| Waveform analysis | 10 |
-| Negative test | 5 |
-| รายงานและการอธิบายผล | 10 |
-| **รวม** | **100** |
-
----
-
-## 2.33 สรุปบทปฏิบัติการ
+## 2.32 สรุปบทปฏิบัติการ
 
 บทปฏิบัติการนี้แสดงกระบวนการ verification พื้นฐานของวงจร sequential ตั้งแต่การอ่าน RTL specification การสร้าง clock และ reset การเขียน self-checking testbench การใช้ reference model การตรวจสอบ overflow และการวิเคราะห์ waveform
 
