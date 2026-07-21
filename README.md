@@ -11,15 +11,15 @@
 
 | Lab | หัวข้อ | เครื่องมือหลัก | ผลลัพธ์สำคัญ |
 | :---- | :---- | :---- | :---- |
-| 1 | Environment Setup & Tool Verification | Nix, LibreLane, Git | สภาพแวดล้อมพร้อมใช้, smoke test ผ่าน |
-| 2 | Counter RTL Simulation & Verification | Verilator, GTKWave | Waveform FST, self-checking testbench PASS |
-| 3 | First RTL-to-GDSII Implementation | LibreLane Classic Flow | GDSII ครั้งแรก, DRC/LVS ผ่าน |
-| 4 | LibreLane Configuration Variables | config.yaml, LibreLane | เข้าใจตัวแปร FP/PL/PDN และผลลัพธ์ |
-| 5 | Floorplan and Pin Placement | OpenROAD, LibreLane | Die/Core กำหนดขนาดได้, Pin ตรงตำแหน่ง |
-| 6 | Synthesis and Static Timing Analysis | Yosys, OpenSTA | Netlist \+ timing report, WNS/TNS |
-| 7 | Placement Optimization | OpenROAD, LibreLane | Global+Detailed Placement ผ่าน legality |
-| 8 | Clock Tree Synthesis | OpenROAD CTS | Clock tree สร้างสำเร็จ, skew ยอมรับได้ |
-| 9 | Global and Detailed Routing | OpenROAD, LibreLane | Routed DEF, DRC=0, overflow=0 |
+| 01 | Environment Setup & Tool Verification | Nix, LibreLane, Git | สภาพแวดล้อมพร้อมใช้, smoke test ผ่าน |
+| 02 | Counter RTL Simulation & Verification | Verilator, GTKWave | Waveform FST, self-checking testbench PASS |
+| 03 | First RTL-to-GDSII Implementation | LibreLane Classic Flow | GDSII ครั้งแรก, DRC/LVS ผ่าน |
+| 04 | LibreLane Configuration Variables | config.yaml, LibreLane | เข้าใจตัวแปร FP/PL/PDN และผลลัพธ์ |
+| 05 | Floorplan and Pin Placement | OpenROAD, LibreLane | Die/Core กำหนดขนาดได้, Pin ตรงตำแหน่ง |
+| 06 | Synthesis and Static Timing Analysis | Yosys, OpenSTA | Netlist \+ timing report, WNS/TNS |
+| 07 | Placement Optimization | OpenROAD, LibreLane | Global+Detailed Placement ผ่าน legality |
+| 08 | Clock Tree Synthesis | OpenROAD CTS | Clock tree สร้างสำเร็จ, skew ยอมรับได้ |
+| 09 | Global and Detailed Routing | OpenROAD, LibreLane | Routed DEF, DRC=0, overflow=0 |
 | 10 | Physical Verification – DRC & LVS | Magic, KLayout, Netgen | DRC=0, LVS "Circuits match" |
 | 11 | Controlling & Debugging the Flow | LibreLane CLI | ควบคุม Step ได้, debug อย่างเป็นระบบ |
 | 12 | Macro Integration | LibreLane, OpenROAD | Top-level \+ Hard Macro, GDSII รวม |
