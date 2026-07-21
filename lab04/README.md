@@ -330,15 +330,11 @@ CLOCK_PERIOD: 20.0
 
 ความถี่คำนวณจาก:
 
-\[
-f = \frac{1}{T}
-\]
+$$f = \frac{1}{T}$$
 
 เมื่อใช้หน่วย MHz และ ns:
 
-\[
-f_{\text{MHz}} = \frac{1000}{T_{\text{ns}}}
-\]
+$$f_{\text{MHz}} = \frac{1000}{T_{\text{ns}}}$$
 
 ตัวอย่าง:
 
@@ -465,32 +461,15 @@ FP_CORE_UTIL: 40
 
 ความสัมพันธ์เชิงแนวคิด:
 
-\[
-\text{Core Utilization}
-=
-\frac{\text{Total Standard Cell Area}}
-{\text{Available Core Area}}
-\times 100
-\]
+$$\text{Core Utilization} = \frac{\text{Total Standard Cell Area}} {\text{Available Core Area}} \times 100$$
 
 ดังนั้น:
 
-\[
-\text{Core Area}
-\approx
-\frac{\text{Standard Cell Area}}
-{\text{Core Utilization}}
-\]
+$$\text{Core Area}\approx\frac{\text{Standard Cell Area}}{\text{Core Utilization}}$$
 
 ถ้า Standard Cell Area เท่ากับ \(4,000\ \mu m^2\) และกำหนด Core utilization เท่ากับ 40%:
 
-\[
-\text{Core Area}
-\approx
-\frac{4,000}{0.40}
-=
-10,000\ \mu m^2
-\]
+$$\text{Core Area}\approx\frac{4,000}{0.40} = 10,000\ \mu m^2$$
 
 พื้นที่ที่เหลือประมาณ 60% ไม่ได้หมายความว่าว่างโดยไม่มีประโยชน์ แต่ใช้เป็นช่องทางสำหรับ Interconnect และ Physical optimization
 
@@ -585,9 +564,7 @@ DIE_AREA: [0, 0, 150, 150]
 - Die height เท่ากับ 150 µm
 - Die area เท่ากับ 22,500 µm²
 
-\[
-A_{\text{die}} = 150 \times 150 = 22,500\ \mu m^2
-\]
+$$A_{\text{die}} = 150 \times 150 = 22,500\ \mu m^2$$
 
 ### ข้อควรระวัง
 
@@ -1262,13 +1239,7 @@ FP_OBSTRUCTIONS:
 
 หมายถึง Blockage ขนาด:
 
-\[
-(40-30) \times (40-30)
-=
-10 \times 10
-=
-100\ \mu m^2
-\]
+$$(40-30) \times (40-30) = 10 \times 10 = 100\ \mu m^2$$
 
 ## 4.14.3 ตรวจสอบขอบเขต
 
@@ -2832,25 +2803,7 @@ lab4_submission/
 
 ---
 
-# 4.36 เกณฑ์ประเมิน
-
-| หัวข้อ | คะแนน |
-|---|---:|
-| Configuration syntax ถูกต้อง | 10 |
-| Flow สามารถรันได้ | 15 |
-| เข้าใจ Relative/Absolute sizing | 10 |
-| วิเคราะห์ Density และ Routability | 15 |
-| Custom pin placement ถูกต้อง | 10 |
-| ใช้ DEF Template ได้ | 10 |
-| ใช้ Obstruction ได้ถูกต้อง | 10 |
-| เก็บและเปรียบเทียบ Metrics | 10 |
-| วิเคราะห์ผลเชิงวิศวกรรม | 5 |
-| รายงานและความสามารถในการทำซ้ำ | 5 |
-| **รวม** | **100** |
-
----
-
-# 4.37 สรุป
+# 4.36 สรุป
 
 ไฟล์ `config.yaml` เป็นส่วนสำคัญที่สุดส่วนหนึ่งของ LibreLane เพราะเป็นตัวเชื่อมระหว่าง RTL, Timing constraints, PDK และ Physical Design Flow
 
