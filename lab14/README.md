@@ -5,19 +5,10 @@ LibreLane ไม่ได้เป็นเพียงคำสั่ง CLI �
 
 สถาปัตยกรรมหลักประกอบด้วย 4 ส่วน:
 
-\[
-\text{Configuration} + \text{Initial State}
-\rightarrow
-\text{Flow}
-\rightarrow
-\text{Steps}
-\rightarrow
-\text{Final State}
-\]
+$$\text{Configuration} + \text{Initial State}\rightarrow\text{Flow}\rightarrow\text{Steps}\rightarrow\text{Final State}$$
 
 LibreLane กำหนดให้แต่ละ `Step` รับ `Configuration` และ `State` เป็นอินพุต แล้วส่งคืน `State` ใหม่ โดย State เก็บตำแหน่งไฟล์ design views เช่น netlist, DEF, GDS, SDF และชุด metrics ที่สะสมระหว่าง flow ส่วน `SequentialFlow` จะส่ง State จาก Step หนึ่งไปยัง Step ถัดไปตามลำดับ.  
 
-:::writing{variant="document" id="71426"}
 ## 14.1 วัตถุประสงค์ของบทปฏิบัติการ
 
 เมื่อจบ Lab นี้ ผู้เรียนจะสามารถ:
@@ -146,9 +137,7 @@ Netgen.LVS
 
 แต่ละ Step มีแนวคิดการทำงานดังนี้:
 
-\[
-State_{out}=Step(Config,State_{in})
-\]
+$$State_{out}=Step(Config,State_{in})$$
 
 Step ไม่ควร:
 
@@ -207,9 +196,7 @@ Flow คือ controller ที่จัดลำดับการเรีย
 
 สำหรับ Sequential Flow:
 
-\[
-State_i=Step_i(State_{i-1},Config)
-\]
+$$State_i=Step_i(State_{i-1},Config)$$
 
 Classic Flow ซึ่งเป็น flow เริ่มต้นของ LibreLane เป็น `SequentialFlow` ที่ดำเนิน Steps ตามลำดับตั้งแต่ lint และ synthesis ไปจนถึง signoff.  
 
@@ -381,9 +368,7 @@ CLOCK_PERIOD: 10.0
 
 กำหนด clock period 10 ns:
 
-\[
-f=\frac{1}{10\text{ ns}}=100\text{ MHz}
-\]
+$$f=\frac{1}{10\text{ ns}}=100\text{ MHz}$$
 
 #### `DIE_AREA`
 
@@ -397,15 +382,11 @@ DIE_AREA:
 
 กำหนด die boundary:
 
-\[
-(x_{min},y_{min},x_{max},y_{max})
-\]
+$$(x_{min},y_{min},x_{max},y_{max})$$
 
 จึงได้ die ขนาด:
 
-\[
-100\ \mu m \times 100\ \mu m
-\]
+$$100\ \mu m \times 100\ \mu m$$
 
 #### `FP_CORE_UTIL`
 
@@ -2851,15 +2832,7 @@ Routing layers
 
 Python สามารถสร้าง experiment matrix:
 
-\[
-N_{runs}
-=
-N_{clock}
-\times
-N_{util}
-\times
-N_{density}
-\]
+$$N_{runs} = N_{clock}\timesN_{util}\timesN_{density}$$
 
 ตัวอย่าง:
 
@@ -2869,9 +2842,7 @@ N_{density}
 
 จำนวน runs:
 
-\[
-3\times4\times3=36
-\]
+$$3\times4\times3=36$$
 
 ---
 
@@ -2912,17 +2883,11 @@ Commit B → LibreLane Run B → Metrics B
 
 เปรียบเทียบ:
 
-\[
-\Delta Area=Area_B-Area_A
-\]
+$$\Delta Area=Area_B-Area_A$$
 
-\[
-\Delta WNS=WNS_B-WNS_A
-\]
+$$\Delta WNS=WNS_B-WNS_A$$
 
-\[
-\Delta Power=Power_B-Power_A
-\]
+$$\Delta Power=Power_B-Power_A$$
 
 ---
 
@@ -3014,9 +2979,7 @@ PL_TARGET_DENSITY_PCT
 
 พร้อมคำนวณ clock frequency เป็น MHz:
 
-\[
-f_{MHz}=\frac{1000}{T_{ns}}
-\]
+$$f_{MHz}=\frac{1000}{T_{ns}}$$
 
 ---
 
