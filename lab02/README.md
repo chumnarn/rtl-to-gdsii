@@ -82,23 +82,16 @@ Physical Design
 
 ความสัมพันธ์ระหว่างคาบและความถี่คือ
 
-\[
-f = \frac{1}{T}
-\]
+$$f = \frac{1}{T}$$
 
 เมื่อ
 
-\[
-T = 10\ \text{ns}
-\]
+$$
+T = 10\ \text{ns}$$
 
 จะได้
 
-\[
-f = \frac{1}{10 \times 10^{-9}}
-  = 100 \times 10^6
-  = 100\ \text{MHz}
-\]
+$$f = \frac{1}{10 \times 10^{-9}}  = 100 \times 10^6   = 100\ \text{MHz}$$
 
 ---
 
@@ -384,15 +377,11 @@ output logic [7:0] count_o
 
 ช่วงค่าที่สามารถแทนได้คือ
 
-\[
-0 \text{ ถึง } 2^8 - 1
-\]
+$$0 \text{ ถึง } 2^8 - 1$$
 
 หรือ
 
-\[
-0 \text{ ถึง } 255
-\]
+$$0 \text{ ถึง } 255$$
 
 ในเลขฐานสิบหกคือ
 
@@ -2025,6 +2014,6 @@ Lint
 ```
 
 เมื่อ simulation แสดง `LAB RESULT: PASS` และ negative test สามารถตรวจพบ RTL ที่ถูกแก้ให้ผิดได้ จึงถือว่า verification environment มีความน่าเชื่อถือในระดับพื้นฐาน และสามารถนำ RTL ไปใช้ในขั้นตอน Logic Synthesis และ RTL-to-GDSII ต่อไปได้
-:::
+
 
 โครงสร้างนี้ตั้งใจแยก **functional simulation** ออกจาก `config.yaml` ของ LibreLane ซึ่งใน repository กำหนด top module เป็น `counter`, ใช้ `counter.sv`, clock port `clk_i` และ clock period 10 ns  
