@@ -2353,11 +2353,7 @@ route__wirelength__max exceeds threshold
 
 Antenna ratio เชิงแนวคิด:
 
-\[
-Antenna\ Ratio =
-\frac{Area\ or\ Perimeter\ of\ Connected\ Metal}
-{Gate\ Area}
-\]
+$$Antenna\ Ratio = \frac{Area\ or\ Perimeter\ of\ Connected\ Metal} {Gate\ Area}$$
 
 ถ้าค่าสูงเกินข้อกำหนดของ PDK จะเกิด antenna violation
 
@@ -2394,17 +2390,7 @@ LibreLane แทนที่ diode insertion strategy แบบเก่าด�
 
 หลัง Routing ค่า delay ประกอบด้วย:
 
-\[
-T_{path}
-=
-T_{cell}
-+
-T_{wire}
-+
-T_{via}
-+
-T_{coupling}
-\]
+$$T_{path} = T_{cell} + T_{wire} + T_{via} + T_{coupling}$$
 
 ก่อน Routing เครื่องมือใช้ estimated RC
 
