@@ -1,0 +1,133 @@
+meta:
+  version: 3
+  flow: Chip
+  substituting_steps:
+    # Magic can report benign overlap markers around some pad structures.
+    Checker.IllegalOverlap: null
+
+DESIGN_NAME: chip_top
+PDK: ihp-sg13g2
+STD_CELL_LIBRARY: sg13g2_stdcell
+
+VERILOG_FILES:
+  - dir::src/counter_core.sv
+  - dir::src/chip_top.sv
+
+VERILOG_DEFINES:
+  - FUNCTIONAL
+
+# Enable the newer SystemVerilog frontend when available.
+USE_SLANG: true
+
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
+
+# ------------------------------------------------------------
+# Pad-ring order; these are synthesized instance names.
+# ------------------------------------------------------------
+
+PAD_SOUTH:
+  - clk_pad
+  - rst_n_pad
+  - enable_pad
+
+PAD_EAST:
+  - "outputs\\[0\\].output_pad"
+  - "outputs\\[1\\].output_pad"
+  - "outputs\\[2\\].output_pad"
+  - "outputs\\[3\\].output_pad"
+
+PAD_NORTH:
+  - "outputs\\[7\\].output_pad"
+  - "outputs\\[6\\].output_pad"
+  - "outputs\\[5\\].output_pad"
+  - "outputs\\[4\\].output_pad"
+
+PAD_WEST:
+  - "vdd_pads\\[0\\].vdd_pad"
+  - "vss_pads\\[0\\].vss_pad"
+  - "iovdd_pads\\[0\\].iovdd_pad"
+  - "iovss_pads\\[0\\].iovss_pad"
+
+# ------------------------------------------------------------
+# Timing
+# ------------------------------------------------------------
+
+PNR_SDC_FILE: dir::constraints/chip_top.sdc
+SIGNOFF_SDC_FILE: dir::constraints/chip_top.sdc
+FALLBACK_SDC: dir::constraints/chip_top.sdc
+
+CLOCK_PORT: clk_PAD
+CLOCK_NET: clk_pad/p2c
+CLOCK_PERIOD: 20.0
+
+# ------------------------------------------------------------
+# Floorplan
+# ------------------------------------------------------------
+
+FP_SIZING: absolute
+DIE_AREA: [0, 0, 1600, 1600]
+CORE_AREA: [365, 365, 1235, 1235]
+
+PL_TARGET_DENSITY_PCT: 10
+GRT_ALLOW_CONGESTION: true
+
+# ------------------------------------------------------------
+# Power distribution
+# ------------------------------------------------------------
+
+VDD_NETS:
+  - VDD
+
+GND_NETS:
+  - VSS
+
+PDN_CORE_RING: true
+PDN_CORE_RING_VWIDTH: 15
+PDN_CORE_RING_HWIDTH: 15
+PDN_CORE_RING_VSPACING: 5
+PDN_CORE_RING_HSPACING: 5
+PDN_CORE_RING_CONNECT_TO_PADS: true
+PDN_ENABLE_PINS: false
+
+# Multiple supply pads feed the same core supply nets.
+MAGIC_EXT_UNIQUE: notopports
+
+# ------------------------------------------------------------
+# Bondpads
+# ------------------------------------------------------------
+
+PAD_BONDPAD_NAME: bondpad_70x70_novias
+PAD_BONDPAD_SIZE: [70, 70]
+
+EXTRA_GDS:
+  - dir::ip/bondpad_70x70_novias/gds/bondpad_70x70_novias.gds
+
+EXTRA_LEFS:
+  - dir::ip/bondpad_70x70_novias/lef/bondpad_70x70_novias.lef
+
+IGNORE_DISCONNECTED_MODULES:
+  - bondpad_70x70_novias
+
+# ------------------------------------------------------------
+# Flow checks
+# ------------------------------------------------------------
+
+RUN_CTS: true
+RUN_ANTENNA_REPAIR: true
+RUN_DRT: true
+RUN_SPEF_EXTRACTION: true
+RUN_MCSTA: true
+RUN_IRDROP_REPORT: false
+
+ERROR_ON_DISCONNECTED_PINS: true
+ERROR_ON_TR_DRC: true
+ERROR_ON_LVS_ERROR: true
+ERROR_ON_MAGIC_DRC: true
+ERROR_ON_KLAYOUT_DRC: true
+
+MAGIC_GDS_FLATGLOB:
+  - "*_CELL_CORNER"
+  - "*_CELL_SUB"
+  - "RSC_*"
+  - "VIA_M1_*"
+  - "VIA_M2_*"
