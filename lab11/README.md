@@ -1,14 +1,4 @@
 
-# Lab 11: Controlling and Debugging the LibreLane Flow  
-## การควบคุมลำดับขั้นตอนและการแก้ปัญหา RTL-to-GDSII ด้วย `config.yaml`
-
-LibreLane แบ่งกระบวนการ RTL-to-GDSII ออกเป็นหน่วยย่อยที่เรียกว่า **Step** แต่ละ Step รับ Configuration และ State จากขั้นตอนก่อนหน้า แล้วสร้าง State ใหม่ส่งต่อไปยังขั้นตอนถัดไป ตัวอย่าง State ได้แก่ synthesized netlist, floorplan DEF, placement DEF, routed DEF, extracted parasitics และ GDSII วิธีแบ่งงานเช่นนี้ช่วยให้สามารถตรวจสอบผลลัพธ์และวิเคราะห์ความผิดพลาดแยกเป็นรายขั้นตอนได้อย่างเป็นระบบ 
-
-โฟลเดอร์ run ของ LibreLane จะมีไดเรกทอรีแยกสำหรับแต่ละ Step เช่น `05-yosys-synthesis`, `10-openroad-floorplan` และ `*-netgen-lvs` พร้อมไฟล์ log, report และ design view ของขั้นตอนนั้น นอกจากนี้ยังมี `resolved.json` ซึ่งบันทึก configuration ที่ผ่านการรวมค่า default, ค่า PDK และค่าจากผู้ใช้แล้ว 
-
-> คำสั่งควบคุมบางตัวอาจแตกต่างเล็กน้อยตาม LibreLane release ที่ติดตั้ง ใน Lab นี้จึงให้ตรวจสอบ `librelane --help` และ `librelane --version` ก่อนเริ่มทดลองเสมอ
-
-:::writing{variant="document" id="43817"}
 # Lab 11: Controlling and Debugging the Flow
 
 ## 11.1 วัตถุประสงค์ของบทปฏิบัติการ
