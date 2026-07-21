@@ -418,7 +418,7 @@ FP_CORE_UTIL: 45
 
 $$Core\ Utilization = \frac{Total\ Standard\ Cell\ Area} {Available\ Core\ Area} \times 100$$
 
-ตัวอย่างเช่น หาก Standard Cell Area เท่ากับ \(4,500\ \mu m^2\) และต้องการ Utilization 45%
+ตัวอย่างเช่น หาก Standard Cell Area เท่ากับ $$4,500\ \mu m^2$$ และต้องการ Utilization 45%
 
 $$Core\ Area = \frac{4500}{0.45} = 10,000\ \mu m^2$$
 
