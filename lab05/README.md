@@ -2062,6 +2062,3 @@ make run
 - Detailed Routing
 - Timing Closure
 - Physical Verification
-:::
-
-ชุดไฟล์ที่พร้อมนำไปวางใน Repository: [lab5_floorplan_pin_placement.zip](sandbox:/mnt/data/lab5_floorplan_pin_placement.zip)
