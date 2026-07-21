@@ -467,7 +467,7 @@ $$\text{Core Utilization} = \frac{\text{Total Standard Cell Area}} {\text{Availa
 
 $$\text{Core Area}\approx\frac{\text{Standard Cell Area}}{\text{Core Utilization}}$$
 
-ถ้า Standard Cell Area เท่ากับ \(4,000\ \mu m^2\) และกำหนด Core utilization เท่ากับ 40%:
+ถ้า Standard Cell Area เท่ากับ $$4,000\ \mu m^2$$ และกำหนด Core utilization เท่ากับ 40%:
 
 $$\text{Core Area}\approx\frac{4,000}{0.40} = 10,000\ \mu m^2$$
 
