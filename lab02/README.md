@@ -1,5 +1,5 @@
 
-# Lab 2  
+# Lab 02  
 # Counter RTL Simulation and Verification
 
 ## 2.1 วัตถุประสงค์ของบทปฏิบัติการ
