@@ -2457,6 +2457,3 @@ tar -tzf lab1_submission.tar.gz
 ```
 
 เมื่อผ่านเกณฑ์ทั้งหมดแล้ว ระบบพร้อมสำหรับ **Lab 2: Counter RTL Simulation and Verification** และการใช้งาน LibreLane ในขั้นตอนต่อไป
-:::
-
-เนื้อหานี้สามารถใช้เป็นแม่แบบมาตรฐานของคู่มือ โดยเพิ่มภาพประกอบหน้า Terminal, แผนภาพ Nix environment และตัวอย่างผลลัพธ์ smoke test ตามเครื่อง Workshop จริงได้
