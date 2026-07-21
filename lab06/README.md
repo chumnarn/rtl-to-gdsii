@@ -2536,24 +2536,7 @@ lab6_synthesis_sta/
 
 ---
 
-# 6.32 เกณฑ์การประเมิน
-
-| หัวข้อ | คะแนน |
-|---|---:|
-| โครงสร้างโครงการถูกต้อง | 10 |
-| RTL สังเคราะห์ได้โดยไม่มี error | 15 |
-| `config.yaml` ถูกต้อง | 15 |
-| SDC constraint ถูกต้อง | 15 |
-| รัน Synthesis สำเร็จ | 10 |
-| รัน STA และอ่านรายงานได้ | 15 |
-| วิเคราะห์ WNS/TNS และ critical path | 10 |
-| ทดลองปรับ clock period | 5 |
-| สรุปผลและอภิปราย | 5 |
-| **รวม** | **100** |
-
----
-
-# 6.33 Checklist ก่อนจบ Lab
+# 6.32 Checklist ก่อนจบ Lab
 
 ## RTL
 
@@ -2596,7 +2579,7 @@ lab6_synthesis_sta/
 
 ---
 
-# 6.34 สรุป
+# 6.33 สรุป
 
 ใน Lab นี้ ผู้เรียนได้ดำเนินการตั้งแต่ RTL จนถึง gate-level netlist และ early timing analysis โดยใช้ LibreLane เป็นตัวควบคุม flow ผ่านไฟล์ `config.yaml`
 
