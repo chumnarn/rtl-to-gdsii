@@ -1,0 +1,25 @@
+# Lab 3: First RTL-to-GDSII Implementation
+# Target PDK: IHP SG13G2
+
+DESIGN_NAME: counter
+
+VERILOG_FILES:
+  - dir::rtl/counter.sv
+
+# Enable the modern SystemVerilog frontend when supported by the installed
+# LibreLane/PDK environment.
+USE_SLANG: true
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 10.0
+
+# Explicit top-level parameters used during elaboration.
+SYNTH_PARAMETERS:
+  - WIDTH=8
+
+# Conservative floorplan utilization for this small block.
+FP_CORE_UTIL: 35
+
+# Deterministic pin placement for the lab.
+FP_PIN_ORDER_CFG: dir::pin_order.cfg
+
