@@ -91,17 +91,15 @@ Clock Tree Synthesis
 
 Global Placement พยายามกำหนดตำแหน่งโดยประมาณให้ Standard Cell ทุกตัว โดยพิจารณา objective หลัก เช่น
 
-\[
-Cost = \alpha W + \beta D + \gamma T + \delta C
-\]
+$$Cost = \alpha W + \beta D + \gamma T + \delta C$$
 
 เมื่อ
 
-- \(W\) คือ Wirelength Cost
-- \(D\) คือ Density Penalty
-- \(T\) คือ Timing Cost
-- \(C\) คือ Congestion หรือ Routability Cost
-- \(\alpha,\beta,\gamma,\delta\) คือน้ำหนักของแต่ละ objective
+- $$W$$ คือ Wirelength Cost
+- $$D$$ คือ Density Penalty
+- $$T$$ คือ Timing Cost
+- $$C$$ คือ Congestion หรือ Routability Cost
+- $$\alpha,\beta,\gamma,\delta$$ คือน้ำหนักของแต่ละ objective
 
 Global Placement ยังไม่บังคับให้ทุกเซลล์อยู่ตรงกับ Placement Site อย่างสมบูรณ์ และอาจมีการซ้อนทับของเซลล์ระหว่างกระบวนการ Optimization
 
@@ -115,11 +113,7 @@ Metric ที่นิยมใช้ประเมิน Placement เบื�
 
 สำหรับ Net ที่มีตำแหน่ง Pin หลายจุด
 
-\[
-HPWL =
-(x_{\max}-x_{\min})+
-(y_{\max}-y_{\min})
-\]
+$$HPWL = (x_{\max}-x_{\min})+(y_{\max}-y_{\min})$$
 
 ค่า HPWL ที่ต่ำมักหมายถึงระยะเชื่อมต่อโดยรวมสั้นลง แต่ไม่ได้รับประกันว่า Routing จะไม่มี Congestion เพราะ Net จำนวนมากอาจถูกรวมอยู่ในบริเวณเดียวกัน
 
@@ -422,20 +416,11 @@ FP_CORE_UTIL: 45
 
 นิยามโดยประมาณคือ
 
-\[
-Core\ Utilization =
-\frac{Total\ Standard\ Cell\ Area}
-     {Available\ Core\ Area}
-\times 100
-\]
+$$Core\ Utilization = \frac{Total\ Standard\ Cell\ Area} {Available\ Core\ Area} \times 100$$
 
 ตัวอย่างเช่น หาก Standard Cell Area เท่ากับ \(4,500\ \mu m^2\) และต้องการ Utilization 45%
 
-\[
-Core\ Area =
-\frac{4500}{0.45}
-= 10,000\ \mu m^2
-\]
+$$Core\ Area = \frac{4500}{0.45} = 10,000\ \mu m^2$$
 
 ค่า Core Utilization ต่ำทำให้
 
@@ -1823,10 +1808,7 @@ PL_WIRE_LENGTH_COEF: 0.30
 
 Placement Optimization เป็นกระบวนการหาสมดุลระหว่าง
 
-\[
-Area \leftrightarrow Timing \leftrightarrow Wirelength
-\leftrightarrow Density \leftrightarrow Routability
-\]
+$$Area \leftrightarrow Timing \leftrightarrow Wirelength \leftrightarrow Density \leftrightarrow Routability$$
 
 Configuration ที่มี Core เล็กที่สุดหรือ HPWL ต่ำที่สุดไม่จำเป็นต้องเป็น Configuration ที่ดีที่สุด
 
@@ -1855,6 +1837,4 @@ Placement ที่เหมาะสมต้อง
 ```
 
 LibreLane ทำให้สามารถกำหนดและตรวจสอบ Placement Configuration ผ่าน `config.yaml` ได้อย่างเป็นระบบ ส่วน OpenROAD ทำหน้าที่ Global Placement, Detailed Placement, Timing Optimization และ Routability Optimization ภายใน Flow เดียวกัน
-:::
 
-เนื้อหานี้สามารถใช้เป็นบทต่อจาก **Lab 6: Synthesis and Static Timing Analysis** และก่อน **Lab 8: Clock Tree Synthesis** ได้โดยตรง.
