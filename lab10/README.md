@@ -2114,6 +2114,3 @@ Physical Status : DRC-clean and LVS-clean
 ```
 
 อย่างไรก็ตาม การผ่าน DRC และ LVS เพียงอย่างเดียวยังไม่ใช่ Tapeout Signoff ทั้งหมด การออกแบบจริงยังต้องตรวจสอบ Timing, Antenna, IR Drop, Power Integrity, Density, Reliability และกฎเฉพาะของโรงงานผลิตเพิ่มเติม
-:::
-
-เนื้อหานี้จัดรูปแบบให้ต่อเนื่องกับ Lab 1–9 และสามารถใช้ `counter` จาก Lab ก่อนหน้าเป็น design under test ได้ทันที
