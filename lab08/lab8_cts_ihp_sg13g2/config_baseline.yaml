@@ -1,0 +1,27 @@
+meta:
+  version: 3
+  flow: Classic
+
+DESIGN_NAME: cts_demo
+
+VERILOG_FILES:
+  - dir::src/cts_demo.sv
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+
+PNR_SDC_FILE: dir::constraints/pnr.sdc
+SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
+FALLBACK_SDC: dir::constraints/pnr.sdc
+
+VDD_NETS: [VDD]
+GND_NETS: [VSS]
+
+FP_SIZING: relative
+FP_CORE_UTIL: 35
+FP_ASPECT_RATIO: 1.0
+PL_TARGET_DENSITY_PCT: 45
+
+RUN_CTS: true
+RUN_POST_CTS_RESIZER_TIMING: true
+QUIT_ON_TIMING_VIOLATIONS: false

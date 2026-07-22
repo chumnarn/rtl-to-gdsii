@@ -1,0 +1,82 @@
+meta:
+  version: 3
+  flow: Classic
+
+# ============================================================
+# Lab 8: Clock Tree Synthesis — IHP SG13G2
+# ============================================================
+
+DESIGN_NAME: cts_demo
+
+VERILOG_FILES:
+  - dir::src/cts_demo.sv
+
+# Better SystemVerilog frontend can be enabled if required:
+# USE_SLANG: true
+
+# ------------------------------------------------------------
+# Clock and timing constraints
+# ------------------------------------------------------------
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+
+PNR_SDC_FILE: dir::constraints/pnr.sdc
+SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
+FALLBACK_SDC: dir::constraints/pnr.sdc
+
+# ------------------------------------------------------------
+# Power nets used by the SG13G2 standard-cell library
+# ------------------------------------------------------------
+
+VDD_NETS:
+  - VDD
+
+GND_NETS:
+  - VSS
+
+# ------------------------------------------------------------
+# Floorplan
+# ------------------------------------------------------------
+
+FP_SIZING: relative
+FP_CORE_UTIL: 35
+FP_ASPECT_RATIO: 1.0
+
+# Keep enough free placement area for CTS and hold-fix buffers.
+PL_TARGET_DENSITY_PCT: 45
+
+# ------------------------------------------------------------
+# Clock Tree Synthesis
+# ------------------------------------------------------------
+
+RUN_CTS: true
+RUN_POST_CTS_RESIZER_TIMING: true
+
+CTS_SINK_CLUSTERING_ENABLE: true
+CTS_SINK_CLUSTERING_SIZE: 16
+CTS_SINK_CLUSTERING_MAX_DIAMETER: 50
+
+CTS_OBSTRUCTION_AWARE: true
+CTS_BALANCE_LEVELS: true
+
+# Use a moderate clock NDR strategy.
+CTS_APPLY_NDR: root_only
+
+# Deliberately do not override CTS_ROOT_BUFFER or CTS_CLK_BUFFERS.
+# The ihp-sg13g2 PDK configuration selects valid SG13G2 clock cells.
+
+# ------------------------------------------------------------
+# Post-CTS timing optimization
+# ------------------------------------------------------------
+
+PL_RESIZER_SETUP_SLACK_MARGIN: 0.10
+PL_RESIZER_HOLD_SLACK_MARGIN: 0.20
+PL_RESIZER_ALLOW_SETUP_VIOS: false
+
+# ------------------------------------------------------------
+# Routing and completion behavior
+# ------------------------------------------------------------
+
+GRT_ALLOW_CONGESTION: false
+QUIT_ON_TIMING_VIOLATIONS: false
