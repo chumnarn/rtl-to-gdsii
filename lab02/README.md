@@ -1117,6 +1117,9 @@ counter_tb.error_count
 8. ทำเช่นเดียวกันกับ `expected_count`
 9. กด Zoom Fit เพื่อแสดง waveform ทั้งหมด
 
+
+![GtkWave](img/gtkwave.png)
+
 ---
 
 ## 2.17 สิ่งที่ต้องสังเกตจาก Waveform
