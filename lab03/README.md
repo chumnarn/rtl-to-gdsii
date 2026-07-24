@@ -101,6 +101,10 @@ DRC / LVS / Antenna
        |
        v
 GDSII
+
+![RTL-to-GDSII](img/RTL-to-GDSII (2).png)
+
+
 ```
 
 LibreLane ทำหน้าที่เป็น flow controller โดยเรียกใช้เครื่องมือ open-source หลายรายการ เช่น
