@@ -106,13 +106,13 @@ pwd
 กรณียังไม่ได้ดาวน์โหลด repository ให้ใช้คำสั่ง
 
 ```bash
-git clone https://github.com/chumnarn/heichips26-digital-workshop.git
+git clone https://github.com/chumnarn/heichips26-digital-workshop.git ~/heichips26-digital-workshop
 ```
 
 เข้าไปยัง repository
 
 ```bash
-cd heichips26-digital-workshop
+cd ~/heichips26-digital-workshop
 ```
 
 ตรวจสอบไฟล์และโฟลเดอร์
