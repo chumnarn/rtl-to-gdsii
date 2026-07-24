@@ -963,6 +963,21 @@ verilator \
 
 หากลืม `--timing` Verilator อาจรายงานว่า simulation ต้องเลือกระหว่าง `--timing` และ `--no-timing`
 
+
+หาก รัน verilator แล้วมีรานงานข้อผิดพลาด ให้ทำการแก้ไขไฟล์ที่เกี่ยวข้อง ให้ถูกต้อง เช่น  เช่นไฟล์ counter.sv
+
+```systemverilog
+%Warning-TIMESCALEMOD: rtl/counter.sv:3:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
+    3 | module counter (
+      |        ^~~~~~~
+                       tb/counter_tb.sv:3:8: ... Location of module with timescale
+    3 | module counter_tb;
+      |        ^~~~~~~~~~
+                       ... For warning description see https://verilator.org/warn/TIMESCALEMOD?v=5.044
+                       ... Use "/* verilator lint_off TIMESCALEMOD */" and lint_on around source to disable this message
+```
+
+
 ---
 
 ## 2.14 คอมไพล์ Simulation ด้วย Verilator
