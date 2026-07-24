@@ -1533,6 +1533,8 @@ librelane --pdk ihp-sg13g2 config.yaml \
     --flow OpenInOpenROAD
 ```
 
+![OpenInOpenRoad](img/OpenInOpenRoad.png)
+
 repository ระบุว่า `--last-run` ให้ LibreLane ใช้ run directory ล่าสุด และ `--flow OpenInOpenROAD` ใช้ flow สำหรับเปิดฐานข้อมูลใน OpenROAD GUI  
 
 ความหมายของ option คือ
@@ -1655,6 +1657,9 @@ Clock Tree Viewer ควรแสดง
 - branch points
 - sequential endpoints
 - clock depth
+
+
+![Clock Tree Viewer](img/clocktree.png)
 
 สำหรับ Counter ขนาดเล็ก clock tree อาจมีโครงสร้างไม่ซับซ้อน repository อธิบายตัวอย่างว่า clock tree เชื่อมไปยัง flip-flops แปดตัวซึ่งสอดคล้องกับ Counter แปดบิต  
 
@@ -1818,6 +1823,8 @@ librelane --pdk ihp-sg13g2 config.yaml \
 ```
 
 repository ใช้คำสั่งนี้เพื่อเปิด GDS หรือ physical layout ของ run ล่าสุดด้วย KLayout  
+
+![OpenInKLayout](img/klayout.png)
 
 ---
 
