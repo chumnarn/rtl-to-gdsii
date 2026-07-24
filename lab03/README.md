@@ -54,54 +54,8 @@
 
 ลำดับโดยสรุปคือ
 
-```text
-SystemVerilog RTL
-       |
-       v
-RTL Elaboration
-       |
-       v
-Logic Synthesis
-       |
-       v
-Technology Mapping
-       |
-       v
-Floorplanning
-       |
-       v
-Power Distribution Network
-       |
-       v
-IO Pin Placement
-       |
-       v
-Global Placement
-       |
-       v
-Detailed Placement
-       |
-       v
-Clock Tree Synthesis
-       |
-       v
-Global Routing
-       |
-       v
-Detailed Routing
-       |
-       v
-Parasitic Extraction
-       |
-       v
-Static Timing Analysis
-       |
-       v
-DRC / LVS / Antenna
-       |
-       v
-GDSII
-```
+![RTL-to-GDSII](img/RTL-to-GDSII(2).png)
+
 
 LibreLane ทำหน้าที่เป็น flow controller โดยเรียกใช้เครื่องมือ open-source หลายรายการ เช่น
 
@@ -115,7 +69,7 @@ LibreLane ทำหน้าที่เป็น flow controller โดยเ�
 
 ใน repository ตัวอย่าง LibreLane ใช้ Classic Flow ซึ่งประกอบด้วยขั้นตอนย่อย เช่น `Yosys.Synthesis`, `OpenROAD.Floorplan` และ `OpenROAD.GlobalPlacement` ก่อนดำเนินต่อไปจนถึง signoff  
 
-![RTL-to-GDSII](img/RTL-to-GDSII(2).png)
+
 ---
 
 ## 3.4 วงจรที่ใช้ในบทปฏิบัติการ
