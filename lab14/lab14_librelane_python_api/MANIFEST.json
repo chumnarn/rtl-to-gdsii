@@ -1,0 +1,39 @@
+{
+  "project": "lab14_librelane_python_api_ihp_sg13g2",
+  "pdk": "ihp-sg13g2",
+  "files": [
+    ".gitignore",
+    "Makefile",
+    "README.md",
+    "config.yaml",
+    "constraints.sdc",
+    "reports/.gitkeep",
+    "rtl/counter.sv",
+    "run_all.sh",
+    "scripts/01_check_environment.py",
+    "scripts/02_show_flows.py",
+    "scripts/03_show_steps.py",
+    "scripts/04_validate_config.py",
+    "scripts/05_run_classic.py",
+    "scripts/06_run_to_synthesis.py",
+    "scripts/07_export_state.py",
+    "scripts/08_parameter_sweep.py",
+    "scripts/09_custom_synthesis_flow.py",
+    "scripts/10_compare_exported_states.py",
+    "scripts/common.py",
+    "tb/tb_counter.sv"
+  ],
+  "python_syntax_check": {
+    "01_check_environment.py": "PASS",
+    "02_show_flows.py": "PASS",
+    "03_show_steps.py": "PASS",
+    "04_validate_config.py": "PASS",
+    "05_run_classic.py": "PASS",
+    "06_run_to_synthesis.py": "PASS",
+    "07_export_state.py": "PASS",
+    "08_parameter_sweep.py": "PASS",
+    "09_custom_synthesis_flow.py": "PASS",
+    "10_compare_exported_states.py": "PASS",
+    "common.py": "PASS"
+  }
+}

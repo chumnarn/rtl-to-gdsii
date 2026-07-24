@@ -1,0 +1,32 @@
+meta:
+  version: 3
+  flow: Classic
+
+DESIGN_NAME: counter
+
+VERILOG_FILES:
+  - dir::rtl/counter.sv
+
+# Enable a modern SystemVerilog frontend when available.
+USE_SLANG: true
+
+CLOCK_PORT: clk
+CLOCK_PERIOD: 20.0
+
+PNR_SDC_FILE: dir::constraints.sdc
+SIGNOFF_SDC_FILE: dir::constraints.sdc
+FALLBACK_SDC: dir::constraints.sdc
+
+FP_SIZING: absolute
+DIE_AREA: [0, 0, 180, 180]
+CORE_AREA: [20, 20, 160, 160]
+
+PL_TARGET_DENSITY_PCT: 35
+
+VDD_NETS:
+  - VDD
+GND_NETS:
+  - VSS
+
+# Keep the lab focused on a small core implementation.
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
