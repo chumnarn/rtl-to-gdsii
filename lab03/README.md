@@ -101,10 +101,6 @@ DRC / LVS / Antenna
        |
        v
 GDSII
-
-![RTL-to-GDSII](img/RTL-to-GDSII (2).png)
-
-
 ```
 
 LibreLane ทำหน้าที่เป็น flow controller โดยเรียกใช้เครื่องมือ open-source หลายรายการ เช่น
@@ -119,6 +115,7 @@ LibreLane ทำหน้าที่เป็น flow controller โดยเ�
 
 ใน repository ตัวอย่าง LibreLane ใช้ Classic Flow ซึ่งประกอบด้วยขั้นตอนย่อย เช่น `Yosys.Synthesis`, `OpenROAD.Floorplan` และ `OpenROAD.GlobalPlacement` ก่อนดำเนินต่อไปจนถึง signoff  
 
+![RTL-to-GDSII](img/RTL-to-GDSII(2).png)
 ---
 
 ## 3.4 วงจรที่ใช้ในบทปฏิบัติการ
