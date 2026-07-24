@@ -168,27 +168,7 @@ Metrics
 
 ตัวอย่างเส้นทางการเปลี่ยนแปลง State:
 
-```text
-Empty State
-    │
-    ▼
-Synthesized Netlist
-    │
-    ▼
-Floorplanned ODB/DEF
-    │
-    ▼
-Placed ODB/DEF
-    │
-    ▼
-CTS ODB/DEF
-    │
-    ▼
-Routed ODB/DEF
-    │
-    ▼
-GDS + SDF + SPEF + Metrics
-```
+![State](img/state.png)
 
 State เก็บทั้ง path ของ design files และ metrics เช่น area, timing, congestion, DRC และ LVS results.  
 
