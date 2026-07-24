@@ -25,29 +25,7 @@
 
 เส้นทางข้อมูลใน Lab นี้คือ
 
-```text
-RTL SystemVerilog
-       |
-       v
-  RTL Elaboration
-       |
-       v
-Logic Optimization
-       |
-       v
-Technology Mapping
-       |
-       v
-Gate-Level Netlist
-       |
-       +---------------------+
-       |                     |
-       v                     v
- Cell/Area Report      Static Timing Analysis
-                             |
-                             v
-                    WNS / TNS / Critical Path
-```
+![Logic Synthesis and Static Timing Analysis](img/LogicSynthesis.png)
 
 LibreLane เป็นโครงสร้างพื้นฐานสำหรับสร้าง ASIC implementation flow โดยกำหนดค่าการทำงานหลักผ่าน configuration file เพียงไฟล์เดียว และ default flow ที่ใช้ทั่วไปคือ `Classic` flow ส่วนการสังเคราะห์ RTL ภายใน flow ใช้ Yosys และการวิเคราะห์ timing ใช้ OpenROAD/OpenSTA. 
 
