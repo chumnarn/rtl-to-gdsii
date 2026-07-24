@@ -128,6 +128,19 @@ VERSION="24.04 LTS (Noble Numbat)"
 ID=ubuntu
 VERSION_ID="24.04"
 ```
+หรือ
+```bash
+lsb_release -a
+```
+ตัวอย่าง
+
+```text
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 26.04 LTS
+Release:        26.04
+Codename:       resolute
+```
 
 ตรวจสอบสถาปัตยกรรม CPU
 
