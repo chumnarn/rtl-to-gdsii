@@ -1205,14 +1205,14 @@ GDSII เป็นข้อมูลสำคัญที่ใช้ส่ง�
 เมื่อ flow เสร็จสมบูรณ์ ควรพบ summary ของผลตรวจสอบ
 
 ```text
-Antenna
-Passed
+* Antenna
+Passed ✅
 
-LVS
-Passed
+* LVS
+Passed ✅
 
-DRC
-Passed
+* DRC
+Passed ✅
 ```
 
 repository ระบุผลที่คาดหวังจากตัวอย่าง Counter ว่า antenna, LVS และ DRC ผ่าน โดยอาจยังมี warning บางรายการที่ไม่เป็นปัญหาสำหรับการทดลองนี้  
