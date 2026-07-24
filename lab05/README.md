@@ -776,8 +776,9 @@ LibreLane กำหนด section สำหรับทั้งสี่ทิ�
        └──────────────────────┘
                terminal_o
                   South
-![pin_order](img/pin_order.png)
+
 ```
+![pin_order](img/pin_order.png)
 
 ---
 
