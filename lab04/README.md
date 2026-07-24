@@ -439,6 +439,19 @@ RUN_DIR=$(find runs -mindepth 1 -maxdepth 1 -type d | sort | tail -1)
 echo "$RUN_DIR"
 ```
 
+### เปิด run ล่าสุดใน OpenROAD GUI
+
+ใช้คำสั่ง
+
+```bash
+librelane --pdk sky130A config.yaml \
+    --last-run \
+    --flow OpenInOpenROAD
+```
+
+![OpenInOpenRoad](img/OpenInOpenRoad.png)
+
+
 ---
 
 # 4.7 การทดลองที่ 1: Automatic Floorplan
