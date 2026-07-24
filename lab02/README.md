@@ -964,7 +964,7 @@ verilator \
 หากลืม `--timing` Verilator อาจรายงานว่า simulation ต้องเลือกระหว่าง `--timing` และ `--no-timing`
 
 
-หาก รัน verilator แล้วมีรานงานข้อผิดพลาด ให้ทำการแก้ไขไฟล์ที่เกี่ยวข้อง ให้ถูกต้อง เช่น  เช่นไฟล์ counter.sv
+หาก รัน verilator แล้วมีรานงานข้อผิดพลาด ให้ทำการแก้ไขไฟล์ที่เกี่ยวข้อง ให้ถูกต้อง เช่นไฟล์ counter.sv
 
 ```systemverilog
 %Warning-TIMESCALEMOD: rtl/counter.sv:3:8: Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)
