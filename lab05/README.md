@@ -764,20 +764,7 @@ LibreLane กำหนด section สำหรับทั้งสี่ทิ�
 
 ภาพเชิงแนวคิด:
 
-```text
-                 North
-       clk rst_n enable_i load_i
-       ┌──────────────────────┐
-       │                      │
- West  │                      │  East
- count │        CORE          │ data_i
- _o[]  │                      │   []
-       │                      │
-       └──────────────────────┘
-               terminal_o
-                  South
 
-```
 ![pin_order](img/pin_order.png)
 
 ---
