@@ -3,6 +3,8 @@
 
 LibreLane ไม่ได้เป็นเพียงคำสั่ง CLI สำหรับเรียก RTL-to-GDSII flow เท่านั้น แต่ถูกออกแบบเป็น **Python infrastructure library** ซึ่งผู้ใช้สามารถสร้าง เรียก ควบคุม ตรวจสอบ และปรับแต่ง ASIC implementation flow ได้จาก Python script หรือ Jupyter Notebook โดยตรง
 
+![Python API](img/api.png)
+
 สถาปัตยกรรมหลักประกอบด้วย 4 ส่วน:
 
 $$\text{Configuration} + \text{Initial State}\rightarrow\text{Flow}\rightarrow\text{Steps}\rightarrow\text{Final State}$$
