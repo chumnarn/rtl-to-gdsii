@@ -1,0 +1,80 @@
+# =============================================================================
+# Lab 5: Floorplan and Pin Placement
+# Target PDK: IHP SG13G2
+# Flow: LibreLane Classic
+# =============================================================================
+
+meta:
+  version: 3
+  flow: Classic
+
+# -----------------------------------------------------------------------------
+# RTL
+# -----------------------------------------------------------------------------
+DESIGN_NAME: floorplan_demo
+
+VERILOG_FILES:
+  - dir::src/floorplan_demo.sv
+
+# This RTL intentionally uses conservative Verilog-compatible constructs.
+# USE_SLANG may be enabled for designs requiring broader SystemVerilog support.
+# USE_SLANG: true
+
+# -----------------------------------------------------------------------------
+# Clock and timing constraints
+# -----------------------------------------------------------------------------
+CLOCK_PORT: clk
+CLOCK_PERIOD: 10.0
+
+PNR_SDC_FILE: dir::constraints/pnr.sdc
+SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
+FALLBACK_SDC: dir::constraints/signoff.sdc
+
+# -----------------------------------------------------------------------------
+# Power and ground
+# IHP SG13G2 standard cells use VDD and VSS supply names.
+# -----------------------------------------------------------------------------
+VDD_NETS:
+  - VDD
+
+GND_NETS:
+  - VSS
+
+# -----------------------------------------------------------------------------
+# Absolute floorplan
+# Die   : 300 um x 300 um
+# Core  : 260 um x 260 um
+# Margin: 20 um on every side
+# -----------------------------------------------------------------------------
+FP_SIZING: absolute
+DIE_AREA: [0.0, 0.0, 300.0, 300.0]
+CORE_AREA: [20.0, 20.0, 280.0, 280.0]
+
+# Small teaching design; leave ample routing whitespace.
+PL_TARGET_DENSITY_PCT: 35
+
+# -----------------------------------------------------------------------------
+# Deterministic I/O placement
+# -----------------------------------------------------------------------------
+IO_PIN_ORDER_CFG: dir::constraints/pin_order.cfg
+
+# -----------------------------------------------------------------------------
+# Placement/routing policy
+# -----------------------------------------------------------------------------
+GRT_ALLOW_CONGESTION: false
+
+# Keep PDK-provided defaults for:
+# - standard-cell library
+# - routing layer names
+# - tap/end-cap cells
+# - CTS buffers
+# - PDN layer selection
+#
+# This avoids hard-coding revision-sensitive IHP cell or layer names.
+
+# -----------------------------------------------------------------------------
+# IHP-specific overrides
+# -----------------------------------------------------------------------------
+pdk::ihp-sg13g2:
+  # Explicitly retain the same safe density when this PDK is selected.
+  PL_TARGET_DENSITY_PCT: 35
