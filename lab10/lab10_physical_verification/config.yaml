@@ -1,0 +1,43 @@
+meta:
+  version: 2
+  flow: Classic
+
+DESIGN_NAME: counter
+
+VERILOG_FILES:
+  - dir::src/counter.sv
+
+CLOCK_PORT: clk
+CLOCK_PERIOD: 20.0
+
+PNR_SDC_FILE: dir::constraints/pnr.sdc
+SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
+
+# Keep the design intentionally small and uncongested so that the lab
+# focuses on reading and debugging DRC/LVS results.
+FP_SIZING: relative
+FP_CORE_UTIL: 35
+FP_ASPECT_RATIO: 1.0
+PL_TARGET_DENSITY_PCT: 45
+
+GRT_ALLOW_CONGESTION: false
+
+RUN_LINTER: true
+RUN_CTS: true
+RUN_ANTENNA_REPAIR: true
+RUN_DRT: true
+RUN_FILL_INSERTION: true
+RUN_SPEF_EXTRACTION: true
+RUN_MCSTA: true
+
+# Physical verification
+RUN_MAGIC_STREAMOUT: true
+RUN_KLAYOUT_STREAMOUT: true
+RUN_KLAYOUT_XOR: true
+RUN_MAGIC_DRC: true
+RUN_KLAYOUT_DRC: true
+RUN_LVS: true
+
+Odb.CustomIOPlacement:
+  IO_PIN_ORDER_CFG: dir::pin_order.cfg
+  ERRORS_ON_UNMATCHED_IO: both
