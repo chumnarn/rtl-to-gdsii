@@ -47,6 +47,8 @@ Global Placement ของ OpenROAD ใช้อัลกอริทึมจ�
 
 Placement Flow โดยย่อมีลำดับดังนี้
 
+
+
 ```text
 Synthesized Netlist
         |
@@ -80,6 +82,7 @@ Post-Placement STA
         v
 Clock Tree Synthesis
 ```
+![Placement Flow](img/placement.png)
 
 ใน LibreLane แต่ละขั้นตอนของ Flow เป็นหน่วยที่เรียกว่า Step และแต่ละ Step รับ State จากขั้นตอนก่อนหน้า LibreLane รองรับการกำหนด Flow ด้วย Configuration และค่าใน Configuration จะถูกตรวจสอบชนิดและความถูกต้องก่อนเริ่มทำงาน 
 
@@ -1394,6 +1397,9 @@ Placement ล้มเหลวหรือไม่?
                                       |
                                       +-- ไม่ใช่ --> Placement พร้อมเข้าสู่ CTS
 ```
+
+
+![Placement Optimization Decision Tree](img/decisiontree.png)
 
 ---
 
