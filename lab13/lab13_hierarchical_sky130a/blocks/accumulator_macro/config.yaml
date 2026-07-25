@@ -1,0 +1,27 @@
+meta:
+  version: 3
+  flow: Classic
+
+DESIGN_NAME: accumulator_macro
+VERILOG_FILES:
+  - dir::../../rtl/accumulator_macro.sv
+USE_SLANG: true
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+PNR_SDC_FILE: dir::constraints.sdc
+SIGNOFF_SDC_FILE: dir::constraints.sdc
+FALLBACK_SDC: dir::constraints.sdc
+
+VDD_NETS: [VDD]
+GND_NETS: [VSS]
+
+FP_SIZING: absolute
+DIE_AREA: [0, 0, 220, 190]
+CORE_AREA: [15, 15, 205, 175]
+FP_PIN_ORDER_CFG: dir::pin_order.cfg
+PL_TARGET_DENSITY_PCT: 40
+
+PDN_CORE_RING: false
+GRT_ALLOW_CONGESTION: false
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
