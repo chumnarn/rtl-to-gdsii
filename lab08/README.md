@@ -58,55 +58,10 @@ OpenROAD ใช้ CTS engine ที่พัฒนาจาก TritonCTS 2.0 �
 
 ลำดับโดยย่อของ Physical Design คือ
 
-```text
-RTL
- │
- ▼
-Logic Synthesis
- │
- ▼
-Floorplanning
- │
- ▼
-I/O Pin Placement
- │
- ▼
-Power Distribution Network
- │
- ▼
-Global Placement
- │
- ▼
-Placement Optimization
- │
- ▼
-Detailed Placement
- │
- ▼
-Clock Tree Synthesis       ← Lab 8
- │
- ▼
-Post-CTS Optimization
- │
- ▼
-Global Routing
- │
- ▼
-Detailed Routing
- │
- ▼
-Parasitic Extraction
- │
- ▼
-Signoff STA
- │
- ▼
-DRC / LVS
- │
- ▼
-GDSII
 ```
 ![RTL-to-GDSII Flow](img/RTL-to-GDSIIFlow.png)
+
+```
 
 CTS ต้องทำหลัง placement เนื่องจากเครื่องมือต้องทราบตำแหน่งทางกายภาพของ clock sinks ก่อน จึงจะสามารถคำนวณ topology, buffer location และความยาวของ clock branches ได้อย่างเหมาะสม
 
