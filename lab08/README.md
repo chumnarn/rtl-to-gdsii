@@ -106,6 +106,7 @@ DRC / LVS
  ▼
 GDSII
 ```
+![RTL-to-GDSII Flow](img/RTL-to-GDSIIFlow.png)
 
 CTS ต้องทำหลัง placement เนื่องจากเครื่องมือต้องทราบตำแหน่งทางกายภาพของ clock sinks ก่อน จึงจะสามารถคำนวณ topology, buffer location และความยาวของ clock branches ได้อย่างเหมาะสม
 
@@ -168,6 +169,7 @@ Clock Port --> Root Buf -+--> Buffer --> FF
                          +--> Buffer --> Buffer --> FF
                                             └----> FF
 ```
+![Clock tree](img/clocktree.png)
 
 Clock tree ที่ดีควร
 
@@ -312,6 +314,7 @@ Clock port
                  ├── FF
                  └── FF
 ```
+![Post-CTS](img/Post-CTS.png)
 
 หลัง CTS จะเริ่มเห็น
 
@@ -1016,6 +1019,7 @@ clk_i
            ├── leaf_buffer_2
            └── leaf_buffer_3
 ```
+![clock topology](img/clocktopology.png)
 
 จำนวนระดับของ tree ขึ้นกับ
 
