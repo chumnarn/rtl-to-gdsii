@@ -1,0 +1,82 @@
+[
+  {
+    "path": ".gitignore",
+    "bytes": 155
+  },
+  {
+    "path": "Makefile",
+    "bytes": 4006
+  },
+  {
+    "path": "README.md",
+    "bytes": 6268
+  },
+  {
+    "path": "env.sh",
+    "bytes": 386
+  },
+  {
+    "path": "macro/config.yaml",
+    "bytes": 616
+  },
+  {
+    "path": "macro/constraints.sdc",
+    "bytes": 547
+  },
+  {
+    "path": "macro/src/counter_macro.sv",
+    "bytes": 639
+  },
+  {
+    "path": "macros/counter_macro/gds/.gitkeep",
+    "bytes": 0
+  },
+  {
+    "path": "macros/counter_macro/lef/.gitkeep",
+    "bytes": 0
+  },
+  {
+    "path": "macros/counter_macro/nl/.gitkeep",
+    "bytes": 0
+  },
+  {
+    "path": "macros/counter_macro/vh/counter_macro.vh",
+    "bytes": 383
+  },
+  {
+    "path": "scripts/check_tools.sh",
+    "bytes": 1315
+  },
+  {
+    "path": "scripts/collect_macro_views.sh",
+    "bytes": 2371
+  },
+  {
+    "path": "scripts/preflight.py",
+    "bytes": 5129
+  },
+  {
+    "path": "scripts/report_summary.sh",
+    "bytes": 1477
+  },
+  {
+    "path": "scripts/verify_macro_instance.sh",
+    "bytes": 1525
+  },
+  {
+    "path": "top/config.yaml",
+    "bytes": 1147
+  },
+  {
+    "path": "top/constraints.sdc",
+    "bytes": 547
+  },
+  {
+    "path": "top/src/counter_macro.vh",
+    "bytes": 383
+  },
+  {
+    "path": "top/src/macro_wrapper.sv",
+    "bytes": 992
+  }
+]

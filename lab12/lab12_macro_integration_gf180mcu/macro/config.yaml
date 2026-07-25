@@ -1,0 +1,39 @@
+meta:
+  version: 3
+  flow: Classic
+
+DESIGN_NAME: counter_macro
+
+VERILOG_FILES:
+  - dir::src/counter_macro.sv
+
+VERILOG_DEFINES:
+  - USE_POWER_PINS
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+
+PNR_SDC_FILE: dir::constraints.sdc
+SIGNOFF_SDC_FILE: dir::constraints.sdc
+FALLBACK_SDC: dir::constraints.sdc
+
+VDD_NETS:
+  - VDD
+
+GND_NETS:
+  - VSS
+
+FP_SIZING: absolute
+DIE_AREA: [0, 0, 220, 200]
+CORE_AREA: [15, 15, 205, 185]
+
+PL_TARGET_DENSITY_PCT: 30
+GRT_ALLOW_CONGESTION: false
+
+PDN_CORE_RING: true
+PDN_ENABLE_PINS: true
+
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
+
+RUN_POST_CTS_RESIZER_TIMING: true
+RUN_POST_GRT_RESIZER_TIMING: true
