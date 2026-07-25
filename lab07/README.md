@@ -47,41 +47,6 @@ Global Placement ของ OpenROAD ใช้อัลกอริทึมจ�
 
 Placement Flow โดยย่อมีลำดับดังนี้
 
-
-
-```text
-Synthesized Netlist
-        |
-        v
-Floorplan
-        |
-        v
-Tap Cell / Endcap Insertion
-        |
-        v
-PDN Generation
-        |
-        v
-I/O Placement
-        |
-        v
-Global Placement
-        |
-        v
-Timing / Routability Optimization
-        |
-        v
-Detailed Placement
-        |
-        v
-Placement Legality Check
-        |
-        v
-Post-Placement STA
-        |
-        v
-Clock Tree Synthesis
-```
 ![Placement Flow](img/placement.png)
 
 ใน LibreLane แต่ละขั้นตอนของ Flow เป็นหน่วยที่เรียกว่า Step และแต่ละ Step รับ State จากขั้นตอนก่อนหน้า LibreLane รองรับการกำหนด Flow ด้วย Configuration และค่าใน Configuration จะถูกตรวจสอบชนิดและความถูกต้องก่อนเริ่มทำงาน 
