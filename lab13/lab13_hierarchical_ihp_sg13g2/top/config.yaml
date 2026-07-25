@@ -1,0 +1,57 @@
+meta:
+  version: 3
+  flow: Classic
+
+DESIGN_NAME: hier_system
+VERILOG_FILES:
+  - dir::../rtl/hier_system.sv
+USE_SLANG: true
+SLANG_ARGUMENTS: ["--keep-hierarchy"]
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 10.0
+PNR_SDC_FILE: dir::constraints.sdc
+SIGNOFF_SDC_FILE: dir::constraints.sdc
+FALLBACK_SDC: dir::constraints.sdc
+
+VDD_NETS: [VDD]
+GND_NETS: [VSS]
+
+FP_SIZING: absolute
+DIE_AREA: [0, 0, 520, 340]
+CORE_AREA: [10, 10, 510, 330]
+FP_PIN_ORDER_CFG: dir::pin_order.cfg
+PL_TARGET_DENSITY_PCT: 30
+
+PDN_CORE_RING: false
+GRT_ALLOW_CONGESTION: false
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
+
+MACROS:
+  counter_macro:
+    gds:
+      - dir::../macros/counter_macro/gds/counter_macro.gds
+    lef:
+      - dir::../macros/counter_macro/lef/counter_macro.lef
+    vh:
+      - dir::../macros/counter_macro/vh/counter_macro.vh
+    instances:
+      u_counter_macro:
+        location: [40, 105]
+        orientation: N
+
+  accumulator_macro:
+    gds:
+      - dir::../macros/accumulator_macro/gds/accumulator_macro.gds
+    lef:
+      - dir::../macros/accumulator_macro/lef/accumulator_macro.lef
+    vh:
+      - dir::../macros/accumulator_macro/vh/accumulator_macro.vh
+    instances:
+      u_accumulator_macro:
+        location: [300, 100]
+        orientation: N
+
+PDN_MACRO_CONNECTIONS:
+  - "u_counter_macro VDD VSS VDD VSS"
+  - "u_accumulator_macro VDD VSS VDD VSS"
