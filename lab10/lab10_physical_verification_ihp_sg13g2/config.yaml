@@ -1,0 +1,52 @@
+meta:
+  version: 2
+  flow: Classic
+
+# Target PDK:
+#   librelane --pdk ihp-sg13g2 config.yaml
+#
+# The SCL is intentionally not hard-coded. LibreLane selects the default
+# SG13G2 standard-cell library supplied by the installed PDK revision.
+
+DESIGN_NAME: counter
+
+VERILOG_FILES:
+  - dir::src/counter.sv
+
+CLOCK_PORT: clk
+CLOCK_PERIOD: 20.0
+
+PNR_SDC_FILE: dir::constraints/pnr.sdc
+SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
+
+# A low utilization is used so this small teaching design has generous
+# placement and routing space under the SG13G2 technology rules.
+FP_SIZING: relative
+FP_CORE_UTIL: 30
+FP_ASPECT_RATIO: 1.0
+PL_TARGET_DENSITY_PCT: 40
+
+GRT_ALLOW_CONGESTION: false
+
+RUN_LINTER: true
+RUN_CTS: true
+RUN_ANTENNA_REPAIR: true
+RUN_DRT: true
+RUN_FILL_INSERTION: true
+RUN_SPEF_EXTRACTION: true
+RUN_MCSTA: true
+
+# Physical verification.
+# RUN_LVS selects the LVS implementation supported by the installed
+# LibreLane/IHP PDK integration. Newer LibreLane releases provide
+# KLayout.LVS specifically for ihp-sg13g2.
+RUN_MAGIC_STREAMOUT: true
+RUN_KLAYOUT_STREAMOUT: true
+RUN_KLAYOUT_XOR: true
+RUN_MAGIC_DRC: true
+RUN_KLAYOUT_DRC: true
+RUN_LVS: true
+
+Odb.CustomIOPlacement:
+  IO_PIN_ORDER_CFG: dir::pin_order.cfg
+  ERRORS_ON_UNMATCHED_IO: both

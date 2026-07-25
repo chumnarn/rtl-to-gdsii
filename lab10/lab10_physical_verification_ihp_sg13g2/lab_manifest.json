@@ -1,0 +1,14 @@
+{
+  "lab": "Lab 10 Physical Verification: DRC and LVS",
+  "pdk": "ihp-sg13g2",
+  "flow": "Classic",
+  "design": "counter",
+  "clock_period_ns": 20.0,
+  "target_frequency_mhz": 50.0,
+  "verification": [
+    "Magic DRC",
+    "KLayout DRC",
+    "KLayout XOR",
+    "LVS"
+  ]
+}
