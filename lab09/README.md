@@ -25,48 +25,8 @@
 
 ลำดับโดยทั่วไปของกระบวนการ Physical Design คือ
 
-```text
-RTL
- │
- ▼
-Logic Synthesis
- │
- ▼
-Floorplanning
- │
- ▼
-Power Distribution Network
- │
- ▼
-Global Placement
- │
- ▼
-Detailed Placement
- │
- ▼
-Clock Tree Synthesis
- │
- ▼
-Post-CTS Optimization
- │
- ▼
-Global Routing
- │
- ▼
-Detailed Routing
- │
- ▼
-Parasitic Extraction
- │
- ▼
-Post-Route STA
- │
- ▼
-DRC / LVS / Antenna Check
- │
- ▼
-GDSII
-```
+
+![RTL-to-GDSII Flow](img/RTL-to-GDSIIroutingflow.png)
 
 ใน LibreLane ขั้นตอน Routing หลักประกอบด้วย:
 
@@ -114,20 +74,7 @@ Power และ ground มักได้รับการสร้างโค
 
 กระบวนการผลิตวงจรรวมมีโลหะหลายชั้น ตัวอย่างเชิงแนวคิด:
 
-```text
-Top Metal    ─────────────────────
-Metal 5      ─────────────────────
-Via 4               ●
-Metal 4      │ │ │ │ │ │ │ │ │ │
-Via 3               ●
-Metal 3      ─────────────────────
-Via 2               ●
-Metal 2      │ │ │ │ │ │ │ │ │ │
-Via 1               ●
-Metal 1      ─────────────────────
-Local Interconnect
-Standard Cells
-```
+![Routing Layer](img/cross-section.png)
 
 แต่ละชั้นมักมี preferred routing direction เช่น
 
