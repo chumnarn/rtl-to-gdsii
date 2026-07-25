@@ -1,0 +1,17 @@
+meta:
+  version: 3
+  flow: Classic
+DESIGN_NAME: counter
+VERILOG_FILES: [dir::../src/counter.sv]
+VDD_NETS: [VDD]
+GND_NETS: [VSS]
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+PNR_SDC_FILE: dir::../constraints/counter.sdc
+SIGNOFF_SDC_FILE: dir::../constraints/counter.sdc
+FALLBACK_SDC: dir::../constraints/counter.sdc
+FP_SIZING: absolute
+DIE_AREA: [0, 0, 120, 120]
+CORE_AREA: [15, 15, 105, 105]
+PL_TARGET_DENSITY_PCT: 35
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
