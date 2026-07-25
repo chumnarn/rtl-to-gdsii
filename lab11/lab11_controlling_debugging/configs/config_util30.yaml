@@ -1,0 +1,14 @@
+meta:
+  version: 2
+  flow: Classic
+
+DESIGN_NAME: counter
+VERILOG_FILES:
+  - dir::../src/counter.sv
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+FP_CORE_UTIL: 30
+FP_ASPECT_RATIO: 1.0
+FP_CORE_MARGIN: 5
+PL_TARGET_DENSITY_PCT: 45
+RT_MAX_LAYER: met4

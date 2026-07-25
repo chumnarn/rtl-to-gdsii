@@ -1,0 +1,15 @@
+# Intentionally incorrect for the debugging exercise.
+meta:
+  version: 2
+  flow: Classic
+
+DESIGN_NAME: counter
+VERILOG_FILES:
+  - dir::../src/counter.sv
+CLOCK_PORT: clock_does_not_exist
+CLOCK_PERIOD: 20.0
+FP_CORE_UTIL: 35
+FP_ASPECT_RATIO: 1.0
+FP_CORE_MARGIN: 5
+PL_TARGET_DENSITY_PCT: 45
+RT_MAX_LAYER: met4
