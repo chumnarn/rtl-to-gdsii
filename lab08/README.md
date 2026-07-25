@@ -58,10 +58,8 @@ OpenROAD ใช้ CTS engine ที่พัฒนาจาก TritonCTS 2.0 �
 
 ลำดับโดยย่อของ Physical Design คือ
 
-```
-![RTL-to-GDSII Flow](img/RTL-to-GDSIIFlow.png)
 
-```
+![RTL-to-GDSII Flow](img/RTL-to-GDSIIFlow.png)
 
 CTS ต้องทำหลัง placement เนื่องจากเครื่องมือต้องทราบตำแหน่งทางกายภาพของ clock sinks ก่อน จึงจะสามารถคำนวณ topology, buffer location และความยาวของ clock branches ได้อย่างเหมาะสม
 
@@ -115,15 +113,6 @@ logic [31:0] counter_q;
 
 Clock tree คือเครือข่ายจาก clock source ผ่าน clock buffers หลายระดับไปยัง clock sinks
 
-```text
-                         +--> Buffer --> FF
-                         |
-Clock Port --> Root Buf -+--> Buffer --> FF
-                         |              FF
-                         |
-                         +--> Buffer --> Buffer --> FF
-                                            └----> FF
-```
 ![Clock tree](img/clocktree.png)
 
 Clock tree ที่ดีควร
@@ -258,17 +247,7 @@ LibreLane ระบุว่า STA หลัง synthesis มักไม่ร
 
 หลัง CTS clock กลายเป็น propagated clock ผ่าน network จริง
 
-```text
-Clock port
-   │
-   └── root buffer
-          ├── branch buffer
-          │      ├── FF
-          │      └── FF
-          └── branch buffer
-                 ├── FF
-                 └── FF
-```
+
 ![Post-CTS](img/Post-CTS.png)
 
 หลัง CTS จะเริ่มเห็น
@@ -958,22 +937,6 @@ CTS สร้าง tree จาก root ไปยัง clusters และ sinks
 
 ตัวอย่างเชิงแนวคิด
 
-```text
-clk_i
- │
- └── root_buffer
-      ├── level1_buffer_0
-      │    ├── leaf_buffer_0
-      │    │    ├── FF0
-      │    │    └── FF1
-      │    └── leaf_buffer_1
-      │         ├── FF2
-      │         └── FF3
-      │
-      └── level1_buffer_1
-           ├── leaf_buffer_2
-           └── leaf_buffer_3
-```
 ![clock topology](img/clocktopology.png)
 
 จำนวนระดับของ tree ขึ้นกับ
