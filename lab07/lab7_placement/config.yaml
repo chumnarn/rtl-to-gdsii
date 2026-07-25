@@ -1,0 +1,40 @@
+meta:
+  version: 2
+  flow: Classic
+
+DESIGN_NAME: placement_top
+
+VERILOG_FILES:
+  - dir::src/placement_top.sv
+
+PDK: sky130A
+STD_CELL_LIBRARY: sky130_fd_sc_hd
+
+CLOCK_PORT: clk_i
+CLOCK_NET: clk_i
+CLOCK_PERIOD: 10.0
+
+PNR_SDC_FILE: dir::constraints/placement.sdc
+SIGNOFF_SDC_FILE: dir::constraints/placement.sdc
+FALLBACK_SDC: dir::constraints/placement.sdc
+
+FP_SIZING: relative
+FP_CORE_UTIL: 45
+FP_ASPECT_RATIO: 1.0
+FP_CORE_MARGIN: 5
+
+PL_TARGET_DENSITY_PCT: 60
+PL_TIMING_DRIVEN: true
+PL_ROUTABILITY_DRIVEN: true
+PL_SKIP_INITIAL_PLACEMENT: false
+PL_WIRE_LENGTH_COEF: 0.25
+
+PL_OPTIMIZE_MIRRORING: true
+PL_MAX_DISPLACEMENT_X: 500
+PL_MAX_DISPLACEMENT_Y: 100
+
+GRT_ADJUSTMENT: 0.30
+
+ERROR_ON_SYNTH_CHECKS: true
+ERROR_ON_UNMAPPED_CELLS: true
+ERROR_ON_DISCONNECTED_PINS: true
