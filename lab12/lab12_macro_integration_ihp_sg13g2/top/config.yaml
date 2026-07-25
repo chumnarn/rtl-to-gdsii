@@ -1,0 +1,70 @@
+meta:
+  version: 3
+  flow: Classic
+
+DESIGN_NAME: macro_wrapper
+
+VERILOG_FILES:
+  - dir::src/macro_wrapper.sv
+
+VERILOG_DEFINES:
+  - USE_POWER_PINS
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+
+PNR_SDC_FILE: dir::constraints.sdc
+SIGNOFF_SDC_FILE: dir::constraints.sdc
+FALLBACK_SDC: dir::constraints.sdc
+
+VDD_NETS:
+  - VDD
+
+GND_NETS:
+  - VSS
+
+FP_SIZING: absolute
+DIE_AREA: [0, 0, 400, 360]
+CORE_AREA: [15, 15, 385, 345]
+
+PL_TARGET_DENSITY_PCT: 32
+GRT_ALLOW_CONGESTION: false
+
+FP_MACRO_HORIZONTAL_HALO: 12
+FP_MACRO_VERTICAL_HALO: 12
+
+PDN_CORE_RING: true
+PDN_CORE_RING_VWIDTH: 3.0
+PDN_CORE_RING_HWIDTH: 3.0
+PDN_CORE_RING_VSPACING: 2.0
+PDN_CORE_RING_HSPACING: 2.0
+PDN_CORE_RING_VOFFSET: 7.0
+PDN_CORE_RING_HOFFSET: 7.0
+PDN_ENABLE_PINS: true
+
+MACROS:
+  counter_macro:
+    gds:
+      - dir::../macros/counter_macro/gds/counter_macro.gds
+    lef:
+      - dir::../macros/counter_macro/lef/counter_macro.lef
+    vh:
+      - dir::src/counter_macro.vh
+    nl:
+      - dir::../macros/counter_macro/nl/counter_macro.nl.v
+    lib: {}
+    spef: {}
+    spice: []
+    sdf: {}
+    instances:
+      u_counter_macro:
+        location: [105, 100]
+        orientation: N
+
+PDN_MACRO_CONNECTIONS:
+  - "u_counter_macro VDD VSS VDD VSS"
+
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
+
+RUN_POST_CTS_RESIZER_TIMING: true
+RUN_POST_GRT_RESIZER_TIMING: true
