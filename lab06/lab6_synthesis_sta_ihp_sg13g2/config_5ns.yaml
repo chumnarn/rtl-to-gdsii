@@ -1,0 +1,22 @@
+# Experiment: 200 MHz timing target
+
+PDK: ihp-sg13g2
+DESIGN_NAME: synth_sta_top
+
+VERILOG_FILES:
+  - dir::src/synth_sta_top.sv
+
+USE_SLANG: true
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 5.0
+
+PNR_SDC_FILE: dir::constraints/synth_sta_top_5ns.sdc
+SIGNOFF_SDC_FILE: dir::constraints/synth_sta_top_5ns.sdc
+
+SYNTH_STRATEGY: AREA 0
+MAX_FANOUT_CONSTRAINT: 10
+
+FP_SIZING: relative
+FP_CORE_UTIL: 35
+PL_TARGET_DENSITY_PCT: 40

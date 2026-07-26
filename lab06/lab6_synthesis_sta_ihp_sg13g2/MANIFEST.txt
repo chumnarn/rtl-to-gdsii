@@ -1,0 +1,16 @@
+.gitignore	82
+Makefile	3072
+README.md	3287
+config.yaml	1069
+config_5ns.yaml	405
+constraints/synth_sta_top.sdc	1049
+constraints/synth_sta_top_5ns.sdc	1047
+reports/.gitkeep	0
+run_lab.sh	341
+runs/.gitkeep	0
+scripts/__pycache__/check_project.cpython-313.pyc	3127
+scripts/__pycache__/collect_results.cpython-313.pyc	5018
+scripts/check_project.py	1752
+scripts/collect_results.py	2561
+src/synth_sta_top.sv	1871
+tb/tb_synth_sta_top.sv	3435

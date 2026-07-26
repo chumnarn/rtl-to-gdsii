@@ -1,0 +1,34 @@
+# ============================================================
+# Lab 6: Synthesis and Static Timing Analysis
+# LibreLane configuration for IHP SG13G2
+# ============================================================
+
+PDK: ihp-sg13g2
+DESIGN_NAME: synth_sta_top
+
+VERILOG_FILES:
+  - dir::src/synth_sta_top.sv
+
+# The RTL is SystemVerilog. Slang gives broader SystemVerilog support
+# on LibreLane versions that provide this configuration variable.
+USE_SLANG: true
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 10.0
+
+PNR_SDC_FILE: dir::constraints/synth_sta_top.sdc
+SIGNOFF_SDC_FILE: dir::constraints/synth_sta_top.sdc
+
+# Synthesis settings
+SYNTH_STRATEGY: AREA 0
+MAX_FANOUT_CONSTRAINT: 10
+
+# Conservative defaults for continuation into physical design.
+# No routing-layer names or standard-cell-library names are hard-coded:
+# those are resolved from the ihp-sg13g2 PDK configuration.
+FP_SIZING: relative
+FP_CORE_UTIL: 35
+PL_TARGET_DENSITY_PCT: 40
+
+# Explicit die size is intentionally omitted for this synthesis/STA lab.
+# LibreLane/PDK defaults are used when continuing past pre-PnR STA.
