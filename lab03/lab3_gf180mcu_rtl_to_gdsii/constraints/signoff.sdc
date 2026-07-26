@@ -1,0 +1,6 @@
+create_clock -name clk -period 24.000 [get_ports clk_i]
+set_clock_uncertainty 0.250 [get_clocks clk]
+set_clock_transition 0.150 [get_clocks clk]
+set_input_delay 2.000 -clock clk [get_ports {rst_ni en_i}]
+set_output_delay 4.000 -clock clk [get_ports {count_o[*]}]
+set_load 0.033442 [get_ports {count_o[*]}]

@@ -1,0 +1,30 @@
+meta:
+  version: 3
+  flow: Classic
+
+DESIGN_NAME: counter
+VERILOG_FILES:
+  - dir::rtl/counter.sv
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 24.0
+
+PNR_SDC_FILE: dir::constraints/pnr.sdc
+SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
+FALLBACK_SDC: dir::constraints/pnr.sdc
+
+IO_PIN_ORDER_CFG: dir::pin_order.cfg
+ERRORS_ON_UNMATCHED_IO: both
+
+FP_CORE_UTIL: 35
+PL_TARGET_DENSITY: 0.45
+MAX_FANOUT_CONSTRAINT: 4
+
+# GF180MCU-specific values are activated for gf180mcuA/B/C/D names.
+pdk::gf180mcu*:
+  CLOCK_PERIOD: 24.0
+  FP_CORE_UTIL: 35
+  PL_TARGET_DENSITY: 0.45
+  MAX_FANOUT_CONSTRAINT: 4
+  DRT_ANTENNA_REPAIR_ITERS: 5
+  DRT_ANTENNA_REPAIR_MARGIN: 10

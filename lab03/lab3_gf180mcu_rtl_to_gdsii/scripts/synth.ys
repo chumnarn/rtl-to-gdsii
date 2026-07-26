@@ -1,0 +1,7 @@
+read_verilog -sv rtl/counter.sv
+hierarchy -check -top counter
+proc
+opt
+check
+stat
+write_verilog -noattr build/counter_generic.v

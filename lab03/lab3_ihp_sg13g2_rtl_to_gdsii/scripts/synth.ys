@@ -1,0 +1,11 @@
+read_verilog -sv rtl/counter.sv
+hierarchy -check -top counter
+chparam -set WIDTH 8 counter
+proc
+opt
+check
+techmap
+opt
+stat
+write_json build/counter_generic.json
+write_verilog -noattr build/counter_generic_netlist.v
