@@ -1,0 +1,60 @@
+# ============================================================================
+# Lab 4: LibreLane Configuration Variables
+# Target: LibreLane Classic RTL-to-GDSII flow
+# Run:    librelane --pdk sky130A config.yaml
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Design input
+# ----------------------------------------------------------------------------
+DESIGN_NAME: lab4_counter
+
+VERILOG_FILES:
+  - dir::rtl/lab4_counter.sv
+
+# ----------------------------------------------------------------------------
+# Primary clock constraint
+# CLOCK_PERIOD is in nanoseconds: 20 ns = 50 MHz
+# ----------------------------------------------------------------------------
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+
+# ----------------------------------------------------------------------------
+# Floorplanning experiment
+# relative: LibreLane calculates die/core dimensions from cell area.
+# ----------------------------------------------------------------------------
+FP_SIZING: relative
+FP_CORE_UTIL: 35
+
+# To perform the fixed-die experiment, replace the two settings above with:
+# FP_SIZING: absolute
+# DIE_AREA: [0, 0, 120, 120]
+
+# ----------------------------------------------------------------------------
+# I/O pin placement
+# ----------------------------------------------------------------------------
+FP_PIN_ORDER_CFG: dir::pins.cfg
+
+# ----------------------------------------------------------------------------
+# Placement
+# Start conservatively. Lab exercises vary this value from 40 to 70.
+# ----------------------------------------------------------------------------
+PL_TARGET_DENSITY_PCT: 50
+
+# ----------------------------------------------------------------------------
+# Optional experiments (uncomment one section at a time)
+# ----------------------------------------------------------------------------
+
+# Firm placement obstructions: [x_min, y_min, x_max, y_max] in micrometres.
+# Use only with an absolute DIE_AREA large enough to contain these rectangles.
+# FP_OBSTRUCTIONS:
+#   - [25, 25, 35, 35]
+#   - [75, 75, 90, 90]
+
+# Soft placement obstructions affect initial placement but may be used by
+# optimization cells inserted in later stages.
+# PL_SOFT_OBSTRUCTIONS:
+#   - [45, 45, 60, 60]
+
+# Debug-only routing experiment. Do not use this to claim a clean signoff.
+# GRT_ALLOW_CONGESTION: true

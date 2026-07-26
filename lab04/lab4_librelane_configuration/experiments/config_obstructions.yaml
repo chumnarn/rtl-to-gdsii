@@ -1,0 +1,27 @@
+DESIGN_NAME: lab4_counter
+VERILOG_FILES:
+- dir::rtl/lab4_counter.sv
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 20.0
+FP_SIZING: absolute
+FP_PIN_ORDER_CFG: dir::pins.cfg
+PL_TARGET_DENSITY_PCT: 50
+DIE_AREA:
+- 0
+- 0
+- 120
+- 120
+FP_OBSTRUCTIONS:
+- - 25
+  - 25
+  - 35
+  - 35
+- - 75
+  - 75
+  - 90
+  - 90
+PL_SOFT_OBSTRUCTIONS:
+- - 45
+  - 45
+  - 60
+  - 60
