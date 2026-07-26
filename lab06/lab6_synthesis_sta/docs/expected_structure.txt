@@ -1,0 +1,18 @@
+lab6_synthesis_sta/
+├── config.yaml
+├── Makefile
+├── README.md
+├── run_lab.sh
+├── constraints/
+│   └── synth_sta_top.sdc
+├── docs/
+│   └── expected_structure.txt
+├── scripts/
+│   ├── check_project.py
+│   └── collect_results.py
+├── src/
+│   └── synth_sta_top.sv
+├── tb/
+│   └── tb_synth_sta_top.sv
+└── runs/
+    └── .gitkeep

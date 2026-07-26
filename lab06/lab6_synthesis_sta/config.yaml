@@ -1,0 +1,25 @@
+meta:
+  flow: Classic
+
+DESIGN_NAME: synth_sta_top
+
+VERILOG_FILES:
+  - dir::src/synth_sta_top.sv
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 10.0
+
+PNR_SDC_FILE: dir::constraints/synth_sta_top.sdc
+SIGNOFF_SDC_FILE: dir::constraints/synth_sta_top.sdc
+
+SYNTH_STRATEGY: AREA 0
+MAX_FANOUT_CONSTRAINT: 10
+
+FP_SIZING: relative
+FP_CORE_UTIL: 40
+PL_TARGET_DENSITY_PCT: 45
+
+# SKY130 routing-layer names. Remove these two entries when porting to a PDK
+# whose layer names differ, then use that PDK's defaults or documented names.
+RT_MIN_LAYER: met1
+RT_MAX_LAYER: met5
