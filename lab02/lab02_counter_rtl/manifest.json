@@ -1,0 +1,22 @@
+{
+  "lab": "Lab 2 Counter RTL Simulation and Verification",
+  "top_module": "counter",
+  "testbench_top": "counter_tb",
+  "clock_port": "clk_i",
+  "clock_period_ns": 10,
+  "default_pdk": "ihp-sg13g2",
+  "files": [
+    ".gitignore",
+    "Makefile",
+    "README.md",
+    "build/.gitkeep",
+    "config.yaml",
+    "logs/.gitkeep",
+    "rtl/counter.sv",
+    "scripts/check_tools.sh",
+    "scripts/run_all.sh",
+    "tb/counter_tb.sv",
+    "waves/.gitkeep",
+    "yosys/synth.ys"
+  ]
+}

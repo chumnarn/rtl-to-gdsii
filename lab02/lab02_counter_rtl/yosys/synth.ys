@@ -1,0 +1,17 @@
+# Standalone Yosys synthesis script for Lab 2.
+# Run from the Lab root:
+#   yosys -s yosys/synth.ys
+
+read_verilog -sv rtl/counter.sv
+hierarchy -check -top counter
+proc
+opt
+check
+fsm
+opt
+memory
+opt
+techmap
+opt
+stat
+write_verilog -noattr build/counter_synth.v

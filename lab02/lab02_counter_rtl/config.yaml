@@ -1,0 +1,18 @@
+# LibreLane configuration for Lab 2
+# Run:
+#   librelane --pdk ihp-sg13g2 config.yaml
+
+DESIGN_NAME: counter
+VERILOG_FILES:
+  - dir::rtl/counter.sv
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 10
+
+# Explicit floorplan settings make the small teaching design reproducible.
+FP_SIZING: relative
+FP_CORE_UTIL: 35
+PL_TARGET_DENSITY_PCT: 45
+
+# Keep the reset port unconstrained by clock creation; LibreLane generates
+# the default SDC from CLOCK_PORT and CLOCK_PERIOD.
