@@ -83,7 +83,7 @@ librelane \--smoke-test
 
 - [ ] `IN_NIX_SHELL` มีค่า  
 - [ ] `librelane --version` ทำงาน  
-- [ ] `librelane --smoke-test` คืน exit code 0  
+- [ ] `librelane --smoke-test` คืน exit code 0  (Smoke test passed)
 - [ ] เครื่องมือหลักทุกตัวแสดง `[PASS]` (Yosys, OpenROAD, KLayout, Magic, Verilator, Netgen)  
 - [ ] PDK เข้าถึงได้
 
