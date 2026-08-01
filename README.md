@@ -57,28 +57,28 @@
 
 \# ติดตั้ง Nix
 
-curl \-L https://nixos.org/nix/install | sh \-s \-- \--daemon
+curl -L https://nixos.org/nix/install | sh -s \-- \--daemon
 
 \# Clone repository
-
+```bash
 git clone https://github.com/chumnarn/heichips26-digital-workshop.git
 
 cd heichips26-digital-workshop
-
+```
 \# เข้า environment
-
+```bash
 nix-shell
-
+```
 \# ตรวจสอบ LibreLane
+```bash
+librelane --version
 
-librelane \--version
-
-librelane \--smoke-test
-
+librelane --smoke-test
+```
 \# ตรวจสอบเครื่องมือทั้งหมด
-
-./verify\_tools.sh
-
+```bash
+./verify_tools.sh
+```
 ### เกณฑ์ผ่าน
 
 - [ ] `IN_NIX_SHELL` มีค่า  
@@ -115,29 +115,26 @@ librelane \--smoke-test
 ### คำสั่งหลัก
 
 \# Lint check
-
-verilator \--lint-only \--Wall \--sv rtl/counter.sv
-
+```bash
+verilator --lint-only --Wall --sv rtl/counter.sv
+```
 \# คอมไพล์และรัน simulation
-
-verilator \--binary \--trace-fst \--sv \\
-
-  rtl/counter.sv tb/counter\_tb.sv \\
-
-  \-o sim/counter\_sim
-
-./sim/counter\_sim
-
+```bash
+verilator --binary --trace-fst --sv \
+  rtl/counter.sv tb/counter_tb.sv \
+  -o sim/counter_sim
+./sim/counter_sim
+```
 \# เปิด waveform
-
+```bash
 gtkwave waves/counter.fst
 
 \# ใช้ Makefile
-
+```bash
 make lint
 
 make run
-
+```
 ### เกณฑ์ผ่าน
 
 - [ ] `make lint` ไม่มี error  
