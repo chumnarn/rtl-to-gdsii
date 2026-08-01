@@ -774,7 +774,7 @@ FP\_MACRO\_VERTICAL\_HALO: 10
 ### คำสั่งหลัก
 
 \# Harden block แต่ละตัว
-
+```bash
 cd blocks/counter\_macro
 
 librelane \--pdk ihp-sg13g2 config.yaml
@@ -782,19 +782,19 @@ librelane \--pdk ihp-sg13g2 config.yaml
 cd blocks/accumulator\_macro
 
 librelane \--pdk ihp-sg13g2 config.yaml
-
+```
 \# Copy views ไปยัง macros directory
-
+```bash
 cp runs/\<tag\>/final/gds/counter\_macro.gds ../../macros/counter\_macro/gds/
 
 cp runs/\<tag\>/final/lef/counter\_macro.lef ../../macros/counter\_macro/lef/
-
+```
 \# รัน Top-level
-
+```bash
 cd top
 
 librelane \--pdk ihp-sg13g2 config.yaml
-
+```
 ### เกณฑ์ผ่าน
 
 - [ ] Counter Macro: GDS, LEF, DRC clean, LVS clean  
