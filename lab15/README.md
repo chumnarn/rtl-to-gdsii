@@ -83,7 +83,7 @@ Full-chip design เพิ่ม I/O pad cells ระหว่างวงจร
 ```text
                     Bonding pads
        +--------------------------------------+
-       |   PAD   PAD   PAD   PAD   PAD        |
+       |     PAD   PAD   PAD   PAD   PAD      |
        |                                      |
        | PAD  +--------------------------+ PAD|
        |      |                          |    |
@@ -91,7 +91,7 @@ Full-chip design เพิ่ม I/O pad cells ระหว่างวงจร
        |      |                          |    |
        | PAD  +--------------------------+ PAD|
        |                                      |
-       |   PAD   PAD   PAD   PAD   PAD        |
+       |     PAD   PAD   PAD   PAD   PAD      |
        +--------------------------------------+
 ```
 
