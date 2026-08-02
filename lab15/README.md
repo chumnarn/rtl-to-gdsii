@@ -1522,6 +1522,17 @@ librelane \
     config.yaml
 ```
 
+เพื่อประหยัดเวลาตอนรันขั้นต้น  เราสามารถข้ามบางขั้น เช่น ข้าม DRC ตัวอย่างคำสั่ง
+
+```bash
+[nix-shell]
+librelane \
+    --pdk ihp-sg13g2 \
+    --flow Chip \
+    config.yaml \
+    --skip KLayout.DRC --skip Magic.DRC
+```
+
 ---
 
 # 15.26 ลำดับขั้นตอนที่ควรสังเกต
