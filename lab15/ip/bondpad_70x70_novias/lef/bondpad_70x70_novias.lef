@@ -7,7 +7,6 @@ MACRO bondpad_70x70_novias
   SIZE 70.0 BY 70.0 ;
   SYMMETRY X Y R90 ;
   SITE sg13g2_ioSite ;
-
   PIN pad
     USE SIGNAL ;
     PORT
