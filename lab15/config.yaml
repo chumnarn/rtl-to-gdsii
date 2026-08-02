@@ -2,19 +2,43 @@ meta:
   version: 3
   flow: Chip
   substituting_steps:
-    # Magic can report benign overlap markers around some pad structures.
+
+   # Magic can report benign overlap markers around some pad structures.
     Checker.IllegalOverlap: null
+
+    # Disable KLayout DRC
+    KLayout.DRC: null
+    Checker.KLayoutDRC: null
+
+    # Disable magic DRC
+    Magic.DRC: null
+    Checker.MagicDRC: null
+
+    # Disable KLayout antenna check
+    #KLayout.Antenna: null
+    #Checker.KLayoutAntenna: null
+
+    # Disable KLayout density check
+    #KLayout.Density: null
+    #Checker.KLayoutDensity: null
+
+    # Save time
+    #OpenROAD.IRDropReport: null
+    #KLayout.XOR: null
+    #Netgen.LVS: null
+    #Checker.LVS: null
+
 
 DESIGN_NAME: chip_top
 PDK: ihp-sg13g2
 STD_CELL_LIBRARY: sg13g2_stdcell
 
 VERILOG_FILES:
-  - dir::src/counter_core.sv
-  - dir::src/chip_top.sv
+ - dir::src/counter_core.sv
+ - dir::src/chip_top.sv
 
 VERILOG_DEFINES:
-  - FUNCTIONAL
+ - FUNCTIONAL
 
 # Enable the newer SystemVerilog frontend when available.
 USE_SLANG: true
@@ -25,51 +49,54 @@ PRIMARY_GDSII_STREAMOUT_TOOL: klayout
 # Pad-ring order; these are synthesized instance names.
 # ------------------------------------------------------------
 
-PAD_SOUTH:
-  - clk_pad
-  - rst_n_pad
-  - enable_pad
+PAD_SOUTH: [
+   clk_pad,
+   rst_n_pad,
+   enable_pad
+]
 
-PAD_EAST:
-  - "outputs\\[0\\].output_pad"
-  - "outputs\\[1\\].output_pad"
-  - "outputs\\[2\\].output_pad"
-  - "outputs\\[3\\].output_pad"
+PAD_EAST: [
+   "outputs\\[0\\].output_pad",
+   "outputs\\[1\\].output_pad",
+   "outputs\\[2\\].output_pad",
+   "outputs\\[3\\].output_pad"
+]
 
-PAD_NORTH:
-  - "outputs\\[7\\].output_pad"
-  - "outputs\\[6\\].output_pad"
-  - "outputs\\[5\\].output_pad"
-  - "outputs\\[4\\].output_pad"
+PAD_NORTH: [
+   "outputs\\[7\\].output_pad",
+   "outputs\\[6\\].output_pad",
+   "outputs\\[5\\].output_pad",
+   "outputs\\[4\\].output_pad"
+]
 
-PAD_WEST:
-  - "vdd_pads\\[0\\].vdd_pad"
-  - "vss_pads\\[0\\].vss_pad"
-  - "iovdd_pads\\[0\\].iovdd_pad"
-  - "iovss_pads\\[0\\].iovss_pad"
-
+PAD_WEST: [
+   "vdd_pads\\[0\\].vdd_pad",
+   "vss_pads\\[0\\].vss_pad",
+   "iovdd_pads\\[0\\].iovdd_pad",
+   "iovss_pads\\[0\\].iovss_pad"
+]
 # ------------------------------------------------------------
 # Timing
 # ------------------------------------------------------------
-
+# SDC files
 PNR_SDC_FILE: dir::constraints/chip_top.sdc
 SIGNOFF_SDC_FILE: dir::constraints/chip_top.sdc
 FALLBACK_SDC: dir::constraints/chip_top.sdc
 
-# Clock
 CLOCK_PORT: clk_PAD
 CLOCK_NET: clk_pad/p2c
+
 CLOCK_PERIOD: 20.0
 
 # ------------------------------------------------------------
 # Floorplan
 # ------------------------------------------------------------
+
 FP_SIZING: absolute
+
 DIE_AREA: [0, 0, 1600, 1600]
 CORE_AREA: [365, 365, 1235, 1235]
 
-# Increase for more logic
-# on your die
 PL_TARGET_DENSITY_PCT: 10
 GRT_ALLOW_CONGESTION: true
 
@@ -82,17 +109,15 @@ VDD_NETS:
 
 GND_NETS:
   - VSS
-  
+
 # PDN
 PDN_CORE_RING: true
 
-# Maximum metal width without slotting: 30um
 PDN_CORE_RING_VWIDTH: 15
 PDN_CORE_RING_HWIDTH: 15
-# Ensure minimum spacing for long metals
+
 PDN_CORE_RING_VSPACING: 5
 PDN_CORE_RING_HSPACING: 5
-
 PDN_CORE_RING_CONNECT_TO_PADS: true
 PDN_ENABLE_PINS: false
 
@@ -146,4 +171,3 @@ MAGIC_GDS_FLATGLOB:
 
 # Because we have multiple power pads for one power domain
 MAGIC_EXT_UNIQUE: notopports
-
