@@ -1514,7 +1514,7 @@ librelane --dockerized \
 กรณีใช้ Nix environment
 
 ```bash
-nix-shell
+[nix-shell]
 librelane \
     --pdk ihp-sg13g2 \
     --flow Chip \
