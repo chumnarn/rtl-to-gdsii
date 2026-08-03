@@ -673,7 +673,53 @@ echo $?
 
 ---
 
-## 1.19 ตรวจสอบ Nix daemon
+## 1.19 Clone LibreLane Repository
+
+สร้างโฟลเดอร์สำหรับเก็บโปรเจกต์:
+
+```bash
+mkdir -p ~/eda
+cd ~/eda
+```
+
+Clone LibreLane:
+
+```bash
+git clone https://github.com/librelane/librelane
+cd librelane
+```
+
+เอกสารทางการระบุว่าเมื่อ clone repository แล้ว ให้เข้าไปที่ root ของ LibreLane และใช้ `nix-shell` เพื่อเข้าสู่ environment ของ LibreLane ([librelane.readthedocs.io][2])
+
+---
+
+## 1.20 เข้า LibreLane Environment ด้วย Nix
+
+จากโฟลเดอร์ `~/eda/librelane` รัน:
+
+```bash
+nix-shell
+```
+
+ครั้งแรก Nix จะดาวน์โหลด binary และ dependency จำนวนมากจาก cache อาจใช้เวลาพอสมควร เอกสาร LibreLane ระบุว่าครั้งแรกอาจใช้เวลาประมาณ 10 นาทีเพื่อดึง binaries จาก cache ([librelane.readthedocs.io][2])
+
+เมื่อเข้าสู่ environment สำเร็จ prompt อาจเปลี่ยนไป และสามารถใช้คำสั่ง LibreLane ได้
+
+ตรวจสอบคำสั่ง:
+
+```bash
+librelane --version
+```
+
+หรือ:
+
+```bash
+librelane --help
+```
+
+---
+
+## 1.21 ตรวจสอบ Nix daemon
 
 ```bash
 systemctl status nix-daemon --no-pager
@@ -709,7 +755,7 @@ sudo pkill nix-daemon
 
 ---
 
-## 1.20 ตรวจสอบไฟล์ Configuration ของ Nix
+## 1.22 ตรวจสอบไฟล์ Configuration ของ Nix
 
 ```bash
 cat /etc/nix/nix.conf
@@ -737,7 +783,7 @@ extra-experimental-features = nix-command flakes
 
 # ส่วนที่ 5: ดาวน์โหลด Workshop Repository
 
-## 1.21 สร้าง Working Directory
+## 1.23 สร้าง Working Directory
 
 ```bash
 mkdir -p "$HOME/workshop"
@@ -752,7 +798,7 @@ pwd
 
 ---
 
-## 1.22 Clone Repository
+## 1.24 Clone Repository
 
 ```bash
 git clone https://github.com/chumnarn/heichips26-digital-workshop.git
@@ -781,7 +827,7 @@ nothing to commit, working tree clean
 
 ---
 
-## 1.23 ตรวจสอบโครงสร้าง Repository
+## 1.25 ตรวจสอบโครงสร้าง Repository
 
 ```bash
 ls -la
@@ -813,7 +859,7 @@ tree -L 2
 
 ---
 
-## 1.24 ตรวจสอบ Remote Repository
+## 1.26 ตรวจสอบ Remote Repository
 
 ```bash
 git remote -v
@@ -840,7 +886,7 @@ git rev-parse HEAD
 
 ---
 
-## 1.25 อัปเดต Repository
+## 1.27 อัปเดต Repository
 
 หาก Clone ไว้ก่อนวันอบรม ให้รัน
 
@@ -866,7 +912,7 @@ git stash pop
 
 # ส่วนที่ 6: เข้าสู่ LibreLane Environment
 
-## 1.26 เรียกใช้ nix-shell
+## 1.28 เรียกใช้ nix-shell
 
 ต้องรันคำสั่งนี้จาก root directory ของ Repository
 
@@ -887,7 +933,7 @@ Repository ของ Workshop กำหนดให้ใช้ `nix-shell` ท�
 
 ---
 
-## 1.27 ยืนยันว่าอยู่ใน Nix shell
+## 1.29 ยืนยันว่าอยู่ใน Nix shell
 
 ตรวจสอบตัวแปร environment
 
@@ -929,7 +975,7 @@ Path ควรชี้ไปยัง `/nix/store/...`
 
 ---
 
-## 1.28 ออกจาก Nix shell
+## 1.30 ออกจาก Nix shell
 
 ```bash
 exit
@@ -956,7 +1002,7 @@ nix-shell
 
 # ส่วนที่ 7: ตรวจสอบ LibreLane
 
-## 1.29 ตรวจสอบคำสั่ง LibreLane
+## 1.31 ตรวจสอบคำสั่ง LibreLane
 
 ภายใน Nix shell รัน
 
@@ -980,7 +1026,7 @@ librelane --version | tee lab1_librelane_version.txt
 
 ---
 
-## 1.30 รัน Smoke Test
+## 1.32 รัน Smoke Test
 
 ```bash
 librelane --smoke-test
@@ -1014,7 +1060,7 @@ echo "${PIPESTATUS[0]}"
 
 # ส่วนที่ 8: ตรวจสอบเครื่องมือ EDA
 
-## 1.31 สร้าง Directory สำหรับผลการตรวจสอบ
+## 1.33 สร้าง Directory สำหรับผลการตรวจสอบ
 
 ```bash
 mkdir -p lab1_results
@@ -1022,7 +1068,7 @@ mkdir -p lab1_results
 
 ---
 
-## 1.32 ตรวจสอบ Yosys
+## 1.34 ตรวจสอบ Yosys
 
 ```bash
 yosys -V
@@ -1063,7 +1109,7 @@ yosys -V | tee lab1_results/yosys_version.txt
 
 ---
 
-## 1.33 ตรวจสอบ OpenROAD
+## 1.35 ตรวจสอบ OpenROAD
 
 ```bash
 openroad -version
@@ -1115,7 +1161,7 @@ tee lab1_results/openroad_version.txt
 
 ---
 
-## 1.34 ตรวจสอบ OpenSTA
+## 1.36 ตรวจสอบ OpenSTA
 
 ```bash
 sta -version
@@ -1146,7 +1192,7 @@ OpenSTA ใช้สำหรับ
 
 ---
 
-## 1.35 ตรวจสอบ Verilator
+## 1.37 ตรวจสอบ Verilator
 
 ```bash
 verilator --version
@@ -1182,7 +1228,7 @@ tee lab1_results/verilator_version.txt
 
 ---
 
-## 1.36 ตรวจสอบ Icarus Verilog
+## 1.38 ตรวจสอบ Icarus Verilog
 
 ```bash
 iverilog -V
@@ -1203,7 +1249,7 @@ tee lab1_results/iverilog_version.txt
 
 ---
 
-## 1.37 ตรวจสอบ KLayout
+## 1.39 ตรวจสอบ KLayout
 
 ```bash
 klayout -v
@@ -1245,7 +1291,7 @@ klayout
 
 ---
 
-## 1.38 ตรวจสอบ Magic
+## 1.40 ตรวจสอบ Magic
 
 ```bash
 magic --version
@@ -1270,7 +1316,7 @@ Magic ใช้สำหรับ
 
 ---
 
-## 1.39 ตรวจสอบ Netgen
+## 1.41 ตรวจสอบ Netgen
 
 ```bash
 netgen -version
@@ -1297,7 +1343,7 @@ Extracted Layout Netlist
 
 ---
 
-## 1.40 ตรวจสอบ Python
+## 1.42 ตรวจสอบ Python
 
 ```bash
 python3 --version
@@ -1329,7 +1375,7 @@ ModuleNotFoundError
 
 ---
 
-## 1.41 ตรวจสอบ Tcl
+## 1.43 ตรวจสอบ Tcl
 
 ```bash
 tclsh <<'EOF'
@@ -1349,7 +1395,7 @@ Tcl ถูกใช้เป็นภาษาสคริปต์ใน OpenRO
 
 ---
 
-## 1.42 ตรวจสอบ GNU Make
+## 1.44 ตรวจสอบ GNU Make
 
 ```bash
 make --version
@@ -1386,7 +1432,7 @@ rm -f /tmp/Makefile.lab1
 
 # ส่วนที่ 9: ตรวจสอบ Graphical Environment
 
-## 1.43 ตรวจสอบ DISPLAY
+## 1.45 ตรวจสอบ DISPLAY
 
 ```bash
 echo "$DISPLAY"
@@ -1420,7 +1466,7 @@ wayland-0
 
 ---
 
-## 1.44 ทดสอบ GUI เบื้องต้น
+## 1.46 ทดสอบ GUI เบื้องต้น
 
 ติดตั้ง X11 test utility เฉพาะกรณีจำเป็น
 
@@ -1448,7 +1494,7 @@ xeyes
 
 # ส่วนที่ 10: ตรวจสอบ Process Design Kit
 
-## 1.45 ความหมายของ PDK
+## 1.47 ความหมายของ PDK
 
 Process Design Kit หรือ PDK คือชุดข้อมูลที่เชื่อมโยงกระบวนการออกแบบกับเทคโนโลยีการผลิต Semiconductor
 
@@ -1477,7 +1523,7 @@ LibreLane มี template หรือการรองรับสำหรั
 
 ---
 
-## 1.46 ตรวจสอบตัวแปร PDK
+## 1.48 ตรวจสอบตัวแปร PDK
 
 ภายใน Nix shell รัน
 
@@ -1502,7 +1548,7 @@ head -30
 
 ---
 
-## 1.47 ตรวจสอบ LibreLane PDK options
+## 1.49 ตรวจสอบ LibreLane PDK options
 
 ```bash
 librelane --help | grep -i pdk
@@ -1528,7 +1574,7 @@ ihp-sg13g2
 
 # ส่วนที่ 11: สร้าง Script ตรวจสอบอัตโนมัติ
 
-## 1.48 สร้างไฟล์ `verify_tools.sh`
+## 1.50 สร้างไฟล์ `verify_tools.sh`
 
 จาก root directory ของ Workshop รัน
 
@@ -1627,7 +1673,7 @@ EOF
 
 ---
 
-## 1.49 กำหนด Permission
+## 1.51 กำหนด Permission
 
 ```bash
 chmod +x verify_tools.sh
@@ -1647,7 +1693,7 @@ ls -l verify_tools.sh
 
 ---
 
-## 1.50 รัน Script
+## 1.52 รัน Script
 
 ```bash
 ./verify_tools.sh
@@ -1675,7 +1721,7 @@ cat lab1_results/tool_verification.txt
 
 # ส่วนที่ 12: ทดสอบ RTL Toolchain ขั้นพื้นฐาน
 
-## 1.51 สร้าง Workspace สำหรับ Mini Test
+## 1.53 สร้าง Workspace สำหรับ Mini Test
 
 ```bash
 mkdir -p lab1_tool_test
@@ -1684,7 +1730,7 @@ cd lab1_tool_test
 
 ---
 
-## 1.52 สร้าง RTL ตัวอย่าง
+## 1.54 สร้าง RTL ตัวอย่าง
 
 สร้างไฟล์ `simple_counter.sv`
 
@@ -1718,7 +1764,7 @@ sed -n '1,120p' simple_counter.sv
 
 ---
 
-## 1.53 รัน Verilator Lint
+## 1.55 รัน Verilator Lint
 
 ```bash
 verilator \
@@ -1744,7 +1790,7 @@ echo $?
 
 ---
 
-## 1.54 รัน Yosys Synthesis Test
+## 1.56 รัน Yosys Synthesis Test
 
 สร้าง Yosys script
 
@@ -1788,7 +1834,7 @@ grep -n -E "ERROR|Error|error" yosys.log
 
 ---
 
-## 1.55 ตรวจสอบสถิติการสังเคราะห์
+## 1.57 ตรวจสอบสถิติการสังเคราะห์
 
 ค้นหา Section สถิติ
 
@@ -1817,7 +1863,7 @@ Number of cells:
 
 ---
 
-## 1.56 กลับไปที่ Root Directory
+## 1.58 กลับไปที่ Root Directory
 
 ```bash
 cd ..
@@ -1839,7 +1885,7 @@ pwd
 
 # ส่วนที่ 13: เก็บข้อมูล Environment
 
-## 1.57 บันทึกข้อมูลระบบ
+## 1.59 บันทึกข้อมูลระบบ
 
 ```bash
 {
@@ -1885,7 +1931,7 @@ q
 
 ---
 
-## 1.58 สร้างรายการ Tool Paths
+## 1.60 สร้างรายการ Tool Paths
 
 ```bash
 for tool in \
@@ -1902,7 +1948,7 @@ done | tee lab1_results/tool_paths.txt
 
 ---
 
-## 1.59 เก็บ Nix Environment Summary
+## 1. เก็บ Nix Environment Summary
 
 ```bash
 {
@@ -1918,7 +1964,7 @@ done | tee lab1_results/tool_paths.txt
 
 # ส่วนที่ 14: Troubleshooting
 
-## 1.60 ปัญหา `nix: command not found`
+## 1.61 ปัญหา `nix: command not found`
 
 อาการ
 
@@ -1948,7 +1994,7 @@ ls -l /nix/var/nix/profiles/default/bin/nix
 
 ---
 
-## 1.61 ปัญหา `experimental Nix feature 'flakes' is disabled`
+## 1.62 ปัญหา `experimental Nix feature 'flakes' is disabled`
 
 อาการ
 
@@ -1978,7 +2024,7 @@ sudo pkill nix-daemon
 
 ---
 
-## 1.62 ปัญหา Binary Cache ไม่ทำงาน
+## 1.63 ปัญหา Binary Cache ไม่ทำงาน
 
 อาการ
 
@@ -2004,7 +2050,7 @@ curl -I https://nix-cache.fossi-foundation.org
 
 ---
 
-## 1.63 ปัญหา `librelane: command not found`
+## 1.64 ปัญหา `librelane: command not found`
 
 ตรวจสอบ Directory
 
@@ -2029,7 +2075,7 @@ command -v librelane
 
 ---
 
-## 1.64 ปัญหา Nix shell เปิดจาก Directory ผิด
+## 1.65 ปัญหา Nix shell เปิดจาก Directory ผิด
 
 อาการ
 
@@ -2047,7 +2093,7 @@ nix-shell
 
 ---
 
-## 1.65 ปัญหา WSL เป็น Version 1
+## 1.66 ปัญหา WSL เป็น Version 1
 
 ตรวจสอบใน PowerShell
 
@@ -2071,7 +2117,7 @@ LibreLane กำหนดให้ Windows environment ใช้ WSL2
 
 ---
 
-## 1.66 ปัญหา GUI ไม่เปิดบน WSL2
+## 1.67 ปัญหา GUI ไม่เปิดบน WSL2
 
 ตรวจสอบ
 
@@ -2103,7 +2149,7 @@ klayout
 
 ---
 
-## 1.67 ปัญหา Permission ใน Repository
+## 1.68 ปัญหา Permission ใน Repository
 
 อาการ
 
@@ -2136,7 +2182,7 @@ sudo librelane ...
 
 ---
 
-## 1.68 ปัญหา Disk เต็ม
+## 1.69 ปัญหา Disk เต็ม
 
 ตรวจสอบ
 
@@ -2158,7 +2204,7 @@ nix store gc --dry-run
 
 ---
 
-## 1.69 ปัญหา OpenROAD ถูกปิดระหว่างทำงาน
+## 1.70 ปัญหา OpenROAD ถูกปิดระหว่างทำงาน
 
 อาการ
 
@@ -2207,7 +2253,7 @@ wsl --shutdown
 
 ---
 
-## 1.70 ปัญหา Repository มีไฟล์แก้ไขค้างอยู่
+## 1.71 ปัญหา Repository มีไฟล์แก้ไขค้างอยู่
 
 ตรวจสอบ
 
@@ -2246,7 +2292,7 @@ git reset --hard
 
 # ส่วนที่ 15: เกณฑ์การผ่าน Lab
 
-## 1.71 Checklist
+## 1.72 Checklist
 
 ผู้เรียนต้องตรวจสอบรายการต่อไปนี้
 
@@ -2278,7 +2324,7 @@ git reset --hard
 
 ---
 
-## 1.72 คำสั่งตรวจสอบขั้นสุดท้าย
+## 1.73 คำสั่งตรวจสอบขั้นสุดท้าย
 
 จาก root directory ของ Repository และภายใน Nix shell ให้รัน
 
