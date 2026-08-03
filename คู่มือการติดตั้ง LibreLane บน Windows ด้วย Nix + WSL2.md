@@ -1,4 +1,4 @@
-ด้านล่างคือ **คู่มือการติดตั้ง LibreLane บน Windows ด้วย Nix + WSL2** แบบ Step-by-Step สำหรับใช้เป็นเอกสารประกอบ Workshop / Lab ได้ทันที โดยอิงจากเอกสารทางการของ LibreLane ซึ่งระบุว่า **Nix เป็นวิธีที่แนะนำมากที่สุด** และบน Windows ต้องใช้งานผ่าน **WSL2** ([librelane.readthedocs.io][1])
+**คู่มือการติดตั้ง LibreLane บน Windows ด้วย Nix + WSL2** แบบ Step-by-Step สำหรับใช้เป็นเอกสารประกอบ Workshop / Lab ได้ทันที โดยอิงจากเอกสารทางการของ LibreLane ซึ่งระบุว่า **Nix เป็นวิธีที่แนะนำมากที่สุด** และบน Windows ต้องใช้งานผ่าน **WSL2** ([librelane.readthedocs.io][1])
 
 ---
 
