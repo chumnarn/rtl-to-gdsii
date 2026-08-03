@@ -467,6 +467,7 @@ sudo apt-get install -y \
     jq \
     nano \
     vim \
+    build-essential\
     ca-certificates
 ```
 
