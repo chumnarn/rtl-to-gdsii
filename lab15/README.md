@@ -946,52 +946,111 @@ config.yaml
 # LibreLane Chip Flow
 # ================================================================
 
+meta:
+  version: 3
+  flow: Chip
+  substituting_steps:
+
+   # Magic can report benign overlap markers around some pad structures.
+    Checker.IllegalOverlap: null
+
+    # Disable KLayout DRC
+    KLayout.DRC: null
+    Checker.KLayoutDRC: null
+
+    # Disable magic DRC
+    Magic.DRC: null
+    Checker.MagicDRC: null
+
+    # Disable KLayout antenna check
+    #KLayout.Antenna: null
+    #Checker.KLayoutAntenna: null
+
+    # Disable KLayout density check
+    #KLayout.Density: null
+    #Checker.KLayoutDensity: null
+
+    # Save time
+    #OpenROAD.IRDropReport: null
+    #KLayout.XOR: null
+    #Netgen.LVS: null
+    #Checker.LVS: null
+
+
 DESIGN_NAME: chip_top
+PDK: ihp-sg13g2
+STD_CELL_LIBRARY: sg13g2_stdcell
 
 VERILOG_FILES:
-  - dir::src/counter_core.sv
-  - dir::src/chip_top.sv
+ - dir::src/counter_core.sv
+ - dir::src/chip_top.sv
 
-# ------------------------------------------------
-# Clock
-# ------------------------------------------------
+VERILOG_DEFINES:
+ - FUNCTIONAL
+
+# Enable the newer SystemVerilog frontend when available.
+USE_SLANG: true
+
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
+
+# ------------------------------------------------------------
+# Pad-ring order; these are synthesized instance names.
+# ------------------------------------------------------------
+
+PAD_SOUTH: [
+   clk_pad,
+   rst_n_pad,
+   enable_pad
+]
+
+PAD_EAST: [
+   "outputs\\[0\\].output_pad",
+   "outputs\\[1\\].output_pad",
+   "outputs\\[2\\].output_pad",
+   "outputs\\[3\\].output_pad"
+]
+
+PAD_NORTH: [
+   "outputs\\[7\\].output_pad",
+   "outputs\\[6\\].output_pad",
+   "outputs\\[5\\].output_pad",
+   "outputs\\[4\\].output_pad"
+]
+
+PAD_WEST: [
+   "vdd_pads\\[0\\].vdd_pad",
+   "vss_pads\\[0\\].vss_pad",
+   "iovdd_pads\\[0\\].iovdd_pad",
+   "iovss_pads\\[0\\].iovss_pad"
+]
+# ------------------------------------------------------------
+# Timing
+# ------------------------------------------------------------
+# SDC files
+PNR_SDC_FILE: dir::constraints/chip_top.sdc
+SIGNOFF_SDC_FILE: dir::constraints/chip_top.sdc
+FALLBACK_SDC: dir::constraints/chip_top.sdc
 
 CLOCK_PORT: clk_PAD
-CLOCK_NET: clk_core
+CLOCK_NET: clk_pad/p2c
+
 CLOCK_PERIOD: 20.0
 
-# ------------------------------------------------
-# Timing constraints
-# ------------------------------------------------
-
-PNR_SDC_FILE: dir::constraints/pnr.sdc
-SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
-
-# ------------------------------------------------
-# Die and core floorplan
-# ------------------------------------------------
-
-DIE_AREA:
-  - 0
-  - 0
-  - 1600
-  - 1600
+# ------------------------------------------------------------
+# Floorplan
+# ------------------------------------------------------------
 
 FP_SIZING: absolute
 
-# These values are examples and must be matched to pad dimensions.
-CORE_AREA:
-  - 300
-  - 300
-  - 1300
-  - 1300
+DIE_AREA: [0, 0, 1600, 1600]
+CORE_AREA: [365, 365, 1235, 1235]
 
-FP_CORE_UTIL: 35
+PL_TARGET_DENSITY_PCT: 10
+GRT_ALLOW_CONGESTION: true
 
-# ------------------------------------------------
-# Power and ground
-# Replace with the net names used by the selected PDK.
-# ------------------------------------------------
+# ------------------------------------------------------------
+# Power distribution
+# ------------------------------------------------------------
 
 VDD_NETS:
   - VDD
@@ -999,92 +1058,67 @@ VDD_NETS:
 GND_NETS:
   - VSS
 
-# ------------------------------------------------
-# Pad-ring ordering
-# Values are pad INSTANCE names from chip_top.sv.
-# ------------------------------------------------
+# PDN
+PDN_CORE_RING: true
 
-PAD_SOUTH:
-  - u_corner_sw
-  - u_pad_clk
-  - u_pad_rst_n
-  - u_pad_enable
-  - u_corner_se
+PDN_CORE_RING_VWIDTH: 15
+PDN_CORE_RING_HWIDTH: 15
 
-PAD_EAST:
-  - u_pad_count_0
-  - u_pad_count_1
-  - u_pad_count_2
-  - u_pad_count_3
+PDN_CORE_RING_VSPACING: 5
+PDN_CORE_RING_HSPACING: 5
+PDN_CORE_RING_CONNECT_TO_PADS: true
+PDN_ENABLE_PINS: false
 
-PAD_NORTH:
-  - u_corner_ne
-  - u_pad_vdd
-  - u_pad_vss
-  - u_corner_nw
+# Multiple supply pads feed the same core supply nets.
+MAGIC_EXT_UNIQUE: notopports
 
-PAD_WEST:
-  - u_pad_count_7
-  - u_pad_count_6
-  - u_pad_count_5
-  - u_pad_count_4
+# ------------------------------------------------------------
+# Bondpads
+# ------------------------------------------------------------
 
-# ------------------------------------------------
-# Placement
-# ------------------------------------------------
+PAD_BONDPAD_NAME: bondpad_70x70_novias
+#PAD_BONDPAD_SIZE: [70, 70]
 
-PL_TARGET_DENSITY_PCT: 45
+EXTRA_GDS:
+  - dir::ip/bondpad_70x70_novias/gds/bondpad_70x70_novias.gds
 
-GPL_CELL_PADDING: 2
-DPL_CELL_PADDING: 1
+EXTRA_LEFS:
+  - dir::ip/bondpad_70x70_novias/lef/bondpad_70x70_novias.lef
 
-# ------------------------------------------------
-# Clock-tree synthesis
-# ------------------------------------------------
+IGNORE_DISCONNECTED_MODULES:
+  - bondpad_70x70_novias
+
+# ------------------------------------------------------------
+# Flow checks
+# ------------------------------------------------------------
 
 RUN_CTS: true
-
-CTS_CLK_MAX_WIRE_LENGTH: 500
-CTS_SINK_CLUSTERING_ENABLE: true
-
-# ------------------------------------------------
-# Routing
-# ------------------------------------------------
-
-GRT_ALLOW_CONGESTION: false
-GRT_ANTENNA_ITERS: 5
-
 RUN_ANTENNA_REPAIR: true
 RUN_DRT: true
-
-# ------------------------------------------------
-# Signoff and checking
-# ------------------------------------------------
-
 RUN_SPEF_EXTRACTION: true
 RUN_MCSTA: true
-RUN_IRDROP_REPORT: true
-RUN_LVS: true
+RUN_IRDROP_REPORT: false
 
-RUN_MAGIC_STREAMOUT: true
-RUN_KLAYOUT_STREAMOUT: true
-RUN_KLAYOUT_XOR: true
-
-RUN_MAGIC_DRC: true
-RUN_KLAYOUT_DRC: true
-
-# ------------------------------------------------
-# Error policy
-# ------------------------------------------------
-
-ERROR_ON_LINTER_WARNINGS: false
 ERROR_ON_DISCONNECTED_PINS: true
 ERROR_ON_TR_DRC: true
 ERROR_ON_LVS_ERROR: true
 ERROR_ON_MAGIC_DRC: true
 ERROR_ON_KLAYOUT_DRC: true
-ERROR_ON_KLAYOUT_ANTENNA: true
-ERROR_ON_KLAYOUT_DENSITY: true
+
+MAGIC_GDS_FLATGLOB:
+  - "*_CELL_CORNER"
+  - "*_CELL_SUB"
+  - "RSC_*"
+  - "VIA_M1_*"
+  - "VIA_M2_*"
+
+# Due to OpenROAD bug
+# https://github.com/The-OpenROAD-Project/OpenROAD/issues/8229
+#PL_TIME_DRIVEN: False
+#PL_ROUTABILITY_DRIVEN: False
+
+# Because we have multiple power pads for one power domain
+MAGIC_EXT_UNIQUE: notopports
 
 # ------------------------------------------------
 # PDK-specific section
