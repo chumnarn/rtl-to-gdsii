@@ -1,6 +1,6 @@
 # RTL-to-GDSII Workshop 2026 — คู่มือฉบับย่อ
 
-## Short Reference Guide: LibreLane \+ IHP SG13G2 PDK
+## Short Reference Guide: LibreLane + IHP SG13G2 PDK
 
 > คู่มือนี้เป็นฉบับย่อของ Lab 1–15 ครอบคลุมวัตถุประสงค์ ขั้นตอนสำคัญ คำสั่งหลัก และเกณฑ์ผ่านของทุก Lab  
 > เครื่องมือหลัก: **LibreLane · Yosys · OpenROAD · OpenSTA · Magic · KLayout · Netgen · Verilator**
@@ -16,14 +16,14 @@
 | 03 | First RTL-to-GDSII Implementation | LibreLane Classic Flow | GDSII ครั้งแรก, DRC/LVS ผ่าน |
 | 04 | LibreLane Configuration Variables | config.yaml, LibreLane | เข้าใจตัวแปร FP/PL/PDN และผลลัพธ์ |
 | 05 | Floorplan and Pin Placement | OpenROAD, LibreLane | Die/Core กำหนดขนาดได้, Pin ตรงตำแหน่ง |
-| 06 | Synthesis and Static Timing Analysis | Yosys, OpenSTA | Netlist \+ timing report, WNS/TNS |
+| 06 | Synthesis and Static Timing Analysis | Yosys, OpenSTA | Netlist + timing report, WNS/TNS |
 | 07 | Placement Optimization | OpenROAD, LibreLane | Global+Detailed Placement ผ่าน legality |
 | 08 | Clock Tree Synthesis | OpenROAD CTS | Clock tree สร้างสำเร็จ, skew ยอมรับได้ |
 | 09 | Global and Detailed Routing | OpenROAD, LibreLane | Routed DEF, DRC=0, overflow=0 |
 | 10 | Physical Verification – DRC & LVS | Magic, KLayout, Netgen | DRC=0, LVS "Circuits match" |
 | 11 | Controlling & Debugging the Flow | LibreLane CLI | ควบคุม Step ได้, debug อย่างเป็นระบบ |
-| 12 | Macro Integration | LibreLane, OpenROAD | Top-level \+ Hard Macro, GDSII รวม |
-| 13 | Hierarchical Physical Design | LibreLane, OpenROAD | Block hardening \+ Top-level integration |
+| 12 | Macro Integration | LibreLane, OpenROAD | Top-level + Hard Macro, GDSII รวม |
+| 13 | Hierarchical Physical Design | LibreLane, OpenROAD | Block hardening + Top-level integration |
 | 14 | LibreLane Python API | Python, LibreLane | Parameter sweep, custom flow จาก script |
 | 15 | Full-Chip Design with IO Pads | LibreLane Chip Flow | Full-chip GDSII พร้อม pad ring |
 
@@ -57,7 +57,7 @@
 
 \# ติดตั้ง Nix
 
-curl -L https://nixos.org/nix/install | sh -s \-- \--daemon
+curl -L https://nixos.org/nix/install | sh -s -- --daemon
 
 \# Clone repository
 
@@ -83,7 +83,7 @@ librelane --smoke-test
 
 - [ ] `IN_NIX_SHELL` มีค่า  
 - [ ] `librelane --version` ทำงาน  
-- [ ] `librelane --smoke-test` คืน exit code 0  (Smoke test passed)
+- [ ] `librelane --smoke-test` คืน exit code 0  
 - [ ] เครื่องมือหลักทุกตัวแสดง `[PASS]` (Yosys, OpenROAD, KLayout, Magic, Verilator, Netgen)  
 - [ ] PDK เข้าถึงได้
 
@@ -108,38 +108,41 @@ librelane --smoke-test
 1. ตรวจสอบ RTL interface (`clk_i`, `rst_ni`, `count_o[7:0]`)  
 2. เขียน testbench สร้าง clock 10 ns, assert reset ตอนต้น  
 3. เพิ่ม reference model และ error counter  
-4. คอมไพล์ด้วย Verilator \+ lint check  
+4. คอมไพล์ด้วย Verilator + lint check  
 5. รัน simulation สร้าง FST waveform  
 6. เปิด GTKWave ตรวจสอบ sequence `FE→FF→00`
 
 ### คำสั่งหลัก
 
 \# Lint check
-```bash
+
 verilator --lint-only --Wall --sv rtl/counter.sv
-```
+
 \# คอมไพล์และรัน simulation
-```bash
+
 verilator --binary --trace-fst --sv \
+
   rtl/counter.sv tb/counter_tb.sv \
+
   -o sim/counter_sim
+
 ./sim/counter_sim
-```
+
 \# เปิด waveform
-```bash
+
 gtkwave waves/counter.fst
 
 \# ใช้ Makefile
-```bash
+
 make lint
 
 make run
-```
+
 ### เกณฑ์ผ่าน
 
 - [ ] `make lint` ไม่มี error  
 - [ ] `make run` แสดง `LAB RESULT: PASS`  
-- [ ] exit code \= 0  
+- [ ] exit code = 0  
 - [ ] มีไฟล์ `waves/counter.fst`  
 - [ ] เห็นลำดับ `FE → FF → 00` ใน waveform  
 - [ ] Reset ระหว่างทำงานทำให้ count กลับเป็น 0
@@ -163,7 +166,7 @@ make run
 ### ขั้นตอนสำคัญ
 
 1. ตรวจสอบ RTL ด้วย Verilator lint  
-2. สร้าง `config.yaml` กำหนด DESIGN\_NAME, CLOCK\_PORT, CLOCK\_PERIOD  
+2. สร้าง `config.yaml` กำหนด DESIGN_NAME, CLOCK_PORT, CLOCK_PERIOD  
 3. รัน LibreLane เต็ม flow  
 4. ตรวจสอบ run directory และผลลัพธ์  
 5. เปิด GDSII ด้วย KLayout
@@ -172,37 +175,37 @@ make run
 
 \# ตรวจสอบ RTL ก่อน
 
-verilator \--lint-only \--Wall \--sv counter.sv
+verilator --lint-only --Wall --sv counter.sv
 
-yosys \-p "read\_verilog \-sv counter.sv; hierarchy \-check \-top counter; check"
+yosys -p "read_verilog -sv counter.sv; hierarchy -check -top counter; check"
 
 \# รัน LibreLane
 
-librelane \--pdk ihp-sg13g2 config.yaml
+librelane --pdk ihp-sg13g2 config.yaml
 
 \# เปิด GDSII
 
-klayout runs/\<tag\>/final/gds/counter.gds
+klayout runs/<tag>/final/gds/counter.gds
 
 **ตัวอย่าง `config.yaml`:**
 
-DESIGN\_NAME: counter
+DESIGN_NAME: counter
 
-VERILOG\_FILES:
+VERILOG_FILES:
 
-  \- dir::rtl/counter.sv
+  - dir::rtl/counter.sv
 
-CLOCK\_PORT: clk\_i
+CLOCK_PORT: clk_i
 
-CLOCK\_PERIOD: 10   \# 10 ns \= 100 MHz
+CLOCK_PERIOD: 10   # 10 ns = 100 MHz
 
 ### เกณฑ์ผ่าน
 
 - [ ] LibreLane flow จบโดยไม่มี fatal error  
 - [ ] พบ GDSII, DEF, ODB, SPEF, SDF ใน run directory  
-- [ ] Setup timing ผ่าน (WNS ≥ 0\)  
+- [ ] Setup timing ผ่าน (WNS ≥ 0)  
 - [ ] Hold timing ผ่าน  
-- [ ] DRC \= 0, LVS ผ่าน, Antenna ผ่าน  
+- [ ] DRC = 0, LVS ผ่าน, Antenna ผ่าน  
 - [ ] OpenROAD GUI และ KLayout เปิด design ได้
 
 ---
@@ -234,23 +237,23 @@ CLOCK\_PERIOD: 10   \# 10 ns \= 100 MHz
 
 \# รัน baseline
 
-librelane \--pdk ihp-sg13g2 config.yaml
+librelane --pdk ihp-sg13g2 config.yaml
 
 \# ตัวอย่างตัวแปรสำคัญใน config.yaml
 
-FP\_SIZING: absolute
+FP_SIZING: absolute
 
-DIE\_AREA: \[0.0, 0.0, 300.0, 300.0\]
+DIE_AREA: [0.0, 0.0, 300.0, 300.0]
 
-CORE\_AREA: \[20.0, 20.0, 280.0, 280.0\]
+CORE_AREA: [20.0, 20.0, 280.0, 280.0]
 
-FP\_CORE\_UTIL: 40
+FP_CORE_UTIL: 40
 
-PL\_TARGET\_DENSITY\_PCT: 55
+PL_TARGET_DENSITY_PCT: 55
 
-FP\_PIN\_ORDER\_CFG: dir::pins.cfg
+FP_PIN_ORDER_CFG: dir::pins.cfg
 
-FP\_DEF\_TEMPLATE: dir::template.def
+FP_DEF_TEMPLATE: dir::template.def
 
 ### เกณฑ์ผ่าน
 
@@ -279,7 +282,7 @@ FP\_DEF\_TEMPLATE: dir::template.def
 
 ### ขั้นตอนสำคัญ
 
-1. กำหนด DIE\_AREA และ CORE\_AREA ใน config.yaml  
+1. กำหนด DIE_AREA และ CORE_AREA ใน config.yaml  
 2. สร้าง `pin_order.cfg` กำหนด pin แต่ละด้าน  
 3. รัน LibreLane ถึงขั้น Floorplan  
 4. ตรวจสอบ ODB/DEF ว่า pin ครบและไม่ซ้อนกัน  
@@ -289,33 +292,33 @@ FP\_DEF\_TEMPLATE: dir::template.def
 
 \# รัน LibreLane ถึง floorplan เท่านั้น
 
-librelane \--pdk ihp-sg13g2 config.yaml \--to OpenROAD.IOPlacement
+librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.IOPlacement
 
 \# ตรวจสอบ pin
 
-make pins    \# แสดง pin ครบ 21 ขา
+make pins    # แสดง pin ครบ 21 ขา
 
 \# เปิด GUI
 
-openroad \-gui
+openroad -gui
 
 **ตัวอย่าง `pin_order.cfg`:**
 
 \#N
 
-clk rst\_n enable\_i load\_i
+clk rst_n enable_i load_i
 
 \#E
 
-data\_i\[0\] data\_i\[1\] data\_i\[2\] data\_i\[3\] data\_i\[4\] data\_i\[5\] data\_i\[6\] data\_i\[7\]
+data_i\[0\] data_i\[1\] data_i\[2\] data_i\[3\] data_i\[4\] data_i\[5\] data_i\[6\] data_i\[7\]
 
 \#S
 
-terminal\_o
+terminal_o
 
 \#W
 
-count\_o\[0\] count\_o\[1\] count\_o\[2\] count\_o\[3\] count\_o\[4\] count\_o\[5\] count\_o\[6\] count\_o\[7\]
+count_o\[0\] count_o\[1\] count_o\[2\] count_o\[3\] count_o\[4\] count_o\[5\] count_o\[6\] count_o\[7\]
 
 ### เกณฑ์ผ่าน
 
@@ -342,7 +345,7 @@ count\_o\[0\] count\_o\[1\] count\_o\[2\] count\_o\[3\] count\_o\[4\] count\_o\[
 
 ### ขั้นตอนสำคัญ
 
-1. สร้าง `config.yaml` ระบุ VERILOG\_FILES, CLOCK\_PORT, CLOCK\_PERIOD  
+1. สร้าง `config.yaml` ระบุ VERILOG_FILES, CLOCK_PORT, CLOCK_PERIOD  
 2. สร้าง `pnr.sdc` และ `signoff.sdc`  
 3. รัน LibreLane ถึงขั้น STA  
 4. อ่าน timing report: WNS, TNS, critical path  
@@ -352,29 +355,29 @@ count\_o\[0\] count\_o\[1\] count\_o\[2\] count\_o\[3\] count\_o\[4\] count\_o\[
 
 \# รัน synthesis และ STA
 
-librelane \--pdk ihp-sg13g2 config.yaml \--to OpenROAD.STAPrePNR
+librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.STAPrePNR
 
 \# อ่าน timing report
 
-cat runs/\<tag\>/\*/reports/sta/max.rpt | head \-60
+cat runs/<tag>/*/reports/sta/max.rpt | head -60
 
 **ตัวอย่าง `pnr.sdc`:**
 
-create\_clock \-name clk \-period 10.0 \[get\_ports clk\_i\]
+create_clock -name clk -period 10.0 [get_ports clk_i]
 
-set\_input\_delay  \-clock clk \-max 2.0 \[all\_inputs\]
+set_input_delay  -clock clk -max 2.0 [all_inputs]
 
-set\_output\_delay \-clock clk \-max 2.0 \[all\_outputs\]
+set_output_delay -clock clk -max 2.0 [all_outputs]
 
-set\_load 0.01 \[all\_outputs\]
+set_load 0.01 [all_outputs]
 
-set\_clock\_uncertainty 0.25 \[get\_clocks clk\]
+set_clock_uncertainty 0.25 [get_clocks clk]
 
 **เกณฑ์ timing:**
 
-WNS \>= 0   (positive slack \= pass)
+WNS >= 0   (positive slack = pass)
 
-TNS  \= 0   (ไม่มี violating endpoint)
+TNS  = 0   (ไม่มี violating endpoint)
 
 ### เกณฑ์ผ่าน
 
@@ -403,7 +406,7 @@ TNS  \= 0   (ไม่มี violating endpoint)
 
 ### ขั้นตอนสำคัญ
 
-1. สร้าง baseline config (FP\_CORE\_UTIL=40, PL\_TARGET\_DENSITY\_PCT=55)  
+1. สร้าง baseline config (FP_CORE_UTIL=40, PL_TARGET_DENSITY_PCT=55)  
 2. รัน LibreLane ถึง Detailed Placement  
 3. เปิด OpenROAD GUI ตรวจสอบ density map  
 4. ทดลอง density ต่ำ (35%) vs. สูง (65%)  
@@ -413,17 +416,17 @@ TNS  \= 0   (ไม่มี violating endpoint)
 
 \# รันถึง Detailed Placement
 
-librelane \--pdk ihp-sg13g2 config.yaml \--to OpenROAD.DetailedPlacement
+librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.DetailedPlacement
 
 \# ตัวแปรสำคัญ
 
-FP\_CORE\_UTIL: 40
+FP_CORE_UTIL: 40
 
-PL\_TARGET\_DENSITY\_PCT: 55
+PL_TARGET_DENSITY_PCT: 55
 
-PL\_TIMING\_DRIVEN: true
+PL_TIMING_DRIVEN: true
 
-PL\_ROUTABILITY\_DRIVEN: true
+PL_ROUTABILITY_DRIVEN: true
 
 ### เกณฑ์ผ่าน
 
@@ -463,29 +466,29 @@ PL\_ROUTABILITY\_DRIVEN: true
 
 \# รันถึง CTS
 
-librelane \--pdk ihp-sg13g2 config.yaml \--to OpenROAD.CTS
+librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.CTS
 
 \# ตัวแปร CTS ใน config.yaml
 
-CTS\_TARGET\_SKEW: 200        \# target skew (ps)
+CTS_TARGET_SKEW: 200        # target skew (ps)
 
-CTS\_MAX\_CAP: 0.25           \# max capacitance (pF)
+CTS_MAX_CAP: 0.25           # max capacitance (pF)
 
-CTS\_CLK\_BUFFER\_LIST:
+CTS_CLK_BUFFER_LIST:
 
-  \- sg13g2\_buf\_2
+  - sg13g2_buf_2
 
-  \- sg13g2\_buf\_4
+  - sg13g2_buf_4
 
-  \- sg13g2\_buf\_8
+  - sg13g2_buf_8
 
 **เกณฑ์ CTS สำหรับ Workshop:**
 
-Clock skew \< 400 ps   → ดี
+Clock skew < 400 ps   → ดี
 
-Clock skew \< 600 ps   → ยอมรับได้
+Clock skew < 600 ps   → ยอมรับได้
 
-Clock skew \>= 600 ps  → ต้องปรับแต่ง
+Clock skew >= 600 ps  → ต้องปรับแต่ง
 
 ### เกณฑ์ผ่าน
 
@@ -517,41 +520,41 @@ Clock skew \>= 600 ps  → ต้องปรับแต่ง
 1. รัน Global Routing และตรวจ congestion map  
 2. แก้ overflow ถ้ามี (ลด utilization หรือปรับ layer)  
 3. รัน Detailed Routing  
-4. ตรวจสอบ Routing DRC \= 0  
+4. ตรวจสอบ Routing DRC = 0  
 5. ตรวจสอบ antenna violation
 
 ### คำสั่งหลัก
 
 \# รัน routing ทั้งหมด
 
-librelane \--pdk ihp-sg13g2 config.yaml \--to OpenROAD.DetailedRouting
+librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.DetailedRouting
 
 \# ตัวแปรสำคัญ
 
-GRT\_ADJUSTMENT: 0.25         \# reserve routing resources
+GRT_ADJUSTMENT: 0.25         # reserve routing resources
 
-RT\_MAX\_LAYER: met5           \# สูงสุดที่ router ใช้ได้
+RT_MAX_LAYER: met5           # สูงสุดที่ router ใช้ได้
 
-GRT\_ALLOW\_CONGESTION: false  \# ห้ามข้ามเมื่อ overflow \> 0
+GRT_ALLOW_CONGESTION: false  # ห้ามข้ามเมื่อ overflow > 0
 
-DRT\_OPT\_ITERS: 64            \# iteration ของ detailed router
+DRT_OPT_ITERS: 64            # iteration ของ detailed router
 
 **Signoff checklist routing:**
 
-Global routing overflow  \= 0
+Global routing overflow  = 0
 
-Detailed routing DRC     \= 0
+Detailed routing DRC     = 0
 
-Unrouted nets            \= 0
+Unrouted nets            = 0
 
-Disconnected pins        \= 0
+Disconnected pins        = 0
 
 ### เกณฑ์ผ่าน
 
-- [ ] Global routing overflow \= 0  
-- [ ] Detailed routing DRC \= 0  
-- [ ] Unrouted nets \= 0  
-- [ ] Antenna violations \= 0 หรือมีแผนซ่อม  
+- [ ] Global routing overflow = 0  
+- [ ] Detailed routing DRC = 0  
+- [ ] Unrouted nets = 0  
+- [ ] Antenna violations = 0 หรือมีแผนซ่อม  
 - [ ] Setup/Hold timing ผ่านหลัง routing
 
 ---
@@ -582,30 +585,30 @@ Disconnected pins        \= 0
 
 \# รัน full flow รวม verification
 
-librelane \--pdk ihp-sg13g2 config.yaml
+librelane --pdk ihp-sg13g2 config.yaml
 
 \# ตรวจสอบผล DRC
 
-find runs/ \-name '\*-magic-drc' | sort | tail \-1 | xargs ls
+find runs/ -name '*-magic-drc' | sort | tail -1 | xargs ls
 
-cat .../reports/drc\_violations.magic.rpt
+cat .../reports/drc_violations.magic.rpt
 
 \# ตรวจสอบ LVS
 
-find runs/ \-name '\*-netgen-lvs' | sort | tail \-1 | xargs ls
+find runs/ -name '*-netgen-lvs' | sort | tail -1 | xargs ls
 
-grep \-i "match\\|mismatch" .../reports/lvs.rpt
+grep -i "match\|mismatch" .../reports/lvs.rpt
 
 \# เปิด layout
 
-klayout runs/\<tag\>/final/gds/counter.gds
+klayout runs/<tag>/final/gds/counter.gds
 
 ### เกณฑ์ผ่าน
 
-- [ ] Magic DRC violations \= 0  
-- [ ] KLayout DRC violations \= 0  
+- [ ] Magic DRC violations = 0  
+- [ ] KLayout DRC violations = 0  
 - [ ] Netgen LVS: `Circuits match uniquely`  
-- [ ] GDS stream-out สำเร็จ (Magic \+ KLayout)  
+- [ ] GDS stream-out สำเร็จ (Magic + KLayout)  
 - [ ] KLayout XOR ผ่าน หรือมีคำอธิบาย  
 - [ ] Signoff Report ครบ
 
@@ -638,31 +641,31 @@ klayout runs/\<tag\>/final/gds/counter.gds
 
 \# ดูรายการ options
 
-librelane \--help
+librelane --help
 
 \# หยุดที่ step ที่ต้องการ
 
-librelane \--pdk ihp-sg13g2 config.yaml \\
+librelane --pdk ihp-sg13g2 config.yaml \
 
-  \--to OpenROAD.Floorplan
+  --to OpenROAD.Floorplan
 
 \# รันจาก step ที่กำหนด
 
-librelane \--pdk ihp-sg13g2 config.yaml \\
+librelane --pdk ihp-sg13g2 config.yaml \
 
-  \--from OpenROAD.GlobalPlacement \\
+  --from OpenROAD.GlobalPlacement \
 
-  \--to OpenROAD.DetailedPlacement
+  --to OpenROAD.DetailedPlacement
 
 \# ข้าม step
 
-librelane \--pdk ihp-sg13g2 config.yaml \\
+librelane --pdk ihp-sg13g2 config.yaml \
 
-  \--skip KLayout.DRC
+  --skip KLayout.DRC
 
 \# ดู resolved config
 
-cat runs/\<tag\>/resolved.json | python3 \-m json.tool | head \-40
+cat runs/<tag>/resolved.json | python3 -m json.tool | head -40
 
 ### เกณฑ์ผ่าน
 
@@ -700,39 +703,39 @@ cat runs/\<tag\>/resolved.json | python3 \-m json.tool | head \-40
 
 \# รัน LibreLane พร้อม Macro
 
-librelane \--pdk ihp-sg13g2 config.yaml
+librelane --pdk ihp-sg13g2 config.yaml
 
 **ตัวอย่าง `config.yaml` ส่วน MACROS:**
 
-DESIGN\_NAME: soc\_top
+DESIGN_NAME: soc_top
 
-VERILOG\_FILES:
+VERILOG_FILES:
 
-  \- dir::rtl/soc\_top.sv
+  - dir::rtl/soc_top.sv
 
 MACROS:
 
-  counter\_macro:
+  counter_macro:
 
     gds:
 
-      \- dir::macros/counter\_macro/gds/counter\_macro.gds
+      - dir::macros/counter_macro/gds/counter_macro.gds
 
     lef:
 
-      \- dir::macros/counter\_macro/lef/counter\_macro.lef
+      - dir::macros/counter_macro/lef/counter_macro.lef
 
     instances:
 
-      u\_counter\_macro:
+      u_counter_macro:
 
-        location: \[50.0, 50.0\]
+        location: [50.0, 50.0]
 
         orientation: N
 
-FP\_MACRO\_HORIZONTAL\_HALO: 10
+FP_MACRO_HORIZONTAL_HALO: 10
 
-FP\_MACRO\_VERTICAL\_HALO: 10
+FP_MACRO_VERTICAL_HALO: 10
 
 ### เกณฑ์ผ่าน
 
@@ -741,7 +744,7 @@ FP\_MACRO\_VERTICAL\_HALO: 10
 - [ ] Macro ถูกวางตำแหน่งที่กำหนด, ไม่ทับ standard cells  
 - [ ] Power/Ground ของ Macro เชื่อมต่อ  
 - [ ] Signal routing เข้าถึง Macro pins  
-- [ ] DRC \= 0, LVS ผ่าน
+- [ ] DRC = 0, LVS ผ่าน
 
 ---
 
@@ -753,7 +756,7 @@ FP\_MACRO\_VERTICAL\_HALO: 10
 
 ผู้เรียนจะสามารถ:
 
-1. แบ่งระบบออกเป็น block-level (Counter Macro \+ Accumulator Macro)  
+1. แบ่งระบบออกเป็น block-level (Counter Macro + Accumulator Macro)  
 2. Harden แต่ละ block แยกกันด้วย LibreLane  
 3. Export Macro views (LEF, GDS, Liberty, SPEF)  
 4. ประกอบ block ที่ Top-level พร้อม floorplan, PDN, routing  
@@ -772,25 +775,25 @@ FP\_MACRO\_VERTICAL\_HALO: 10
 
 \# Harden block แต่ละตัว
 
-cd blocks/counter\_macro
+cd blocks/counter_macro
 
-librelane \--pdk ihp-sg13g2 config.yaml
+librelane --pdk ihp-sg13g2 config.yaml
 
-cd blocks/accumulator\_macro
+cd blocks/accumulator_macro
 
-librelane \--pdk ihp-sg13g2 config.yaml
+librelane --pdk ihp-sg13g2 config.yaml
 
 \# Copy views ไปยัง macros directory
 
-cp runs/\<tag\>/final/gds/counter\_macro.gds ../../macros/counter\_macro/gds/
+cp runs/<tag>/final/gds/counter_macro.gds ../../macros/counter_macro/gds/
 
-cp runs/\<tag\>/final/lef/counter\_macro.lef ../../macros/counter\_macro/lef/
+cp runs/<tag>/final/lef/counter_macro.lef ../../macros/counter_macro/lef/
 
 \# รัน Top-level
 
 cd top
 
-librelane \--pdk ihp-sg13g2 config.yaml
+librelane --pdk ihp-sg13g2 config.yaml
 
 ### เกณฑ์ผ่าน
 
@@ -820,8 +823,8 @@ librelane \--pdk ihp-sg13g2 config.yaml
 
 1. ตรวจสอบ `import librelane` สำเร็จ  
 2. สร้าง script เรียก Classic Flow  
-3. อ่าน final\_state และ metrics  
-4. สร้าง sweep loop เปลี่ยน CLOCK\_PERIOD  
+3. อ่าน final_state และ metrics  
+4. สร้าง sweep loop เปลี่ยน CLOCK_PERIOD  
 5. เปรียบเทียบผลจากหลาย runs
 
 ### คำสั่งหลัก
@@ -830,25 +833,25 @@ from librelane.flows import Flow, FlowError
 
 \# เรียก Classic Flow
 
-classic\_class \= Flow.factory.get("Classic")
+classic_class = Flow.factory.get("Classic")
 
-flow \= classic\_class("config.yaml", pdk="sky130A")
+flow = classic_class("config.yaml", pdk="sky130A")
 
-final\_state \= flow.start(tag="lab14\_run", overwrite=True)
+final_state = flow.start(tag="lab14_run", overwrite=True)
 
 \# อ่านผล
 
-print(flow.run\_dir)
+print(flow.run_dir)
 
-print(flow.config\_resolved\_path)
+print(flow.config_resolved_path)
 
-print(final\_state.metrics)
+print(final_state.metrics)
 
 \# Partial flow
 
-final\_state \= flow.start(
+final_state = flow.start(
 
-    tag="synth\_only",
+    tag="synth_only",
 
     frm="Yosys.Synthesis",
 
@@ -860,25 +863,25 @@ final\_state \= flow.start(
 
 \# Parameter sweep
 
-for period in \[10, 8, 6\]:
+for period in [10, 8, 6]:
 
-    flow \= classic\_class("config.yaml", pdk="sky130A",
+    flow = classic_class("config.yaml", pdk="sky130A",
 
-                         config\_override={"CLOCK\_PERIOD": period})
+                         config_override={"CLOCK_PERIOD": period})
 
-    state \= flow.start(tag=f"period\_{period}", overwrite=True)
+    state = flow.start(tag=f"period_{period}", overwrite=True)
 
-    print(period, state.metrics.get("design\_\_instance\_\_count"))
+    print(period, state.metrics.get("design__instance__count"))
 
 \# ตรวจสอบ API
 
-make check    \# import librelane
+make check    # import librelane
 
-make flows    \# list registered flows
+make flows    # list registered flows
 
-make steps    \# list registered steps
+make steps    # list registered steps
 
-make run      \# run Classic Flow
+make run      # run Classic Flow
 
 ### เกณฑ์ผ่าน
 
@@ -907,7 +910,7 @@ make run      \# run Classic Flow
 ### ขั้นตอนสำคัญ
 
 1. ตรวจสอบ I/O pad cells ที่มีใน PDK  
-2. เขียน `chip_top.sv` wrapper ที่ instantiate core \+ pads  
+2. เขียน `chip_top.sv` wrapper ที่ instantiate core + pads  
 3. สร้าง `padframe.cfg` กำหนด pad ทั้ง 4 ด้าน  
 4. สร้าง `config.yaml` ระบุ `FLOW_CONFIG: Chip`  
 5. รัน LibreLane Chip Flow  
@@ -917,39 +920,39 @@ make run      \# run Classic Flow
 
 \# ตรวจสอบ IO pad cells ใน PDK
 
-grep \-R "^module .\*Pad\\|^module .\*PAD" $PDK\_ROOT/
+grep -R "^module .*Pad\|^module .*PAD" $PDK_ROOT/
 
 \# รัน Chip Flow
 
-librelane \--pdk ihp-sg13g2 \--flow Chip config.yaml
+librelane --pdk ihp-sg13g2 --flow Chip config.yaml
 
 \# Validate configuration ก่อนรัน
 
-librelane \--pdk ihp-sg13g2 \--flow Chip config.yaml \--validate-only
+librelane --pdk ihp-sg13g2 --flow Chip config.yaml --validate-only
 
 \# เปิด GDSII
 
-klayout runs/\<tag\>/final/gds/chip\_top.gds
+klayout runs/<tag>/final/gds/chip_top.gds
 
 **ตัวอย่าง `config.yaml` สำหรับ Chip Flow:**
 
-DESIGN\_NAME: chip\_top
+DESIGN_NAME: chip_top
 
-VERILOG\_FILES:
+VERILOG_FILES:
 
-  \- dir::src/counter.sv
+  - dir::src/counter.sv
 
-  \- dir::src/chip\_top.sv
+  - dir::src/chip_top.sv
 
-CLOCK\_PORT: clk\_PAD
+CLOCK_PORT: clk_PAD
 
-CLOCK\_PERIOD: 10
+CLOCK_PERIOD: 10
 
-PAD\_CFG: dir::pad/padframe.cfg
+PAD_CFG: dir::pad/padframe.cfg
 
-DIE\_AREA: \[0.0, 0.0, 1000.0, 1000.0\]
+DIE_AREA: [0.0, 0.0, 1000.0, 1000.0]
 
-CORE\_AREA: \[200.0, 200.0, 800.0, 800.0\]
+CORE_AREA: [200.0, 200.0, 800.0, 800.0]
 
 ### เกณฑ์ผ่าน
 
@@ -973,93 +976,93 @@ CORE\_AREA: \[200.0, 200.0, 800.0, 800.0\]
 
 \# Design identification
 
-DESIGN\_NAME: counter
+DESIGN_NAME: counter
 
-VERILOG\_FILES:
+VERILOG_FILES:
 
-  \- dir::rtl/counter.sv
+  - dir::rtl/counter.sv
 
 \# Clock
 
-CLOCK\_PORT: clk\_i
+CLOCK_PORT: clk_i
 
-CLOCK\_PERIOD: 10          \# ns
+CLOCK_PERIOD: 10          # ns
 
 \# Floorplan
 
-FP\_SIZING: absolute       \# หรือ relative
+FP_SIZING: absolute       # หรือ relative
 
-DIE\_AREA: \[0, 0, 300, 300\]
+DIE_AREA: [0, 0, 300, 300]
 
-CORE\_AREA: \[20, 20, 280, 280\]
+CORE_AREA: [20, 20, 280, 280]
 
-FP\_CORE\_UTIL: 40          \# % (ใช้เมื่อ FP\_SIZING: relative)
+FP_CORE_UTIL: 40          # % (ใช้เมื่อ FP_SIZING: relative)
 
 \# Placement
 
-PL\_TARGET\_DENSITY\_PCT: 55
+PL_TARGET_DENSITY_PCT: 55
 
-PL\_TIMING\_DRIVEN: true
+PL_TIMING_DRIVEN: true
 
 \# SDC
 
-PNR\_SDC\_FILE: dir::constraints/pnr.sdc
+PNR_SDC_FILE: dir::constraints/pnr.sdc
 
-SIGNOFF\_SDC\_FILE: dir::constraints/signoff.sdc
+SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
 
 \# IO
 
-FP\_PIN\_ORDER\_CFG: dir::pins.cfg
+FP_PIN_ORDER_CFG: dir::pins.cfg
 
 ### ลำดับขั้นตอน RTL-to-GDSII
 
 SystemVerilog RTL
 
-    ↓ Yosys (Lab 6\)
+    ↓ Yosys (Lab 6)
 
 Gate-Level Netlist
 
-    ↓ OpenROAD Floorplan (Lab 5\)
+    ↓ OpenROAD Floorplan (Lab 5)
 
-    ↓ OpenROAD Placement (Lab 7\)
+    ↓ OpenROAD Placement (Lab 7)
 
-    ↓ OpenROAD CTS (Lab 8\)
+    ↓ OpenROAD CTS (Lab 8)
 
-    ↓ OpenROAD Routing (Lab 9\)
+    ↓ OpenROAD Routing (Lab 9)
 
-Routed DEF \+ ODB
+Routed DEF + ODB
 
-    ↓ Magic / KLayout DRC (Lab 10\)
+    ↓ Magic / KLayout DRC (Lab 10)
 
-    ↓ Netgen LVS (Lab 10\)
+    ↓ Netgen LVS (Lab 10)
 
 GDSII
 
 ### คำสั่ง LibreLane สำคัญ
 
-librelane \--version                           \# ตรวจสอบ version
+librelane --version                           # ตรวจสอบ version
 
-librelane \--smoke-test                        \# smoke test
+librelane --smoke-test                        # smoke test
 
-librelane \--pdk ihp-sg13g2 config.yaml        \# รัน full flow
+librelane --pdk ihp-sg13g2 config.yaml        # รัน full flow
 
-librelane \--pdk ihp-sg13g2 config.yaml \\
+librelane --pdk ihp-sg13g2 config.yaml \
 
-  \--to OpenROAD.Floorplan                     \# หยุดที่ step
+  --to OpenROAD.Floorplan                     # หยุดที่ step
 
-librelane \--pdk ihp-sg13g2 config.yaml \\
+librelane --pdk ihp-sg13g2 config.yaml \
 
-  \--from OpenROAD.GlobalPlacement \\
+  --from OpenROAD.GlobalPlacement \
 
-  \--to OpenROAD.DetailedPlacement             \# รันช่วงที่ระบุ
+  --to OpenROAD.DetailedPlacement             # รันช่วงที่ระบุ
 
-librelane \--pdk ihp-sg13g2 config.yaml \\
+librelane --pdk ihp-sg13g2 config.yaml \
 
-  \--skip KLayout.DRC                          \# ข้าม step
+  --skip KLayout.DRC                          # ข้าม step
 
-librelane \--pdk ihp-sg13g2 \--flow Chip \\
+librelane --pdk ihp-sg13g2 --flow Chip \
 
-  config.yaml                                 \# Chip flow
+  config.yaml                                 # Chip flow
 
 ### Metrics สำคัญที่ต้องตรวจสอบ
 
@@ -1067,13 +1070,13 @@ librelane \--pdk ihp-sg13g2 \--flow Chip \\
 | :---- | :---- |
 | Setup WNS | ≥ 0 ns |
 | Hold WNS | ≥ 0 ns |
-| Routing Overflow | \= 0 |
-| Routing DRC | \= 0 |
-| Magic DRC | \= 0 |
-| KLayout DRC | \= 0 |
+| Routing Overflow | = 0 |
+| Routing DRC | = 0 |
+| Magic DRC | = 0 |
+| KLayout DRC | = 0 |
 | LVS | Circuits match uniquely |
-| Unrouted Nets | \= 0 |
-| Clock Skew | \< 400 ps (Workshop guideline) |
+| Unrouted Nets | = 0 |
+| Clock Skew | < 400 ps (Workshop guideline) |
 
 ---
 
