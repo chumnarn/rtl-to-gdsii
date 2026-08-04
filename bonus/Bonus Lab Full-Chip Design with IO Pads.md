@@ -1630,7 +1630,7 @@ Parasitic Extraction
 Static Timing Analysis
       │
       ▼
-LVS
+     LVS
       │
       ▼
 Bond Pad / Seal Ring / Filler
@@ -1639,7 +1639,7 @@ Bond Pad / Seal Ring / Filler
 Final GDSII
 ```
 
-### รันคำสั่ง skip บางขั้นตอน เช่น ข้าม DRC
+### รันคำสั่ง skip บางขั้นตอน เช่น ข้าม DRC 
 
 ```bash
 librelane --pdk ihp-sg13g2 config.yaml \
