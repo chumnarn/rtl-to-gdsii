@@ -1,3 +1,7 @@
+
+This lab is taken form : [HeiChips/heichips26-digital-workshop](https://github.com/HeiChips/heichips26-digital-workshop) HeiChips/heichips26-digital-workshop
+
+
 # Bonus Exercise - Full Chip Design
 
 In order to create a full chip design we need to perform a number of additional steps.
