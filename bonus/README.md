@@ -1,5 +1,5 @@
 
-This lab is taken form : [HeiChips/heichips26-digital-workshop](https://github.com/HeiChips/heichips26-digital-workshop) HeiChips/heichips26-digital-workshop
+This lab is taken form : HeiChips/heichips26-digital-workshop https://github.com/HeiChips/heichips26-digital-workshop HeiChips/heichips26-digital-workshop
 
 
 # Bonus Exercise - Full Chip Design
