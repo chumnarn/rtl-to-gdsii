@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project: RV32I Chip on LibreLane + IHP SG13G2</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-2: #161b22;
+    --bg-3: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent-2: #1f6feb;
+    --green: #3fb950;
+    --orange: #d29922;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --pink: #ff7b72;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Thai", "Noto Sans", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1f6feb 0%, #bc8cff 100%);
+    padding: 60px 40px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 60px rgba(31, 111, 235, 0.3);
+  }
+  .hero h1 { font-size: 2.5rem; margin: 0 0 12px; font-weight: 800; }
+  .hero p { font-size: 1.2rem; opacity: 0.95; margin: 6px 0; }
+  .hero .badges { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .badge {
+    background: rgba(255,255,255,0.18);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Section */
+  section { margin-bottom: 40px; }
+  h2 {
+    font-size: 1.8rem;
+    color: var(--accent);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    margin-top: 40px;
+  }
+  h3 { color: var(--purple); margin-top: 24px; }
+
+  /* Cards */
+  .grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    margin: 20px 0;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card h4 { margin: 0 0 8px; color: var(--accent); font-size: 1.05rem; }
+  .card p { margin: 0; color: var(--text-dim); font-size: 0.95rem; }
+
+  /* Architecture diagram */
+  .arch {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  .arch svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+
+  /* Step timeline */
+  .timeline { position: relative; padding: 20px 0; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .step {
+    position: relative;
+    padding: 16px 20px 16px 70px;
+    margin-bottom: 12px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .step::before {
+    content: counter(step);
+    counter-increment: step;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    z-index: 1;
+  }
+  .timeline { counter-reset: step; }
+  .step h4 { margin: 0 0 4px; color: var(--accent); }
+  .step p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
+  .step code {
+    background: var(--bg-3);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--pink);
+  }
+
+  /* Code blocks */
+  pre {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  code {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    color: var(--pink);
+  }
+  pre code { color: var(--text); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-2);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th { background: var(--bg-3); color: var(--accent); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: var(--bg-3); }
+
+  /* Status badges */
+  .ok { color: var(--green); font-weight: 700; }
+  .warn { color: var(--orange); font-weight: 700; }
+  .err { color: var(--red); font-weight: 700; }
+
+  /* Tools grid */
+  .tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .tool {
+    background: var(--bg-2);
+    border-left: 4px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 6px;
+  }
+  .tool .name { font-weight: 700; color: var(--text); }
+  .tool .role { font-size: 0.85rem; color: var(--text-dim); }
+
+  /* Callouts */
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: var(--bg-2);
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  .callout.warn { border-left-color: var(--orange); }
+  .callout.danger { border-left-color: var(--red); }
+  .callout.success { border-left-color: var(--green); }
+  .callout strong { color: var(--accent); }
+  .callout.warn strong { color: var(--orange); }
+  .callout.danger strong { color: var(--red); }
+  .callout.success strong { color: var(--green); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  /* Print-friendly */
+  @media print {
+    body { background: white; color: black; }
+    .card, .step, pre, table { break-inside: avoid; }
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero { padding: 40px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>🛠️ Project: RV32I Chip</h1>
+    <p>ออกแบบและ Implement RISC-V SoC ด้วย LibreLane + IHP SG13G2 + PicoRV32</p>
+    <p style="opacity: 0.85;">4–6 ชั่วโมง · Intermediate · Tape-out-ready GDSII</p>
+    <div class="badges">
+      <span class="badge">LibreLane 3.0.3</span>
+      <span class="badge">IHP SG13G2 (130nm)</span>
+      <span class="badge">PicoRV32 RV32I</span>
+      <span class="badge">Open Source</span>
+      <span class="badge">Apache 2.0</span>
+    </div>
+  </div>
+
+  <!-- WHAT YOU'LL BUILD -->
+  <section>
+    <h2>🎯 สิ่งที่คุณจะได้</h2>
+    <div class="grid">
+      <div class="card">
+        <h4>🏗️ RV32I SoC</h4>
+        <p>PicoRV32 core + 4KB SRAM + GPIO + UART TX</p>
+      </div>
+      <div class="card">
+        <h4>📐 Tape-out GDSII</h4>
+        <p>Layout ที่ผ่าน DRC, LVS, Antenna บน SG13G2</p>
+      </div>
+      <div class="card">
+        <h4>📊 Sign-off Reports</h4>
+        <p>Timing, Power, Area, IR-drop ครบทุก corner</p>
+      </div>
+      <div class="card">
+        <h4>📦 MPW-ready</h4>
+        <p>เตรียมส่ง IHP MPW shuttle หรือ Tiny Tapeout</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLCHAIN -->
+  <section>
+    <h2>🧰 Toolchain</h2>
+    <div class="tools">
+      <div class="tool"><div class="name">LibreLane 3.0.3</div><div class="role">RTL-to-GDSII flow</div></div>
+      <div class="tool"><div class="name">Yosys 0.41+</div><div class="role">Synthesis</div></div>
+      <div class="tool"><div class="name">OpenROAD</div><div class="role">P&R + STA</div></div>
+      <div class="tool"><div class="name">OpenRCX</div><div class="role">Parasitic extraction</div></div>
+      <div class="tool"><div class="name">OpenSTA</div><div class="role">Static timing</div></div>
+      <div class="tool"><div class="name">KLayout</div><div class="role">DRC, XOR, density</div></div>
+      <div class="tool"><div class="name">Magic VLSI</div><div class="role">DRC, LVS</div></div>
+      <div class="tool"><div class="name">Netgen</div><div class="role">LVS</div></div>
+      <div class="tool"><div class="name">IHP SG13G2 PDK</div><div class="role">130nm SiGe BiCMOS</div></div>
+      <div class="tool"><div class="name">PicoRV32</div><div class="role">RV32I CPU core</div></div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section>
+    <h2>🏛️ Architecture</h2>
+    <div class="arch">
+<svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" font-family="system-ui" font-size="13">
+  <!-- SoC box -->
+  <rect x="20" y="20" width="760" height="420" fill="#161b22" stroke="#58a6ff" stroke-width="2" rx="10"/>
+  <text x="400" y="48" text-anchor="middle" fill="#58a6ff" font-size="18" font-weight="700">rv32i_soc (top-level)</text>
+
+  <!-- PicoRV32 -->
+  <rect x="60" y="80" width="240" height="160" fill="#21262d" stroke="#bc8cff" stroke-width="2" rx="8"/>
+  <text x="180" y="108" text-anchor="middle" fill="#bc8cff" font-size="15" font-weight="700">PicoRV32</text>
+  <text x="180" y="128" text-anchor="middle" fill="#8b949e">RV32I core</text>
+  <text x="180" y="148" text-anchor="middle" fill="#8b949e">750-2000 LUTs</text>
+  <text x="180" y="168" text-anchor="middle" fill="#8b949e">~4 CPI</text>
+  <text x="180" y="208" text-anchor="middle" fill="#3fb950" font-weight="600">clk, resetn, irq</text>
+  <text x="180" y="228" text-anchor="middle" fill="#3fb950" font-weight="600">→ mem_*</text>
+
+  <!-- SRAM -->
+  <rect x="380" y="80" width="200" height="100" fill="#21262d" stroke="#3fb950" stroke-width="2" rx="8"/>
+  <text x="480" y="108" text-anchor="middle" fill="#3fb950" font-size="14" font-weight="700">SRAM (4KB)</text>
+  <text x="480" y="128" text-anchor="middle" fill="#8b949e">1024 × 32-bit</text>
+  <text x="480" y="148" text-anchor="middle" fill="#8b949e">flip-flop based</text>
+  <text x="480" y="168" text-anchor="middle" fill="#8b949e">0x0000_0000</text>
+
+  <!-- I/O block -->
+  <rect x="380" y="220" width="200" height="100" fill="#21262d" stroke="#d29922" stroke-width="2" rx="8"/>
+  <text x="480" y="248" text-anchor="middle" fill="#d29922" font-size="14" font-weight="700">Memory-mapped I/O</text>
+  <text x="480" y="268" text-anchor="middle" fill="#8b949e">GPIO, UART</text>
+  <text x="480" y="288" text-anchor="middle" fill="#8b949e">0x0000_1000</text>
+
+  <!-- UART TX -->
+  <rect x="630" y="80" width="120" height="60" fill="#21262d" stroke="#ff7b72" stroke-width="2" rx="8"/>
+  <text x="690" y="108" text-anchor="middle" fill="#ff7b72" font-size="13" font-weight="700">UART TX</text>
+  <text x="690" y="128" text-anchor="middle" fill="#8b949e">115200 baud</text>
+
+  <!-- GPIO -->
+  <rect x="630" y="160" width="120" height="60" fill="#21262d" stroke="#ff7b72" stroke-width="2" rx="8"/>
+  <text x="690" y="188" text-anchor="middle" fill="#ff7b72" font-size="13" font-weight="700">GPIO</text>
+  <text x="690" y="208" text-anchor="middle" fill="#8b949e">8-bit I/O</text>
+
+  <!-- Memory map -->
+  <rect x="60" y="280" width="520" height="130" fill="#0d1117" stroke="#30363d" stroke-width="1" rx="6"/>
+  <text x="80" y="305" fill="#58a6ff" font-weight="600">Memory Map:</text>
+  <text x="80" y="328" fill="#e6edf3">  0x0000_0000 - 0x0000_0FFF  → SRAM (4KB instruction + data)</text>
+  <text x="80" y="350" fill="#e6edf3">  0x0000_1000              → GPIO out</text>
+  <text x="80" y="370" fill="#e6edf3">  0x0000_1004              → GPIO in</text>
+  <text x="80" y="390" fill="#e6edf3">  0x0000_1008              → UART TX trigger</text>
+
+  <!-- External -->
+  <text x="690" y="370" text-anchor="middle" fill="#8b949e">▼ External</text>
+  <text x="690" y="392" text-anchor="middle" fill="#3fb950" font-weight="600">clk, rst_n, irq</text>
+  <text x="690" y="410" text-anchor="middle" fill="#3fb950" font-weight="600">gpio, uart_tx</text>
+
+  <!-- Arrows -->
+  <line x1="300" y1="130" x2="380" y2="130" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="300" y1="180" x2="380" y2="270" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="580" y1="130" x2="630" y2="110" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="580" y1="270" x2="630" y2="190" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#58a6ff"/>
+    </marker>
+  </defs>
+</svg>
+    </div>
+  </section>
+
+  <!-- STEP-BY-STEP TIMELINE -->
+  <section>
+    <h2>📋 Step-by-step Flow</h2>
+    <div class="timeline">
+
+      <div class="step">
+        <h4>1 · ติดตั้ง Environment</h4>
+        <p>ติดตั้ง Ubuntu packages, Nix, LibreLane 3.0.3, IHP SG13G2 PDK, RISC-V toolchain</p>
+        <p><code>git clone https://github.com/librelane/librelane.git && cd librelane && nix-shell</code></p>
+      </div>
+
+      <div class="step">
+        <h4>2 · Clone PicoRV32 + Template</h4>
+        <p>ดึง source code ของ PicoRV32 และใช้ IHP SG13G2 LibreLane template</p>
+        <p><code>git clone https://github.com/IHP-GmbH/ihp-sg13g2-librelane-template.git</code></p>
+      </div>
+
+      <div class="step">
+        <h4>3 · ออกแบบ Top-level SoC</h4>
+        <p>เขียน <code>rv32i_soc.v</code> ที่รวม PicoRV32 + SRAM wrapper + UART TX + GPIO</p>
+        <p>กำหนด memory map 4KB SRAM + 4KB I/O</p>
+      </div>
+
+      <div class="step">
+        <h4>4 · เขียน config.yaml</h4>
+        <p>ตั้งค่า <code>DESIGN_NAME</code>, <code>CLOCK_PORT</code>, <code>VERILOG_FILES</code>, <code>DIE_AREA</code>, ฯลฯ</p>
+        <p>เลือก <code>SYNTH_STRATEGY: AREA 0</code>, <code>FP_CORE_UTIL: 45</code></p>
+      </div>
+
+      <div class="step">
+        <h4>5 · รัน LibreLane Flow</h4>
+        <p>รัน RTL → GDSII แบบ no-human-in-the-loop</p>
+        <p><code>librelane --pdk ihp-sg13g2 flow/librelane/config.yaml</code></p>
+      </div>
+
+      <div class="step">
+        <h4>6 · ตรวจสอบผลลัพธ์</h4>
+        <p>เปิดดู layout ใน OpenROAD/KLayout, ตรวจ WNS/TNS/DRC/LVS/Antenna</p>
+        <p><code>librelane --last-run --flow OpenInKLayout</code></p>
+      </div>
+
+      <div class="step">
+        <h4>7 · Optimize & Debug</h4>
+        <p>ปรับ CLOCK_PERIOD / FP_CORE_UTIL / pinout แล้วรันใหม่</p>
+        <p>แก้ violations จน DRC = 0, LVS = 0, WNS ≥ 0</p>
+      </div>
+
+      <div class="step">
+        <h4>8 · Sign-off และ Tape-out</h4>
+        <p>เก็บ final GDS + reports → ส่ง IHP MPW หรือ Tiny Tapeout shuttle</p>
+        <p>รอ die ~3-4 เดือน</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUICK COMMANDS -->
+  <section>
+    <h2>⚡ Quick Commands Cheatsheet</h2>
+
+    <h3>🔧 Setup</h3>
+<pre><code># Nix
+git clone https://github.com/librelane/librelane.git
+cd librelane && git checkout 3.0.3
+nix-shell
+librelane --smoke-test
+
+# pip + Docker
+export PDK=ihp-sg13g2
+export PDK_ROOT=~/ttsetup/pdk
+export LIBRELANE_TAG=3.0.3
+pip install librelane==$LIBRELANE_TAG
+
+# RISC-V toolchain
+git clone https://github.com/YosysHQ/picorv32.git
+cd picorv32 && make -j$(nproc) build-riscv32i-tools</code></pre>
+
+    <h3>🚀 Run Flow</h3>
+<pre><code># Full Classic flow
+librelane --pdk ihp-sg13g2 flow/librelane/config.yaml
+
+# Chip flow (มี pad ring)
+librelane --pdk ihp-sg13g2 --flow Chip flow/librelane/config.yaml
+
+# Resume จาก step ที่ fail
+librelane --pdk ihp-sg13g2 config.yaml --from openroad.place
+
+# Run แค่ synthesis
+librelane --pdk ihp-sg13g2 config.yaml \
+    --from yosys.synthesis --to yosys.synthesis</code></pre>
+
+    <h3>👀 Visualization</h3>
+<pre><code># OpenROAD GUI
+librelane --pdk ihp-sg13g2 config.yaml --last-run --flow OpenInOpenROAD
+
+# KLayout
+librelane --pdk ihp-sg13g2 config.yaml --last-run --flow OpenInKLayout
+
+# Reports
+cat runs/RUN_*/06-final/cts.min.slack.rpt
+cat runs/RUN_*/06-final/magic.drc.rpt
+cat runs/RUN_*/06-final/netgen.lvs.rpt</code></pre>
+
+    <h3>🛠️ Manual PDK</h3>
+<pre><code>git clone --branch dev --recurse-submodules \
+    https://github.com/IHP-GmbH/IHP-Open-PDK.git
+cd IHP-Open-PDK
+export PDK_ROOT="$(pwd)"
+librelane --pdk ihp-sg13g2 --pdk-root $PDK_ROOT --manual-pdk config.yaml</code></pre>
+  </section>
+
+  <!-- KEY CONFIG -->
+  <section>
+    <h2>⚙️ Key Configuration Parameters</h2>
+    <table>
+      <tr><th>Parameter</th><th>Default</th><th>คำอธิบาย</th></tr>
+      <tr><td><code>DESIGN_NAME</code></td><td>—</td><td>Top-level module name</td></tr>
+      <tr><td><code>CLOCK_PORT</code></td><td>clk</td><td>ชื่อ clock port</td></tr>
+      <tr><td><code>CLOCK_PERIOD</code></td><td>—</td><td>ระยะเวลา clock (ns) — 20 = 50 MHz</td></tr>
+      <tr><td><code>VERILOG_FILES</code></td><td>—</td><td>List ของ source files</td></tr>
+      <tr><td><code>FP_CORE_UTIL</code></td><td>50</td><td>Core utilization (%)</td></tr>
+      <tr><td><code>PL_TARGET_DENSITY_PCT</code></td><td>FP_CORE_UTIL+10</td><td>Placement target density</td></tr>
+      <tr><td><code>SYNTH_STRATEGY</code></td><td>AREA 0</td><td>AREA 0, AREA 1, DELAY 0, DELAY 1, DELAY 2, DELAY 3</td></tr>
+      <tr><td><code>MAX_FANOUT_CONSTRAINT</code></td><td>—</td><td>Max fanout ต่อ net</td></tr>
+      <tr><td><code>CTS_TARGET_SKEW</code></td><td>—</td><td>Clock tree target skew (ns)</td></tr>
+      <tr><td><code>DIE_AREA</code></td><td>—</td><td>Die area (µm): "0 0 1000 1000"</td></tr>
+      <tr><td><code>CORE_AREA</code></td><td>—</td><td>Core area (µm)</td></tr>
+      <tr><td><code>RUN_HEURISTIC_DIODE_INSERTION</code></td><td>false</td><td>แก้ปัญหา antenna</td></tr>
+    </table>
+  </section>
+
+  <!-- SIGN-OFF CHECKLIST -->
+  <section>
+    <h2>✅ Sign-off Checklist</h2>
+    <table>
+      <tr><th>Metric</th><th>Target</th><th>ไฟล์ที่ตรวจ</th></tr>
+      <tr><td>WNS (Worst Negative Slack)</td><td class="ok">≥ 0 ns</td><td><code>cts.min.slack.rpt</code></td></tr>
+      <tr><td>TNS (Total Negative Slack)</td><td class="ok">= 0 ns</td><td><code>cts.min.slack.rpt</code></td></tr>
+      <tr><td>Clock Skew</td><td class="ok">&lt; 200 ps</td><td><code>cts.skew.rpt</code></td></tr>
+      <tr><td>DRC violations (KLayout)</td><td class="ok">0</td><td><code>klayout.drc.rpt</code></td></tr>
+      <tr><td>DRC violations (Magic)</td><td class="ok">0</td><td><code>magic.drc.rpt</code></td></tr>
+      <tr><td>LVS errors</td><td class="ok">0</td><td><code>netgen.lvs.rpt</code></td></tr>
+      <tr><td>Antenna violations</td><td class="ok">0</td><td><code>klayout.antenna.rpt</code></td></tr>
+      <tr><td>Core utilization</td><td class="warn">&lt; 70%</td><td><code>floorplan.stat</code></td></tr>
+      <tr><td>Metal density (per layer)</td><td class="warn">30–70%</td><td><code>klayout.density.rpt</code></td></tr>
+      <tr><td>IR drop</td><td class="warn">&lt; 5% VDD</td><td><code>ir_drop.rpt</code></td></tr>
+    </table>
+  </section>
+
+  <!-- TROUBLESHOOTING -->
+  <section>
+    <h2>🩺 Troubleshooting</h2>
+    <table>
+      <tr><th>อาการ</th><th>สาเหตุ</th><th>วิธีแก้</th></tr>
+      <tr>
+        <td><span class="err">PDK not found</span></td>
+        <td>ไม่ได้ตั้ง PDK_ROOT</td>
+        <td><code>export PDK_ROOT=~/.ciel</code></td>
+      </tr>
+      <tr>
+        <td><span class="err">nix-shell: command not found</span></td>
+        <td>ไม่ได้ติดตั้ง Nix</td>
+        <td>ติดตั้ง Nix ก่อน</td>
+      </tr>
+      <tr>
+        <td><span class="err">undefined module</span></td>
+        <td>VERILOG_FILES ไม่ครบ</td>
+        <td>เช็ค <code>dir::src/*.v</code></td>
+      </tr>
+      <tr>
+        <td><span class="warn">DRC: metal spacing</span></td>
+        <td>Routing congestion</td>
+        <td>เพิ่ม DIE_AREA หรือลด FP_CORE_UTIL</td>
+      </tr>
+      <tr>
+        <td><span class="warn">STA: setup violation</span></td>
+        <td>Critical path ยาว</td>
+        <td>เพิ่ม CLOCK_PERIOD หรือ optimize RTL</td>
+      </tr>
+      <tr>
+        <td><span class="err">LVS pin mismatch</span></td>
+        <td>Pin top module ไม่ครบ</td>
+        <td>ตรวจ pinout.cfg</td>
+      </tr>
+      <tr>
+        <td><span class="warn">Antenna violation</span></td>
+        <td>Gate oxide risk</td>
+        <td><code>RUN_HEURISTIC_DIODE_INSERTION: true</code></td>
+      </tr>
+      <tr>
+        <td><span class="err">PicoRV32 trap (sim)</span></td>
+        <td>PROGADDR_RESET ไม่ตรง</td>
+        <td>แก้ <code>PROGADDR_RESET</code> ให้ตรงกับ firmware</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- MEMORY MAP -->
+  <section>
+    <h2>🗺️ Memory Map (default)</h2>
+    <pre><code>0x0000_0000  ┌──────────────────────┐
+             │  SRAM (4 KB)          │  instruction + data
+             │  1024 × 32-bit        │
+0x0000_0FFF  ├──────────────────────┤
+             │  reserved             │
+0x0000_1000  ├──────────────────────┤
+             │  0x1000: GPIO out     │  WO, [7:0]
+             │  0x1004: GPIO in      │  RO, [7:0]
+             │  0x1008: UART TX      │  WO, [7:0]  trigger
+             │  0x100C: UART RX      │  RO, [7:0]
+0x0000_1FFF  └──────────────────────┘</code></pre>
+  </section>
+
+  <!-- CALLOUTS -->
+  <section>
+    <h2>⚠️ Important Notes</h2>
+    <div class="callout warn">
+      <strong>Preview Status:</strong> IHP Open PDK อยู่ในสถานะ preview เท่านั้น ไม่อนุญาตให้ใช้ผลิตจริง — เหมาะสำหรับการศึกษา, วิจัย, และ MPW shuttle
+    </div>
+    <div class="callout">
+      <strong>Windows Users:</strong> ใช้ WSL2 เท่านั้น — LibreLane ไม่รองรับ Windows native
+    </div>
+    <div class="callout success">
+      <strong>Tip:</strong> Run ทีละ step ตอน debug — เร็วกว่า full run มาก
+      <br><code>librelane ... --from openroad.floorplan</code>
+    </div>
+    <div class="callout">
+      <strong>Tip:</strong> Verify RV32I binary ด้วย <code>riscv64-unknown-elf-objdump -d firmware.elf</code> ก่อนใส่ใน memory
+    </div>
+  </section>
+
+  <!-- OUTPUT STRUCTURE -->
+  <section>
+    <h2>📁 Output Structure</h2>
+    <pre><code>runs/
+└── RUN_&lt;timestamp&gt;/
+    ├── 01-yosys-synthesis/      # Synthesis artifacts
+    │   ├── synthesis.stat
+    │   └── synthesis.v
+    ├── 02-floorplan/            # Floorplan
+    ├── 03-place/                # Placement
+    ├── 04-cts/                  # Clock tree
+    ├── 05-route/                # Routing
+    ├── 06-final/                # ← Final outputs
+    │   ├── final.gds             # 🎯 GDSII (tape-out file)
+    │   ├── final.lef             # Library Exchange Format
+    │   ├── final.def             # Design Exchange Format
+    │   ├── final.sdc             # Timing constraints
+    │   ├── final.spef            # Parasitics
+    │   ├── final.lib             # Liberty timing
+    │   ├── cts.min.slack.rpt     # Timing
+    │   ├── magic.drc.rpt         # DRC
+    │   ├── klayout.drc.rpt       # DRC
+    │   ├── netgen.lvs.rpt        # LVS
+    │   ├── klayout.antenna.rpt   # Antenna
+    │   └── ir_drop.rpt           # Power
+    ├── logs/
+    │   └── librelane.log
+    └── reports/</code></pre>
+  </section>
+
+  <!-- RESOURCES -->
+  <section>
+    <h2>📚 Resources</h2>
+    <div class="grid">
+      <div class="card">
+        <h4>📘 LibreLane Docs</h4>
+        <p>librelane.readthedocs.io</p>
+      </div>
+      <div class="card">
+        <h4>📘 IHP Open PDK</h4>
+        <p>ihp-open-pdk-docs.readthedocs.io</p>
+      </div>
+      <div class="card">
+        <h4>📘 IHP SG13G2 Template</h4>
+        <p>github.com/IHP-GmbH/ihp-sg13g2-librelane-template</p>
+      </div>
+      <div class="card">
+        <h4>📘 PicoRV32</h4>
+        <p>github.com/YosysHQ/picorv32</p>
+      </div>
+      <div class="card">
+        <h4>🎥 FOSSi Webinar</h4>
+        <p>OpenLane 2 & LibreLane Updates</p>
+      </div>
+      <div class="card">
+        <h4>🔧 IIC-OSIC-Tools</h4>
+        <p>Docker image รวมเครื่องมือครบ</p>
+      </div>
+      <div class="card">
+        <h4>💬 FOSSi Discord</h4>
+        <p>ชุมชน open-source silicon</p>
+      </div>
+      <div class="card">
+        <h4>💬 Tiny Tapeout</h4>
+        <p>MPW shuttle service</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>🛠️ Workshop Handbook: RV32I Chip on LibreLane + IHP SG13G2</p>
+    <p>Last updated: 2026-07-31 · Open Source · Apache 2.0</p>
+    <p>Happy Taping Out! 🎉</p>
+  </footer>
+
+</div>
+</body>
+</html>
