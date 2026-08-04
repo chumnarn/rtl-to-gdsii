@@ -1639,6 +1639,15 @@ Bond Pad / Seal Ring / Filler
 Final GDSII
 ```
 
+### รันคำสั่ง skip บางขั้นตอน เช่น ข้าม DRC
+
+```bash
+librelane --pdk ihp-sg13g2 config.yaml \
+--skip KLayout.DRC \
+--skip Magic.DRC
+``` 
+
+
 ---
 
 ## 22. ขั้นตอนที่ 18: ติดตามสถานะระหว่าง Flow
