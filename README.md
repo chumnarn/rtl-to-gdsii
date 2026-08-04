@@ -60,25 +60,25 @@
 curl -L https://nixos.org/nix/install | sh -s \-- \--daemon
 
 \# Clone repository
-```bash
+
 git clone https://github.com/chumnarn/heichips26-digital-workshop.git
 
 cd heichips26-digital-workshop
-```
+
 \# เข้า environment
-```bash
+
 nix-shell
-```
+
 \# ตรวจสอบ LibreLane
-```bash
+
 librelane --version
 
 librelane --smoke-test
-```
+
 \# ตรวจสอบเครื่องมือทั้งหมด
-```bash
+
 ./verify_tools.sh
-```
+
 ### เกณฑ์ผ่าน
 
 - [ ] `IN_NIX_SHELL` มีค่า  
@@ -916,21 +916,21 @@ make run      \# run Classic Flow
 ### คำสั่งหลัก
 
 \# ตรวจสอบ IO pad cells ใน PDK
-```bash
+
 grep \-R "^module .\*Pad\\|^module .\*PAD" $PDK\_ROOT/
-```
+
 \# รัน Chip Flow
-```bash
+
 librelane \--pdk ihp-sg13g2 \--flow Chip config.yaml
-```
+
 \# Validate configuration ก่อนรัน
-```bash
+
 librelane \--pdk ihp-sg13g2 \--flow Chip config.yaml \--validate-only
-```
+
 \# เปิด GDSII
-```bash
+
 klayout runs/\<tag\>/final/gds/chip\_top.gds
-```
+
 **ตัวอย่าง `config.yaml` สำหรับ Chip Flow:**
 
 DESIGN\_NAME: chip\_top
@@ -1036,7 +1036,7 @@ Routed DEF \+ ODB
 GDSII
 
 ### คำสั่ง LibreLane สำคัญ
-```bash
+
 librelane \--version                           \# ตรวจสอบ version
 
 librelane \--smoke-test                        \# smoke test
@@ -1060,7 +1060,7 @@ librelane \--pdk ihp-sg13g2 config.yaml \\
 librelane \--pdk ihp-sg13g2 \--flow Chip \\
 
   config.yaml                                 \# Chip flow
-```
+
 ### Metrics สำคัญที่ต้องตรวจสอบ
 
 | Metric | เกณฑ์ |
