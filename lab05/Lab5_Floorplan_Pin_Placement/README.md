@@ -53,21 +53,22 @@ make gui
 ```
 หรือ ดู run-tag
 ```bash
-	$(LIBRELANE) $(LL_FLAGS) \
-		--pdk $(PDK) \
-		--run-tag $(TAG)_floorplan \
-		--flow OpenInOpenROAD \
-		$(CONFIG)
+librelane    \
+      --pdk ihp-sg13g2 \
+      --run-tag lab5_ihp_floorplan \
+      --flow OpenInOpenROAD   \
+      config.yaml
   ```
 
 หรือ ดู last-run 
 ```bash
-	$(LIBRELANE) $(LL_FLAGS) \
-		--pdk $(PDK) \
-		--last-run \
-		--flow OpenInOpenROAD \
-		$(CONFIG)
+librelane    \
+      --pdk ihp-sg13g2 \
+      --last-run
+      --flow OpenInOpenROAD   \
+      config.yaml
   ```
+
 
 
       
