@@ -43,16 +43,19 @@ module tb_cts_demo;
         repeat (4) @(posedge clk_i);
         rst_ni = 1'b1;
 
-        @(posedge clk_i);
-        enable_i = 1'b1;
+     @(negedge clk_i);
+     enable_i = 1'b1;
+ 
+    for (cycle = 0; cycle < 40; cycle = cycle + 1) begin
+     @(negedge clk_i);
+     data_i = cycle[7:0];
 
-        for (cycle = 0; cycle < 40; cycle = cycle + 1) begin
-            data_i = cycle[7:0];
-            @(posedge clk_i);
-            #1;
-            if (event_o)
-                event_count = event_count + 1;
-        end
+     @(posedge clk_i);
+     #1ns;
+
+    if (event_o)
+        event_count = event_count + 1;
+end
 
         enable_i = 1'b0;
         repeat (3) @(posedge clk_i);
