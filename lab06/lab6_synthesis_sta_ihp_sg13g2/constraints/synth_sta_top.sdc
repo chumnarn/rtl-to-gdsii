@@ -1,3 +1,4 @@
+cat > constraints/synth_sta_top.sdc <<'EOF'
 # Lab 6: Synthesis and Static Timing Analysis
 # Target PDK: IHP SG13G2
 #
@@ -19,9 +20,7 @@ create_clock \
 set_clock_uncertainty 0.250 [get_clocks core_clk]
 set_clock_transition  0.150 [get_clocks core_clk]
 
-set data_inputs [remove_from_collection \
-    [all_inputs] \
-    [get_ports {clk_i rst_ni}]]
+set data_inputs [all_inputs -no_clocks]
 
 set_input_delay 2.000 \
     -clock [get_clocks core_clk] \
@@ -33,9 +32,7 @@ set_output_delay 4.000 \
     -clock [get_clocks core_clk] \
     [all_outputs]
 
-# Use a representative output load for this teaching block.
-# The capacitance unit follows the selected Liberty library.
 set_load 0.033442 [all_outputs]
 
-# Asynchronous reset is not a functional data path.
 set_false_path -from [get_ports rst_ni]
+EOF
