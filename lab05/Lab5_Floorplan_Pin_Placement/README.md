@@ -64,7 +64,7 @@ librelane    \
 ```bash
 librelane    \
       --pdk ihp-sg13g2 \
-      --last-run
+      --last-run \
       --flow OpenInOpenROAD   \
       config.yaml
   ```
