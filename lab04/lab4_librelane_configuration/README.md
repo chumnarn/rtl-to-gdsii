@@ -68,7 +68,7 @@ make run PDK=ihp-sg13g2
 หรือเรียกโดยตรง:
 
 ```bash
-librelane --pdk sky130A config.yaml
+librelane --pdk ihp-sg13g2 config.yaml
 ```
 
 ## 5. การทดลอง Density และ Die Area
