@@ -89,7 +89,6 @@ floorplan: config-check pins lint
 gui:
 	$(LIBRELANE) $(LL_FLAGS) \
 		--pdk $(PDK) \
-		--run-tag $(TAG)_floorplan \
 		--last-run \
 		--flow OpenInOpenROAD \
 		$(CONFIG)
