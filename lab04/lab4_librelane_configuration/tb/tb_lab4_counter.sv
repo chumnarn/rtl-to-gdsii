@@ -1,133 +1,89 @@
 `timescale 1ns/1ps
-`default_nettype none
 
 module tb_lab4_counter;
-    localparam int unsigned WIDTH      = 8;
-    localparam time         CLK_PERIOD = 20ns;
 
-    logic                 clk_i;
-    logic                 rst_ni;
-    logic                 enable_i;
-    logic                 load_i;
-    logic                 up_i;
-    logic [WIDTH-1:0]     data_i;
-    logic [WIDTH-1:0]     count_o;
-    logic                 carry_o;
+    localparam int WIDTH = 8;
+    localparam time CLK_PERIOD = 10ns;
 
-    logic [WIDTH-1:0] expected_count;
-    int unsigned      error_count;
+    logic clk_i;
+    logic rst_ni;
+    logic en_i;
+    logic [WIDTH-1:0] count_o;
 
     lab4_counter #(
         .WIDTH(WIDTH)
     ) dut (
-        .clk_i    (clk_i),
-        .rst_ni   (rst_ni),
-        .enable_i (enable_i),
-        .load_i   (load_i),
-        .up_i     (up_i),
-        .data_i   (data_i),
-        .count_o  (count_o),
-        .carry_o  (carry_o)
+        .clk_i   (clk_i),
+        .rst_ni  (rst_ni),
+        .en_i    (en_i),
+        .count_o (count_o)
     );
 
-    initial clk_i = 1'b0;
-    always #(CLK_PERIOD / 2) clk_i = ~clk_i;
+    initial begin
+        clk_i = 1'b0;
+        forever #(CLK_PERIOD/2) clk_i = ~clk_i;
+    end
 
-    task automatic check_count(input logic [WIDTH-1:0] expected);
-        @(negedge clk_i);
+    always @(posedge clk_i) begin
+        $display(
+            "[%0t] rst_ni=%b en_i=%b count_o=0x%0h",
+            $time,
+            rst_ni,
+            en_i,
+            count_o
+        );
+    end
+
+    task automatic check_count(
+        input logic [WIDTH-1:0] expected
+    );
         if (count_o !== expected) begin
-            $error("count_o mismatch: expected=0x%0h actual=0x%0h time=%0t",
-                   expected, count_o, $time);
-            error_count++;
+            $fatal(
+                1,
+                "count_o mismatch: expected=0x%0h actual=0x%0h time=%0t",
+                expected,
+                count_o,
+                $time
+            );
         end
-    endtask
-
-    task automatic apply_reset;
-        rst_ni   = 1'b0;
-        enable_i = 1'b0;
-        load_i   = 1'b0;
-        up_i     = 1'b1;
-        data_i   = '0;
-        repeat (3) @(posedge clk_i);
-        rst_ni = 1'b1;
-        check_count('0);
     endtask
 
     initial begin
-        $dumpfile("reports/lab4_counter.vcd");
-        $dumpvars(0, tb_lab4_counter);
+        rst_ni = 1'b0;
+        en_i   = 1'b0;
 
-        error_count   = 0;
-        expected_count = '0;
-        apply_reset();
+        // Hold active-low reset for several clock cycles.
+        repeat (4) @(posedge clk_i);
 
-        // Load a known value.
+        // Change control signals away from posedge to avoid races.
         @(negedge clk_i);
-        data_i = 8'h3C;
-        load_i = 1'b1;
-        @(posedge clk_i);
-        load_i = 1'b0;
-        expected_count = 8'h3C;
-        check_count(expected_count);
+        rst_ni = 1'b1;
 
-        // Count upward five cycles.
-        enable_i = 1'b1;
-        up_i     = 1'b1;
-        repeat (5) begin
-            @(posedge clk_i);
-            expected_count++;
-            check_count(expected_count);
-        end
-
-        // Hold value while disabled.
-        enable_i = 1'b0;
-        repeat (3) begin
-            @(posedge clk_i);
-            check_count(expected_count);
-        end
-
-        // Count downward four cycles.
-        enable_i = 1'b1;
-        up_i     = 1'b0;
-        repeat (4) begin
-            @(posedge clk_i);
-            expected_count--;
-            check_count(expected_count);
-        end
-
-        // Verify upward overflow and carry pulse.
         @(negedge clk_i);
-        data_i = 8'hFF;
-        load_i = 1'b1;
-        @(posedge clk_i);
-        load_i = 1'b0;
-        check_count(8'hFF);
+        en_i = 1'b1;
 
-        enable_i = 1'b1;
-        up_i     = 1'b1;
-        @(posedge clk_i);
-        check_count(8'h00);
-        if (carry_o !== 1'b1) begin
-            $error("carry_o must pulse on upward overflow");
-            error_count++;
-        end
+        repeat (60) @(posedge clk_i);
 
-        // Verify downward underflow and carry pulse.
-        up_i = 1'b0;
-        @(posedge clk_i);
-        check_count(8'hFF);
-        if (carry_o !== 1'b1) begin
-            $error("carry_o must pulse on downward underflow");
-            error_count++;
-        end
+        // Disable after the 60th count event.
+        @(negedge clk_i);
+        en_i = 1'b0;
 
-        if (error_count == 0) begin
-            $display("LAB4 TEST PASS");
-            $finish;
-        end
+        // Allow nonblocking assignment updates to settle.
+        #1ns;
+        check_count(8'h3c);
 
-        $fatal(1, "LAB4 TEST FAIL: %0d error(s)", error_count);
+        $display(
+            "PASS: expected=0x3c actual=0x%0h time=%0t",
+            count_o,
+            $time
+        );
+
+        $finish;
     end
-endmodule
 
-`default_nettype wire
+    initial begin
+        $dumpfile("build/lab4_counter.vcd");
+        $dumpvars(0, tb_lab4_counter);
+    end
+
+endmodule
