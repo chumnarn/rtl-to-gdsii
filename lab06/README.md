@@ -990,7 +990,7 @@ help:
 	@echo "  make clean         Remove generated runs"
 	@echo ""
 	@echo "Variables:"
-	@echo "  PDK=sky130A"
+	@echo "  PDK=ihp-sg13g2"
 	@echo "  RUN_TAG=lab6"
 	@echo "  FLOW=Classic"
 
@@ -1197,7 +1197,7 @@ make synthesis
 ```bash
 librelane \
     --flow Classic \
-    --pdk sky130A \
+    --pdk ihp-sg13g2 \
     --run-tag lab6 \
     --to OpenROAD.STAPrePNR \
     config.yaml
