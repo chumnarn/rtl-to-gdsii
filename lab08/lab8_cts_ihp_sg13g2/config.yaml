@@ -79,4 +79,4 @@ PL_RESIZER_ALLOW_SETUP_VIOS: false
 # ------------------------------------------------------------
 
 GRT_ALLOW_CONGESTION: false
-QUIT_ON_TIMING_VIOLATIONS: false
+#QUIT_ON_TIMING_VIOLATIONS: false
