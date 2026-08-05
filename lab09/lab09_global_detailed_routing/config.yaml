@@ -15,11 +15,11 @@ SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
 FP_SIZING: relative
 FP_CORE_UTIL: 40
 FP_ASPECT_RATIO: 1.0
-FP_CORE_MARGIN: 5
+
 
 # Placement settings emphasizing routability.
 PL_TARGET_DENSITY_PCT: 50
-PL_TIME_DRIVEN: true
+PL_TIMING_DRIVEN: true
 PL_ROUTABILITY_DRIVEN: true
 
 # sky130A routing stack.
