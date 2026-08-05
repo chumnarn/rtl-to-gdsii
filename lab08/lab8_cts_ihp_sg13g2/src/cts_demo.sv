@@ -36,7 +36,7 @@ module cts_demo #(
                 checksum_q <= checksum_q + {8'h00, data_i};
                 cycle_q    <= cycle_q + 8'h01;
 
-                if (cycle_q == 8'h0f) begin
+               if (cycle_q[3:0] == 4'hf) begin
                     shadow_q <= count_q ^ data_ext;
                     event_q  <= 1'b1;
                 end
