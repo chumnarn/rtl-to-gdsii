@@ -1,0 +1,76 @@
+meta:
+  version: 3
+  flow: Classic
+
+# ============================================================
+# Lab 9: Global and Detailed Routing — IHP SG13G2
+# ============================================================
+DESIGN_NAME: routing_demo
+
+VERILOG_FILES:
+  - dir::src/routing_demo.sv
+
+CLOCK_PORT: clk
+CLOCK_PERIOD: 20.0
+
+PNR_SDC_FILE: dir::constraints/pnr.sdc
+SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
+FALLBACK_SDC: dir::constraints/pnr.sdc
+
+# Better SystemVerilog frontend. Comment out only when using an older
+# LibreLane build without the Slang frontend.
+USE_SLANG: true
+
+# ============================================================
+# Floorplan and placement
+# ============================================================
+FP_SIZING: relative
+FP_CORE_UTIL: 38
+FP_ASPECT_RATIO: 1.0
+FP_CORE_MARGIN: 10
+
+# Keep whitespace for routing experiments.
+PL_TARGET_DENSITY_PCT: 48
+PL_TIME_DRIVEN: true
+PL_ROUTABILITY_DRIVEN: true
+
+# ============================================================
+# IHP SG13G2 routing stack
+# Technology stack: Metal1..Metal5, TopMetal1, TopMetal2
+# PDK default signal routing starts at Metal2.
+# ============================================================
+RT_MIN_LAYER: Metal2
+RT_MAX_LAYER: TopMetal2
+RT_CLOCK_MIN_LAYER: Metal3
+RT_CLOCK_MAX_LAYER: TopMetal2
+
+# ============================================================
+# Global routing (FastRoute)
+# ============================================================
+GRT_ADJUSTMENT: 0.30
+GRT_ALLOW_CONGESTION: false
+GRT_OVERFLOW_ITERS: 50
+GRT_MACRO_EXTENSION: 0
+
+# Antenna repair settings supported by current LibreLane releases.
+GRT_ANTENNA_REPAIR_ITERS: 3
+GRT_ANTENNA_REPAIR_MARGIN: 10
+GRT_ANTENNA_REPAIR_JUMPER_ONLY: false
+GRT_ANTENNA_REPAIR_DIODE_ONLY: false
+
+# ============================================================
+# Detailed routing (TritonRoute)
+# ============================================================
+DRT_THREADS: null
+DRT_OPT_ITERS: 64
+DRT_SAVE_SNAPSHOTS: false
+DRT_SAVE_DRC_REPORT_ITERS: null
+DRT_ANTENNA_REPAIR_ITERS: 3
+DRT_ANTENNA_REPAIR_MARGIN: 10
+DRT_ANTENNA_REPAIR_JUMPER_ONLY: false
+DRT_ANTENNA_REPAIR_DIODE_ONLY: false
+
+# Stop when routing/connectivity is not clean.
+ERROR_ON_TR_DRC: true
+ERROR_ON_DISCONNECTED_PINS: true
+ERROR_ON_LONG_WIRE: true
