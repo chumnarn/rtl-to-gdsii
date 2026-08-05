@@ -51,6 +51,26 @@ Open the floorplan in OpenROAD:
 ```bash
 make gui
 ```
+หรือ ดู run-tag
+```bash
+	$(LIBRELANE) $(LL_FLAGS) \
+		--pdk $(PDK) \
+		--run-tag $(TAG)_floorplan \
+		--flow OpenInOpenROAD \
+		$(CONFIG)
+  ```
+
+หรือ ดู last-run 
+```bash
+	$(LIBRELANE) $(LL_FLAGS) \
+		--pdk $(PDK) \
+		--last-run \
+		--flow OpenInOpenROAD \
+		$(CONFIG)
+  ```
+
+
+      
 
 Run the complete Classic flow:
 
