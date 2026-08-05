@@ -2,7 +2,7 @@ SHELL := /usr/bin/env bash
 .DEFAULT_GOAL := help
 
 CONFIG  ?= config.yaml
-PDK     ?= sky130A
+PDK     ?= ihp-sg13g2
 RUN_TAG ?= lab6
 JOBS    ?= 1
 BUILD   := build
