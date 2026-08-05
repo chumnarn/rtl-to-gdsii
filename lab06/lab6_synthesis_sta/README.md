@@ -38,10 +38,10 @@ Or run the same sequence with:
 ./run_lab.sh
 ```
 
-The default target PDK is `sky130A`. Override variables when needed:
+The default target PDK is `ihp-sg13g2`. Override variables when needed:
 
 ```bash
-make sta PDK=sky130A RUN_TAG=lab6_test JOBS=4
+make sta PDK=ihp-sg13g2 RUN_TAG=lab6_test JOBS=4
 ```
 
 ## Full RTL-to-GDSII run
