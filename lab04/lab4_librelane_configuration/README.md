@@ -50,6 +50,19 @@ LAB4 TEST PASS
 ```bash
 make synth
 ```
+หรือ
+```bash
+mkdir -p build
+
+yosys -p \
+'read_verilog -sv rtl/lab4_counter.sv;
+ hierarchy -check -top lab4_counter;
+ proc;
+ opt;
+ check;
+ stat;
+ write_json build/lab4_counter.json'
+ ```
 
 ## 4. รัน LibreLane ด้วยไฟล์หลัก `config.yaml`
 
