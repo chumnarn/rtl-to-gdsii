@@ -203,15 +203,15 @@ Timing, Power, Area, IR-drop ครบทุก corner
 ## 🗺️ Memory Map (default)
 
     0x0000_0000  ┌──────────────────────┐
-                 │  SRAM (4 KB)          │  instruction + data
-                 │  1024 × 32-bit        │
+                 │  SRAM (4 KB)         │  instruction + data
+                 │  1024 × 32-bit       │
     0x0000_0FFF  ├──────────────────────┤
-                 │  reserved             │
+                 │  reserved            │
     0x0000_1000  ├──────────────────────┤
-                 │  0x1000: GPIO out     │  WO, [7:0]
-                 │  0x1004: GPIO in      │  RO, [7:0]
-                 │  0x1008: UART TX      │  WO, [7:0]  trigger
-                 │  0x100C: UART RX      │  RO, [7:0]
+                 │  0x1000: GPIO out    │  WO, [7:0]
+                 │  0x1004: GPIO in     │  RO, [7:0]
+                 │  0x1008: UART TX     │  WO, [7:0]  trigger
+                 │  0x100C: UART RX     │  RO, [7:0]
     0x0000_1FFF  └──────────────────────┘
 
 
