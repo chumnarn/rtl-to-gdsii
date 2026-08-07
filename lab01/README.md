@@ -1,24 +1,3 @@
-
-
-nano ~/.nix-channels
-
-```text
-https://nixos.org/channels/nixpkgs-unstable nixpkgs
-```
-
-
-```text
-
-unset NIX_PATH
-
-nix-channel --remove nixpkgs 2>/dev/null || true
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-nix-channel --update
-
-```
-
-
-
 # Lab 1  
 # การติดตั้งสภาพแวดล้อมและตรวจสอบเครื่องมือ  
 ## Environment Setup and Tool Verification
