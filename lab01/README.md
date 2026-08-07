@@ -9,20 +9,12 @@ https://nixos.org/channels/nixpkgs-unstable nixpkgs
 
 ```text
 
-exit 2>/dev/null || true
 unset NIX_PATH
 
 nix-channel --remove nixpkgs 2>/dev/null || true
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 nix-channel --update
 
-source "$HOME/.nix-profile/etc/profile.d/nix.sh"
-
-nix-instantiate --find-file nixpkgs
-nix-shell -p hello
-
-cd ~/eda/librelane
-nix-shell
 ```
 
 
