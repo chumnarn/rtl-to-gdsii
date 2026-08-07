@@ -41,34 +41,8 @@ Timing, Power, Area, IR-drop ครบทุก corner
 
 ## 🏛️ Architecture
 
-    Architecture (ข้อความจากแผนภาพ SVG):
-    rv32i_soc (top-level)
-    PicoRV32
-    RV32I core
-    750-2000 LUTs
-    ~4 CPI
-    clk, resetn, irq
-    → mem_*
-    SRAM (4KB)
-    1024 × 32-bit
-    flip-flop based
-    0x0000_0000
-    Memory-mapped I/O
-    GPIO, UART
-    0x0000_1000
-    UART TX
-    115200 baud
-    GPIO
-    8-bit I/O
-    Memory Map:
-    0x0000_0000 - 0x0000_0FFF  → SRAM (4KB instruction + data)
-    0x0000_1000              → GPIO out
-    0x0000_1004              → GPIO in
-    0x0000_1008              → UART TX trigger
-    ▼ External
-    clk, rst_n, irq
-    gpio, uart_tx
-
+    Architecture rv32i_soc (top-level)
+   ![Architecture](img/rv32i.png)
 
 ## 📋 Step-by-step Flow
 
