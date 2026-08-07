@@ -1,4 +1,11 @@
 
+
+nano ~/.nix-channels
+
+```text
+https://nixos.org/channels/nixpkgs-unstable nixpkgs
+```
+
 # Lab 1  
 # การติดตั้งสภาพแวดล้อมและตรวจสอบเครื่องมือ  
 ## Environment Setup and Tool Verification
