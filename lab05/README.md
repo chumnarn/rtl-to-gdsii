@@ -1196,7 +1196,7 @@ find runs -type f -name "*.odb" | sort
 สมมติพบ:
 
 ```text
-runs/lab5_floorplan/.../floorplan_demo.odb
+runs/test01_floorplan/final/odb/floorplan_demo.odb
 ```
 
 เปิด GUI:
@@ -1208,7 +1208,7 @@ openroad -gui
 ใน OpenROAD Tcl Console:
 
 ```tcl
-read_db runs/lab5_floorplan/.../floorplan_demo.odb
+read_db runs/test01_floorplan/final/odb/floorplan_demo.odb
 ```
 
 จากนั้นเลือก:
