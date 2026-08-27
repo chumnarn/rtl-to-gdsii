@@ -6,7 +6,7 @@ the `ihp-sg13g2` PDK.
 ## Directory structure
 
 ```text
-Lab5_Floorplan_Pin_Placement_IHP_SG13G2/
+lab5_floorplan_pin_placement
 ├── config.yaml
 ├── Makefile
 ├── README.md
