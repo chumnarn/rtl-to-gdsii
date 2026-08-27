@@ -20,6 +20,7 @@ help:
 	@echo "make lint           Run Verilator RTL lint"
 	@echo "make sim            Run self-checking RTL simulation"
 	@echo "make sta            Run LibreLane through OpenROAD.STAPrePNR"
+	@echo "make synthesis      Run synthesis"
 	@echo "make synth-explore  Compare all synthesis strategies"
 	@echo "make run            Run the complete LibreLane Classic flow"
 	@echo "make reports        Summarize latest run outputs"
