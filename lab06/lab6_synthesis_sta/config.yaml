@@ -21,5 +21,5 @@ PL_TARGET_DENSITY_PCT: 45
 
 # SKY130 routing-layer names. Remove these two entries when porting to a PDK
 # whose layer names differ, then use that PDK's defaults or documented names.
-RT_MIN_LAYER: met1
-RT_MAX_LAYER: met5
+#RT_MIN_LAYER: met1
+#RT_MAX_LAYER: met5
