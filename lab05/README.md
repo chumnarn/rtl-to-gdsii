@@ -1243,6 +1243,7 @@ librelane --pdk sky130A --last-run --flow OpenInOpenroad config.yaml
 ```
 
 สำหรับเปิดดู floorplan รันล่าสุด
+
 ---
 
 ## วิธีที่ 2: เปิด DEF ด้วย OpenROAD
@@ -1293,9 +1294,9 @@ librelane --pdk sky130A --last-run --flow OpenInklayout config.yaml
 ```
 
 สำหรับเปิดดู floorplan รันล่าสุด
----
 
 ---
+
 
 # 5.18 สิ่งที่ต้องตรวจสอบใน GUI
 
