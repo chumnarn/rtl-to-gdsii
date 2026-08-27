@@ -2,7 +2,8 @@ SHELL := /usr/bin/env bash
 .DEFAULT_GOAL := help
 
 CONFIG  ?= config.yaml
-PDK     ?= ihp-sg13g2
+PDK     ?= sky130A
+FLOW    ?= Classic
 RUN_TAG ?= lab6
 JOBS    ?= 1
 BUILD   := build
@@ -52,6 +53,14 @@ synth-explore:
 	@command -v librelane >/dev/null 2>&1 || { echo "ERROR: librelane not found"; exit 1; }
 	librelane -j $(JOBS) --flow SynthesisExploration --pdk $(PDK) \
 		--run-tag $(RUN_TAG)_explore $(CONFIG)
+
+synthesis:
+	librelane \
+		--flow $(FLOW) \
+		--pdk $(PDK) \
+		--run-tag $(RUN_TAG) \
+		--to OpenROAD.STAPrePNR \
+		$(CONFIG)
 
 run:
 	@command -v librelane >/dev/null 2>&1 || { echo "ERROR: librelane not found"; exit 1; }
