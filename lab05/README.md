@@ -1236,6 +1236,14 @@ gui::fit
 - End-cap cell
 
 ---
+หรือใช้คำสั่ง
+
+```bash
+librelane --pdk sky130A --last-run --flow OpenInOpenroad config.yaml
+```
+
+สำหรับเปิดดู floorplan รันล่าสุด
+---
 
 ## วิธีที่ 2: เปิด DEF ด้วย OpenROAD
 
@@ -1276,6 +1284,16 @@ klayout <path-to-gds>
 ```
 
 GDS เหมาะสำหรับตรวจผล Layout ขั้นสุดท้าย ส่วน ODB/DEF เหมาะสำหรับตรวจ Floorplan และ Placement ระหว่าง Flow
+
+---
+หรือใช้คำสั่ง
+
+```bash
+librelane --pdk sky130A --last-run --flow OpenInklayout config.yaml
+```
+
+สำหรับเปิดดู floorplan รันล่าสุด
+---
 
 ---
 
