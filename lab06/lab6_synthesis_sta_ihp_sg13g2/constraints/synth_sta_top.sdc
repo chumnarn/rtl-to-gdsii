@@ -1,4 +1,3 @@
-cat > constraints/synth_sta_top.sdc <<'EOF'
 # Lab 6: Synthesis and Static Timing Analysis
 # Target PDK: IHP SG13G2
 #
@@ -35,4 +34,4 @@ set_output_delay 4.000 \
 set_load 0.033442 [all_outputs]
 
 set_false_path -from [get_ports rst_ni]
-EOF
+
