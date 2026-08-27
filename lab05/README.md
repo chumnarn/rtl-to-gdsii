@@ -614,7 +614,7 @@ PL_TARGET_DENSITY_PCT: 45
 
 ```text
 Standard-cell area
------------------------- × 100
+-------------------  × 100
 Placeable core area
 ```
 
