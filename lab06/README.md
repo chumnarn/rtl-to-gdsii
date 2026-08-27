@@ -774,8 +774,8 @@ PL_TARGET_DENSITY_PCT: 45
 # Check the selected PDK if a different process is used.
 # ============================================================
 
-RT_MIN_LAYER: met1
-RT_MAX_LAYER: met5
+#RT_MIN_LAYER: met1
+#RT_MAX_LAYER: met5
 ```
 
 LibreLane รองรับ configuration file แบบ YAML และ JSON ส่วนตัวอย่างขั้นต่ำโดยทั่วไปประกอบด้วย `DESIGN_NAME`, `VERILOG_FILES`, `CLOCK_PORT`, `CLOCK_PERIOD` และ PDK ที่เลือกใช้. 
