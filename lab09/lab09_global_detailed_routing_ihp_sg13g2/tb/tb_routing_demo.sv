@@ -3,7 +3,6 @@
 
 module tb_routing_demo;
 
-```
 localparam int unsigned WIDTH      = 32;
 localparam time         CLK_PERIOD = 10ns;
 
@@ -174,7 +173,6 @@ initial begin
     #2000ns;
     $fatal(1, "Simulation timeout");
 end
-```
 
 endmodule
 
