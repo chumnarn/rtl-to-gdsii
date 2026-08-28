@@ -87,7 +87,7 @@ librelane config.yaml \
   --pdk ihp-sg13g2 \
   --pdk-root "$PDK_ROOT" \
   --manual-pdk \
-  --save-views-to final/
+  --to OpenROAD.CTS
 ```
 
 `config.yaml` ไม่กำหนด `CTS_ROOT_BUFFER` หรือ `CTS_CLK_BUFFERS` แบบตายตัว
