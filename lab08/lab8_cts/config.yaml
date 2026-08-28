@@ -1,4 +1,4 @@
-meta:
+  GNU nano 8.7.1                                          config.yaml                                                   meta:
   version: 3
   flow: Classic
 
@@ -35,7 +35,7 @@ CTS_BALANCE_LEVELS: true
 CTS_APPLY_NDR: root_only
 
 PL_RESIZER_SETUP_SLACK_MARGIN: 0.10
-PL_RESIZER_HOLD_SLACK_MARGIN: 0.20
+PL_RESIZER_HOLD_SLACK_MARGIN: 0.0
 PL_RESIZER_ALLOW_SETUP_VIOS: false
 GRT_RESIZER_ALLOW_SETUP_VIOS: false
 
