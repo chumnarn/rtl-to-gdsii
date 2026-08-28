@@ -1222,6 +1222,11 @@ LibreLane Classic Flow รองรับการควบคุมช่วง
 รัน:
 
 ```bash
+
+ls -l ./scripts
+
+chmod +x scripts/*.sh
+
 make check
 ```
 
