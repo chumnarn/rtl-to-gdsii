@@ -43,6 +43,9 @@ iverilog
 ตรวจสอบ:
 
 ```bash
+
+chmod +x scripts/*.sh
+
 make check
 ```
 
