@@ -18,6 +18,8 @@ LibreLane Classic Flow โดยใช้ `config.yaml`
 ## 1. ตรวจสอบโปรเจกต์
 
 ```bash
+ls -l scripts
+
 chmod +x scripts/*.py
 chmod +x scripts/*.sh
 
