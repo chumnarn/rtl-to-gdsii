@@ -49,7 +49,7 @@ chmod +x scripts/*.sh
 make check
 ```
 
-## 2. ติดตั้ง IHP SG13G2 PDK
+## 2. ติดตั้ง IHP SG13G2 PDK (ถ้ายังไม่ได้ติดตั้ง PDK)
 
 ```bash
 make pdk
