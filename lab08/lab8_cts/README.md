@@ -103,8 +103,8 @@ scripts/summarize_cts.sh
 หรือระบุ run directory:
 
 ```bash
-scripts/find_cts_reports.sh runs/RUN_NAME
-scripts/summarize_cts.sh runs/RUN_NAME | tee cts_summary.txt
+scripts/find_cts_reports.sh runs/<RUN_NAME>
+scripts/summarize_cts.sh runs/<RUN_NAME> | tee cts_summary.txt
 ```
 
 ตรวจสอบอย่างน้อย:
