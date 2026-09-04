@@ -41,7 +41,7 @@ synth: prepare
 	librelane \
 		--pdk $(PDK) \
 		--flow Chip \
-		--tag $(TAG)_synth \
+		--run-tag $(TAG)_synth \
 		--to Yosys.Synthesis \
 		$(CONFIG)
 
@@ -49,7 +49,7 @@ floorplan: prepare
 	librelane \
 		--pdk $(PDK) \
 		--flow Chip \
-		--tag $(TAG)_floorplan \
+		--run-tag $(TAG)_floorplan \
 		--to OpenROAD.Floorplan \
 		$(CONFIG)
 
@@ -57,7 +57,7 @@ padring: prepare
 	librelane \
 		--pdk $(PDK) \
 		--flow Chip \
-		--tag $(TAG)_padring \
+		--run-tag $(TAG)_padring \
 		--to OpenROAD.PadRing \
 		$(CONFIG)
 
@@ -65,7 +65,7 @@ run: prepare
 	librelane \
 		--pdk $(PDK) \
 		--flow Chip \
-		--tag $(TAG) \
+		--run-tag $(TAG) \
 		$(CONFIG)
 
 openroad:
