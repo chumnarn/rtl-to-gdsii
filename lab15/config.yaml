@@ -171,3 +171,22 @@ MAGIC_GDS_FLATGLOB:
 
 # Because we have multiple power pads for one power domain
 MAGIC_EXT_UNIQUE: notopports
+
+# Because we have multiple power pads for one power domain
+MAGIC_EXT_UNIQUE: notopports
+
+# ------------------------------------------------
+# PDK-specific section
+# Select and edit one section for the actual PDK.
+# ------------------------------------------------
+
+pdk::ihp-sg13g2:
+  STD_CELL_LIBRARY: sg13g2_stdcell
+
+pdk::sky130A:
+  STD_CELL_LIBRARY: sky130_fd_sc_hd
+
+pdk::gf180mcuD:
+  FP_CORE_UTIL: 30
+  PL_TARGET_DENSITY_PCT: 40
+  
