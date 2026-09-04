@@ -1267,7 +1267,6 @@ verilator \
     --Wno-UNDRIVEN \
     --Wno-UNUSEDSIGNAL \
     --top-module chip_top \
-    src/io_cells_stub.v \
     src/counter_core.sv \
     src/chip_top.sv
 ```
@@ -1285,7 +1284,6 @@ verilator \
 
 ```bash
 yosys -p '
-    read_verilog -sv src/io_cells_stub.v
     read_verilog -sv src/counter_core.sv
     read_verilog -sv src/chip_top.sv
     hierarchy -check -top chip_top
