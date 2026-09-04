@@ -130,6 +130,8 @@ MAGIC_EXT_UNIQUE: notopports
 
 PAD_BONDPAD_NAME: bondpad_70x70_novias
 #PAD_BONDPAD_SIZE: [70, 70]
+PAD_BONDPAD_WIDTH: 70
+PAD_BONDPAD_HEIGHT: 70
 
 EXTRA_GDS:
   - dir::ip/bondpad_70x70_novias/gds/bondpad_70x70_novias.gds
