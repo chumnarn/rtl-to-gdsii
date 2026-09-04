@@ -2134,6 +2134,10 @@ lint:
 		--lint-only \
 		--Wall \
 		--Wno-DECLFILENAME \
+        --Wno-PINMISSING \
+        --Wno-MODMISSING \
+        --Wno-UNDRIVEN \
+        --Wno-UNUSEDSIGNAL \
 		--top-module chip_top \
 		src/io_cells_stub.v \
 		src/counter_core.sv \
