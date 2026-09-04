@@ -21,6 +21,9 @@ verilator \
   --Wall \
   --Wno-DECLFILENAME \
   --Wno-PINMISSING \
+  --Wno-MODMISSING \
+  --Wno-UNDRIVEN \
+  --Wno-UNUSEDSIGNAL \
   --top-module chip_top \
   src/counter_core.sv \
   src/chip_top.sv
