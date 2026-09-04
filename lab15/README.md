@@ -1532,7 +1532,7 @@ head -100
 librelane \
     --pdk ihp-sg13g2 \
     --flow Chip \
-    --tag lab15_fullchip \
+    --run-tag lab15_fullchip \
     config.yaml
 ```
 
@@ -1553,7 +1553,7 @@ librelane --dockerized \
 librelane \
     --pdk ihp-sg13g2 \
     --flow Chip \
-    --tag lab15_fullchip \
+    --run-tag lab15_fullchip \
     config.yaml
 ```
 
@@ -2139,7 +2139,7 @@ synth:
 	librelane \
 		--pdk $(PDK) \
 		--flow $(FLOW) \
-		--tag $(TAG)_synth \
+		--run-tag $(TAG)_synth \
 		--to Yosys.Synthesis \
 		$(CONFIG)
 
@@ -2147,7 +2147,7 @@ floorplan:
 	librelane \
 		--pdk $(PDK) \
 		--flow $(FLOW) \
-		--tag $(TAG)_floorplan \
+		--run-tag $(TAG)_floorplan \
 		--to OpenROAD.Floorplan \
 		$(CONFIG)
 
@@ -2155,7 +2155,7 @@ padring:
 	librelane \
 		--pdk $(PDK) \
 		--flow $(FLOW) \
-		--tag $(TAG)_padring \
+		--run-tag $(TAG)_padring \
 		--to OpenROAD.PadRing \
 		$(CONFIG)
 
@@ -2163,7 +2163,7 @@ run:
 	librelane \
 		--pdk $(PDK) \
 		--flow $(FLOW) \
-		--tag $(TAG) \
+		--ru-ntag $(TAG) \
 		$(CONFIG)
 
 openroad:
