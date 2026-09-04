@@ -1262,6 +1262,10 @@ verilator \
     --lint-only \
     --Wall \
     --Wno-DECLFILENAME \
+    --Wno-PINMISSING \
+    --Wno-MODMISSING \
+    --Wno-UNDRIVEN \
+    --Wno-UNUSEDSIGNAL \
     --top-module chip_top \
     src/io_cells_stub.v \
     src/counter_core.sv \
@@ -1542,7 +1546,7 @@ librelane \
 librelane --dockerized \
     --pdk ihp-sg13g2 \
     --flow Chip \
-    --tag lab15_fullchip \
+    --run-tag lab15_fullchip \
     config.yaml
 ```
 
@@ -2163,7 +2167,7 @@ run:
 	librelane \
 		--pdk $(PDK) \
 		--flow $(FLOW) \
-		--ru-ntag $(TAG) \
+		--run-tag $(TAG) \
 		$(CONFIG)
 
 openroad:
