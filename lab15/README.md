@@ -1354,14 +1354,17 @@ OpenROAD จะไม่พบ instance และ pad-ring generation จะล�
 รัน
 
 ```bash
-librelane --pdk ihp-sg13g2 --flow Chip config.yaml --validate-only
-```
-
-หาก LibreLane version ที่ใช้ไม่มี `--validate-only` ให้ใช้
-
-```bash
 librelane --pdk ihp-sg13g2 --flow Chip config.yaml \
     --to Yosys.Synthesis
+```
+หรือ
+```
+librelane \
+  --pdk ihp-sg13g2 \
+  --flow Chip \
+  --run-tag config_check \
+  --to Yosys.JsonHeader \
+  config.yaml
 ```
 
 หรือเริ่ม flow และตรวจ configuration snapshot ใน run directory
