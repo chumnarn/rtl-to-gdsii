@@ -55,29 +55,31 @@
 
 ### คำสั่งหลัก
 
-\# ติดตั้ง Nix
+```
+# ติดตั้ง Nix
 
 curl -L https://nixos.org/nix/install | sh -s -- --daemon
 
-\# Clone repository
+# Clone repository
 
 git clone https://github.com/chumnarn/heichips26-digital-workshop.git
 
 cd heichips26-digital-workshop
 
-\# เข้า environment
+# เข้า environment
 
 nix-shell
 
-\# ตรวจสอบ LibreLane
+# ตรวจสอบ LibreLane
 
 librelane --version
 
 librelane --smoke-test
 
-\# ตรวจสอบเครื่องมือทั้งหมด
+# ตรวจสอบเครื่องมือทั้งหมด
 
 ./verify_tools.sh
+```
 
 ### เกณฑ์ผ่าน
 
@@ -114,11 +116,12 @@ librelane --smoke-test
 
 ### คำสั่งหลัก
 
-\# Lint check
+```
+# Lint check
 
 verilator --lint-only --Wall --sv rtl/counter.sv
 
-\# คอมไพล์และรัน simulation
+# คอมไพล์และรัน simulation
 
 verilator --binary --trace-fst --sv \
 
@@ -128,15 +131,16 @@ verilator --binary --trace-fst --sv \
 
 ./sim/counter_sim
 
-\# เปิด waveform
+# เปิด waveform
 
 gtkwave waves/counter.fst
 
-\# ใช้ Makefile
+# ใช้ Makefile
 
 make lint
 
 make run
+```
 
 ### เกณฑ์ผ่าน
 
@@ -173,22 +177,25 @@ make run
 
 ### คำสั่งหลัก
 
-\# ตรวจสอบ RTL ก่อน
+```
+# ตรวจสอบ RTL ก่อน
 
 verilator --lint-only --Wall --sv counter.sv
 
 yosys -p "read_verilog -sv counter.sv; hierarchy -check -top counter; check"
 
-\# รัน LibreLane
+# รัน LibreLane
 
 librelane --pdk ihp-sg13g2 config.yaml
 
-\# เปิด GDSII
+# เปิด GDSII
 
 klayout runs/<tag>/final/gds/counter.gds
+```
 
 **ตัวอย่าง `config.yaml`:**
 
+```
 DESIGN_NAME: counter
 
 VERILOG_FILES:
@@ -198,6 +205,7 @@ VERILOG_FILES:
 CLOCK_PORT: clk_i
 
 CLOCK_PERIOD: 10   # 10 ns = 100 MHz
+```
 
 ### เกณฑ์ผ่าน
 
@@ -235,11 +243,12 @@ CLOCK_PERIOD: 10   # 10 ns = 100 MHz
 
 ### คำสั่งหลัก
 
-\# รัน baseline
+```
+# รัน baseline
 
 librelane --pdk ihp-sg13g2 config.yaml
 
-\# ตัวอย่างตัวแปรสำคัญใน config.yaml
+# ตัวอย่างตัวแปรสำคัญใน config.yaml
 
 FP_SIZING: absolute
 
@@ -254,6 +263,7 @@ PL_TARGET_DENSITY_PCT: 55
 FP_PIN_ORDER_CFG: dir::pins.cfg
 
 FP_DEF_TEMPLATE: dir::template.def
+```
 
 ### เกณฑ์ผ่าน
 
@@ -290,35 +300,39 @@ FP_DEF_TEMPLATE: dir::template.def
 
 ### คำสั่งหลัก
 
-\# รัน LibreLane ถึง floorplan เท่านั้น
+```
+# รัน LibreLane ถึง floorplan เท่านั้น
 
 librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.IOPlacement
 
-\# ตรวจสอบ pin
+# ตรวจสอบ pin
 
 make pins    # แสดง pin ครบ 21 ขา
 
-\# เปิด GUI
+# เปิด GUI
 
 openroad -gui
+```
 
 **ตัวอย่าง `pin_order.cfg`:**
 
-\#N
+```
+#N
 
 clk rst_n enable_i load_i
 
-\#E
+#E
 
 data_i\[0\] data_i\[1\] data_i\[2\] data_i\[3\] data_i\[4\] data_i\[5\] data_i\[6\] data_i\[7\]
 
-\#S
+#S
 
 terminal_o
 
-\#W
+#W
 
 count_o\[0\] count_o\[1\] count_o\[2\] count_o\[3\] count_o\[4\] count_o\[5\] count_o\[6\] count_o\[7\]
+```
 
 ### เกณฑ์ผ่าน
 
@@ -353,16 +367,19 @@ count_o\[0\] count_o\[1\] count_o\[2\] count_o\[3\] count_o\[4\] count_o\[5\] co
 
 ### คำสั่งหลัก
 
-\# รัน synthesis และ STA
+```
+# รัน synthesis และ STA
 
 librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.STAPrePNR
 
-\# อ่าน timing report
+# อ่าน timing report
 
 cat runs/<tag>/*/reports/sta/max.rpt | head -60
+```
 
 **ตัวอย่าง `pnr.sdc`:**
 
+```
 create_clock -name clk -period 10.0 [get_ports clk_i]
 
 set_input_delay  -clock clk -max 2.0 [all_inputs]
@@ -372,12 +389,15 @@ set_output_delay -clock clk -max 2.0 [all_outputs]
 set_load 0.01 [all_outputs]
 
 set_clock_uncertainty 0.25 [get_clocks clk]
+```
 
 **เกณฑ์ timing:**
 
+```
 WNS >= 0   (positive slack = pass)
 
 TNS  = 0   (ไม่มี violating endpoint)
+```
 
 ### เกณฑ์ผ่าน
 
@@ -414,11 +434,12 @@ TNS  = 0   (ไม่มี violating endpoint)
 
 ### คำสั่งหลัก
 
-\# รันถึง Detailed Placement
+```
+# รันถึง Detailed Placement
 
 librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.DetailedPlacement
 
-\# ตัวแปรสำคัญ
+# ตัวแปรสำคัญ
 
 FP_CORE_UTIL: 40
 
@@ -427,6 +448,7 @@ PL_TARGET_DENSITY_PCT: 55
 PL_TIMING_DRIVEN: true
 
 PL_ROUTABILITY_DRIVEN: true
+```
 
 ### เกณฑ์ผ่าน
 
@@ -464,11 +486,12 @@ PL_ROUTABILITY_DRIVEN: true
 
 ### คำสั่งหลัก
 
-\# รันถึง CTS
+```
+# รันถึง CTS
 
 librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.CTS
 
-\# ตัวแปร CTS ใน config.yaml
+# ตัวแปร CTS ใน config.yaml
 
 CTS_TARGET_SKEW: 200        # target skew (ps)
 
@@ -481,14 +504,16 @@ CTS_CLK_BUFFER_LIST:
   - sg13g2_buf_4
 
   - sg13g2_buf_8
-
+```
 **เกณฑ์ CTS สำหรับ Workshop:**
 
+```
 Clock skew < 400 ps   → ดี
 
 Clock skew < 600 ps   → ยอมรับได้
 
 Clock skew >= 600 ps  → ต้องปรับแต่ง
+```
 
 ### เกณฑ์ผ่าน
 
@@ -525,11 +550,12 @@ Clock skew >= 600 ps  → ต้องปรับแต่ง
 
 ### คำสั่งหลัก
 
-\# รัน routing ทั้งหมด
+```
+# รัน routing ทั้งหมด
 
 librelane --pdk ihp-sg13g2 config.yaml --to OpenROAD.DetailedRouting
 
-\# ตัวแปรสำคัญ
+# ตัวแปรสำคัญ
 
 GRT_ADJUSTMENT: 0.25         # reserve routing resources
 
@@ -538,9 +564,11 @@ RT_MAX_LAYER: met5           # สูงสุดที่ router ใช้ไ�
 GRT_ALLOW_CONGESTION: false  # ห้ามข้ามเมื่อ overflow > 0
 
 DRT_OPT_ITERS: 64            # iteration ของ detailed router
+```
 
 **Signoff checklist routing:**
 
+```
 Global routing overflow  = 0
 
 Detailed routing DRC     = 0
@@ -548,6 +576,7 @@ Detailed routing DRC     = 0
 Unrouted nets            = 0
 
 Disconnected pins        = 0
+```
 
 ### เกณฑ์ผ่าน
 
@@ -583,25 +612,27 @@ Disconnected pins        = 0
 
 ### คำสั่งหลัก
 
-\# รัน full flow รวม verification
+```
+# รัน full flow รวม verification
 
 librelane --pdk ihp-sg13g2 config.yaml
 
-\# ตรวจสอบผล DRC
+# ตรวจสอบผล DRC
 
 find runs/ -name '*-magic-drc' | sort | tail -1 | xargs ls
 
 cat .../reports/drc_violations.magic.rpt
 
-\# ตรวจสอบ LVS
+# ตรวจสอบ LVS
 
 find runs/ -name '*-netgen-lvs' | sort | tail -1 | xargs ls
 
 grep -i "match\|mismatch" .../reports/lvs.rpt
 
-\# เปิด layout
+# เปิด layout
 
 klayout runs/<tag>/final/gds/counter.gds
+```
 
 ### เกณฑ์ผ่าน
 
@@ -639,17 +670,18 @@ klayout runs/<tag>/final/gds/counter.gds
 
 ### คำสั่งหลัก
 
-\# ดูรายการ options
+```
+# ดูรายการ options
 
 librelane --help
 
-\# หยุดที่ step ที่ต้องการ
+# หยุดที่ step ที่ต้องการ
 
 librelane --pdk ihp-sg13g2 config.yaml \
 
   --to OpenROAD.Floorplan
 
-\# รันจาก step ที่กำหนด
+# รันจาก step ที่กำหนด
 
 librelane --pdk ihp-sg13g2 config.yaml \
 
@@ -657,15 +689,16 @@ librelane --pdk ihp-sg13g2 config.yaml \
 
   --to OpenROAD.DetailedPlacement
 
-\# ข้าม step
+# ข้าม step
 
 librelane --pdk ihp-sg13g2 config.yaml \
 
   --skip KLayout.DRC
 
-\# ดู resolved config
+# ดู resolved config
 
 cat runs/<tag>/resolved.json | python3 -m json.tool | head -40
+```
 
 ### เกณฑ์ผ่าน
 
@@ -701,7 +734,8 @@ cat runs/<tag>/resolved.json | python3 -m json.tool | head -40
 
 ### คำสั่งหลัก
 
-\# รัน LibreLane พร้อม Macro
+```
+# รัน LibreLane พร้อม Macro
 
 librelane --pdk ihp-sg13g2 config.yaml
 
@@ -736,7 +770,7 @@ MACROS:
 FP_MACRO_HORIZONTAL_HALO: 10
 
 FP_MACRO_VERTICAL_HALO: 10
-
+```
 ### เกณฑ์ผ่าน
 
 - [ ] LEF และ GDS โหลดสำเร็จ  
@@ -773,7 +807,8 @@ FP_MACRO_VERTICAL_HALO: 10
 
 ### คำสั่งหลัก
 
-\# Harden block แต่ละตัว
+```
+# Harden block แต่ละตัว
 
 cd blocks/counter_macro
 
@@ -783,17 +818,18 @@ cd blocks/accumulator_macro
 
 librelane --pdk ihp-sg13g2 config.yaml
 
-\# Copy views ไปยัง macros directory
+# Copy views ไปยัง macros directory
 
 cp runs/<tag>/final/gds/counter_macro.gds ../../macros/counter_macro/gds/
 
 cp runs/<tag>/final/lef/counter_macro.lef ../../macros/counter_macro/lef/
 
-\# รัน Top-level
+# รัน Top-level
 
 cd top
 
 librelane --pdk ihp-sg13g2 config.yaml
+```
 
 ### เกณฑ์ผ่าน
 
@@ -829,9 +865,10 @@ librelane --pdk ihp-sg13g2 config.yaml
 
 ### คำสั่งหลัก
 
+```
 from librelane.flows import Flow, FlowError
 
-\# เรียก Classic Flow
+# เรียก Classic Flow
 
 classic_class = Flow.factory.get("Classic")
 
@@ -839,7 +876,7 @@ flow = classic_class("config.yaml", pdk="sky130A")
 
 final_state = flow.start(tag="lab14_run", overwrite=True)
 
-\# อ่านผล
+# อ่านผล
 
 print(flow.run_dir)
 
@@ -847,7 +884,7 @@ print(flow.config_resolved_path)
 
 print(final_state.metrics)
 
-\# Partial flow
+# Partial flow
 
 final_state = flow.start(
 
@@ -861,7 +898,7 @@ final_state = flow.start(
 
 )
 
-\# Parameter sweep
+# Parameter sweep
 
 for period in [10, 8, 6]:
 
@@ -873,7 +910,7 @@ for period in [10, 8, 6]:
 
     print(period, state.metrics.get("design__instance__count"))
 
-\# ตรวจสอบ API
+# ตรวจสอบ API
 
 make check    # import librelane
 
@@ -882,6 +919,7 @@ make flows    # list registered flows
 make steps    # list registered steps
 
 make run      # run Classic Flow
+```
 
 ### เกณฑ์ผ่าน
 
@@ -918,19 +956,20 @@ make run      # run Classic Flow
 
 ### คำสั่งหลัก
 
-\# ตรวจสอบ IO pad cells ใน PDK
+```
+# ตรวจสอบ IO pad cells ใน PDK
 
 grep -R "^module .*Pad\|^module .*PAD" $PDK_ROOT/
 
-\# รัน Chip Flow
+# รัน Chip Flow
 
 librelane --pdk ihp-sg13g2 --flow Chip config.yaml
 
-\# Validate configuration ก่อนรัน
+# Validate configuration ก่อนรัน
 
 librelane --pdk ihp-sg13g2 --flow Chip config.yaml --validate-only
 
-\# เปิด GDSII
+# เปิด GDSII
 
 klayout runs/<tag>/final/gds/chip_top.gds
 
@@ -953,6 +992,7 @@ PAD_CFG: dir::pad/padframe.cfg
 DIE_AREA: [0.0, 0.0, 1000.0, 1000.0]
 
 CORE_AREA: [200.0, 200.0, 800.0, 800.0]
+```
 
 ### เกณฑ์ผ่าน
 
@@ -974,7 +1014,8 @@ CORE_AREA: [200.0, 200.0, 800.0, 800.0]
 
 ### โครงสร้าง config.yaml พื้นฐาน
 
-\# Design identification
+```
+# Design identification
 
 DESIGN_NAME: counter
 
@@ -982,13 +1023,13 @@ VERILOG_FILES:
 
   - dir::rtl/counter.sv
 
-\# Clock
+# Clock
 
 CLOCK_PORT: clk_i
 
 CLOCK_PERIOD: 10          # ns
 
-\# Floorplan
+# Floorplan
 
 FP_SIZING: absolute       # หรือ relative
 
@@ -998,21 +1039,22 @@ CORE_AREA: [20, 20, 280, 280]
 
 FP_CORE_UTIL: 40          # % (ใช้เมื่อ FP_SIZING: relative)
 
-\# Placement
+# Placement
 
 PL_TARGET_DENSITY_PCT: 55
 
 PL_TIMING_DRIVEN: true
 
-\# SDC
+# SDC
 
 PNR_SDC_FILE: dir::constraints/pnr.sdc
 
 SIGNOFF_SDC_FILE: dir::constraints/signoff.sdc
 
-\# IO
+# IO
 
 FP_PIN_ORDER_CFG: dir::pins.cfg
+```
 
 ### ลำดับขั้นตอน RTL-to-GDSII
 
@@ -1040,6 +1082,7 @@ GDSII
 
 ### คำสั่ง LibreLane สำคัญ
 
+```
 librelane --version                           # ตรวจสอบ version
 
 librelane --smoke-test                        # smoke test
@@ -1063,6 +1106,7 @@ librelane --pdk ihp-sg13g2 config.yaml \
 librelane --pdk ihp-sg13g2 --flow Chip \
 
   config.yaml                                 # Chip flow
+```
 
 ### Metrics สำคัญที่ต้องตรวจสอบ
 
