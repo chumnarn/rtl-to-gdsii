@@ -44,6 +44,7 @@ lab09_global_detailed_routing_ihp_sg13g2/
 
 ```bash
 cd lab09_global_detailed_routing_ihp_sg13g2
+chmod +x scripts/*.sh
 make check
 make validate
 ```
