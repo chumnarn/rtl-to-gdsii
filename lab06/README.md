@@ -203,11 +203,7 @@ Arrival time คือเวลาที่ข้อมูลมาถึงป�
 สำหรับ register-to-register path สามารถประมาณได้จาก
 
 ```text
-Data Arrival Time
-= Launch Clock Arrival
-+ Clock-to-Q Delay
-+ Combinational Delay
-+ Routing Delay
+Data Arrival Time = Launch Clock Arrival + Clock-to-Q Delay + Combinational Delay + Routing Delay
 ```
 
 ในขั้น Pre-PnR ยังไม่มีสายสัญญาณจริง ดังนั้น routing delay เป็นเพียงค่าประมาณหรือ wire-load estimate ผล STA ในขั้นนี้จึงเหมาะสำหรับค้นหาปัญหาเชิงโครงสร้างของ RTL แต่ยังไม่ใช่ผล signoff ขั้นสุดท้าย
@@ -221,10 +217,7 @@ Required time คือเวลาช้าที่สุดที่ข้อ
 ตัวอย่างอย่างง่าย:
 
 ```text
-Required Time
-= Clock Period
-- Setup Time
-- Clock Uncertainty
+Required Time = Clock Period - Setup Time - Clock Uncertainty
 ```
 
 ในงานจริงต้องพิจารณาเพิ่มเติม เช่น
