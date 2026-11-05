@@ -58,7 +58,7 @@ copy_required "${macro}.gds" "$dest/gds/${macro}.gds"
 copy_required "${macro}.lef" "$dest/lef/${macro}.lef"
 copy_optional "${macro}.nl.v" "$dest/nl/${macro}.nl.v"
 copy_optional "${macro}.pnl.v" "$dest/pnl/${macro}.pnl.v"
-copy_optional "${macro}.spef" "$dest/spef/${macro}.spef"
+copy_optional "${macro}.nom.spef" "$dest/spef/${macro}.spef"
 copy_optional "${macro}*.lib" "$dest/lib/${macro}.lib"
 copy_optional "${macro}.spice" "$dest/spice/${macro}.spice"
 
