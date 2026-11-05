@@ -223,7 +223,7 @@ lab14-librelane-python-api/
 สร้างไฟล์:
 
 ```bash
-nano src/counter.v
+nano rtl/counter.v
 ```
 
 ใส่เนื้อหาดังนี้:
