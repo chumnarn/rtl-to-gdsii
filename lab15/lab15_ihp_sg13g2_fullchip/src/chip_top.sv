@@ -69,7 +69,7 @@ module chip_top #(
     // Input pads
     // ------------------------------------------------------------
 
-    sg13g2_IOPadIn clk_pad (
+    sg13g2_IOPadIn u_clk_iopad (
 `ifdef USE_POWER_PINS
         .iovdd(IOVDD), .iovss(IOVSS), .vdd(VDD), .vss(VSS),
 `endif
@@ -77,7 +77,7 @@ module chip_top #(
         .pad(clk_PAD)
     );
 
-    sg13g2_IOPadIn rst_n_pad (
+    sg13g2_IOPadIn u_rst_n_iopad (
 `ifdef USE_POWER_PINS
         .iovdd(IOVDD), .iovss(IOVSS), .vdd(VDD), .vss(VSS),
 `endif
@@ -85,7 +85,7 @@ module chip_top #(
         .pad(rst_n_PAD)
     );
 
-    sg13g2_IOPadIn enable_pad (
+    sg13g2_IOPadIn u_enable_iopad (
 `ifdef USE_POWER_PINS
         .iovdd(IOVDD), .iovss(IOVSS), .vdd(VDD), .vss(VSS),
 `endif
