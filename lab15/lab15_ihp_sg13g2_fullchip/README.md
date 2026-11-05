@@ -23,6 +23,7 @@ pad-wrapped chip.
 
 ```bash
 unzip lab15_ihp_sg13g2_fullchip.zip
+
 cd lab15_ihp_sg13g2_fullchip
 
 make preflight
