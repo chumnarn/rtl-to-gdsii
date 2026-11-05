@@ -189,7 +189,7 @@ Classic Flow ซึ่งเป็น flow เริ่มต้นของ Lib
 สร้าง directory สำหรับ Lab:
 
 ```bash
-mkdir -p lab14-librelane-python-api/{src,scripts,reports}
+mkdir -p lab14-librelane-python-api/{rtl,scripts,reports}
 cd lab14-librelane-python-api
 ```
 
@@ -199,7 +199,7 @@ cd lab14-librelane-python-api
 lab14-librelane-python-api/
 ├── config.yaml
 ├── Makefile
-├── src/
+├── rtl/
 │   └── counter.v
 ├── scripts/
 │   ├── 01_check_api.py
@@ -276,7 +276,7 @@ meta:
 DESIGN_NAME: counter
 
 VERILOG_FILES:
-  - dir::src/counter.v
+  - dir::rtl/counter.v
 
 CLOCK_PORT: clk
 CLOCK_PERIOD: 10.0
@@ -329,7 +329,7 @@ DESIGN_NAME: counter
 
 ```yaml
 VERILOG_FILES:
-  - dir::src/counter.v
+  - dir::rtl/counter.v
 ```
 
 `dir::` หมายถึง path ที่อ้างอิงจาก directory ของ `config.yaml`
