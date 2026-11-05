@@ -117,7 +117,7 @@ bad-clock: validate $(PDK_ROOT)/$(PDK)
 	@./scripts/run_flow.sh configs/config_bad_clock.yaml bad_clock
 
 nodrc: validate $(PDK_ROOT)/$(PDK)
-	@./scripts/run_flow.sh config.yaml nodrc --skip KLayout.DRC --skip Magic.DRC --skip KLayout.Antenna --skip KLayout.Density
+	@./scripts/run_flow.sh config.yaml nodrc --skip KLayout.DRC --skip Magic.DRC 
 
 magic-drc: validate $(PDK_ROOT)/$(PDK)
 	@./scripts/run_flow.sh config.yaml magic_drc --skip KLayout.DRC
