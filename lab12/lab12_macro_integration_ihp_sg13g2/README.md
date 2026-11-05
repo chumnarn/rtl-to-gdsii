@@ -58,8 +58,10 @@ librelane config.yaml \
 ```bash
 cd lab12_macro_integration_ihp_sg13g2
 
+make clone-pdk
+
 # กำหนดตำแหน่ง PDK หากไม่ได้อยู่ที่ ./IHP-Open-PDK
-export PDK_ROOT=/absolute/path/to/IHP-Open-PDK
+export PDK_ROOT=$PWD/IHP-Open-PDK
 export PDK=ihp-sg13g2
 
 make check
