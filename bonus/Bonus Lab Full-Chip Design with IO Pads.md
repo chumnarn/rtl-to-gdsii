@@ -173,7 +173,7 @@ Seal Ring มีหน้าที่ช่วย
 เข้าสู่ไดเรกทอรี Repository แล้วตรวจสอบโครงสร้างของโฟลเดอร์ `bonus`
 
 ```bash
-cd heichips26-digital-workshop/bonus
+cd bonus
 find . -maxdepth 4 -type f | sort
 ```
 
@@ -216,7 +216,7 @@ bonus/
 ### 5.1 เข้าสู่โฟลเดอร์ Repository
 
 ```bash
-cd heichips26-digital-workshop
+cd rtl-to-gdsii
 ```
 
 ตรวจสอบตำแหน่งปัจจุบัน
