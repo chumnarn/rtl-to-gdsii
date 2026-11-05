@@ -1,12 +1,11 @@
 # คู่มือ Lab 14 — LibreLane Python API Programming
-## อธิบายรายละเอียดการทำงานของ Python Scripts ทั้ง 11 ไฟล์
+## รายละเอียดการทำงานของ Python Scripts ทั้ง 11 ไฟล์
 ### RTL-to-GDSII Workshop ด้วย IHP SG13G2 PDK
 
-ผมตรวจสอบ Source Code จริงจาก GitHub Repository ของอาจารย์ครบทั้ง 11 ไฟล์แล้ว ประกอบด้วย Python Scripts หมายเลข 01–10 และไฟล์ `common.py` ซึ่งใช้เป็น Shared Library
 
 แหล่งข้อมูล: [chumnarn/rtl-to-gdsii — Lab 14 Python Scripts](https://github.com/chumnarn/rtl-to-gdsii/tree/main/lab14/lab14_librelane_python_api/scripts?utm_source=chatgpt.com)
 
-เนื้อหาต่อไปนี้สามารถใช้ประกอบ **คู่มืออบรม Lab 14 — LibreLane Python API** โดยจะอธิบายหลักการทำงาน โครงสร้างโปรแกรม API ที่ใช้ ลำดับการประมวลผล ผลลัพธ์ และข้อควรระวังในการนำไปประยุกต์ใช้กับ ASIC Physical Design
+อธิบายหลักการทำงาน โครงสร้างโปรแกรม API ที่ใช้ ลำดับการประมวลผล ผลลัพธ์ และข้อควรระวังในการนำไปประยุกต์ใช้กับ ASIC Physical Design
 
 ---
 
