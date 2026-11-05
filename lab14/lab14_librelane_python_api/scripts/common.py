@@ -38,7 +38,7 @@ def make_flow(
 ):
     ensure_project_layout()
     flow_class = get_flow_class("Classic")
-    sources = CONFIG_FILE if config_sources is None else config_sources
+    sources = str(CONFIG_FILE) if config_sources is None else config_sources
     return flow_class(
         sources,
         pdk=pdk or DEFAULT_PDK,
