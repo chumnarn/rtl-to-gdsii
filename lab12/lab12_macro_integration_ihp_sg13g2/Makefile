@@ -82,7 +82,6 @@ open-macro: ## Open the last/specified macro run in OpenROAD
 		--pdk-root "$(PDK_ROOT)" \
 		--manual-pdk \
 		--run-tag "$(MACRO_RUN_TAG)" \
-#		--last-run \
 		--flow OpenInOpenROAD
 
 open-top: ## Open the last/specified top run in OpenROAD
@@ -92,7 +91,6 @@ open-top: ## Open the last/specified top run in OpenROAD
 		--pdk-root "$(PDK_ROOT)" \
 		--manual-pdk \
 		--run-tag "$(TOP_RUN_TAG)" \
-#		--last-run \
 		--flow OpenInOpenROAD
 
 klayout-top: ## Open integrated top-level GDS in KLayout
@@ -102,7 +100,6 @@ klayout-top: ## Open integrated top-level GDS in KLayout
 		--pdk-root "$(PDK_ROOT)" \
 		--manual-pdk \
 		--run-tag "$(TOP_RUN_TAG)" \
-#		--last-run \
 		--flow OpenInKLayout
 
 clean-runs: ## Remove LibreLane runs and final views
