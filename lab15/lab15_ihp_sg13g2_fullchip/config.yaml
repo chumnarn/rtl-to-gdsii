@@ -26,9 +26,9 @@ PRIMARY_GDSII_STREAMOUT_TOOL: klayout
 # ------------------------------------------------------------
 
 PAD_SOUTH:
-  - clk_pad
-  - rst_n_pad
-  - enable_pad
+  - u_clk_iopad
+  - u_rst_n_iopad
+  - u_enable_iopad
 
 PAD_EAST:
   - "outputs\\[0\\].output_pad"
@@ -57,7 +57,7 @@ SIGNOFF_SDC_FILE: dir::constraints/chip_top.sdc
 FALLBACK_SDC: dir::constraints/chip_top.sdc
 
 CLOCK_PORT: clk_PAD
-CLOCK_NET: clk_pad/p2c
+CLOCK_NET: u_clk_iopad/p2c
 CLOCK_PERIOD: 20.0
 
 # ------------------------------------------------------------
