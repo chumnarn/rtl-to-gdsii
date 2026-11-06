@@ -216,7 +216,7 @@ bonus/
 ### 5.1 เข้าสู่โฟลเดอร์ Repository
 
 ```bash
-cd rtl-to-gdsii
+cd rtl-to-gdsii/bonus
 ```
 
 ตรวจสอบตำแหน่งปัจจุบัน
@@ -230,7 +230,7 @@ pwd
 จาก Root Directory ของ Repository ให้เรียก
 
 ```bash
-nix-shell
+nix-shell ~/eda/librelane/shell.nix
 ```
 
 หรือในกรณีที่ Repository กำหนด Flake Environment
