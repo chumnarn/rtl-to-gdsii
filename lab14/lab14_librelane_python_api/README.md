@@ -154,6 +154,12 @@ make gui
 make klayout
 ```
 
+
+![OpenInOpenRoad](lab14_gui.png)
+![OpenInOpenRoad](lab14_gui_cts.png)
+![Klayout](lab14_klayout.png)
+
+
 ## Configuration สำคัญ
 
 ```yaml
