@@ -41,6 +41,10 @@ make openroad
 make klayout
 ```
 
+![OpenInOpenRoad](lab15.png)
+
+![Klayout](lab15klayout.png)
+
 ## Clock and floorplan
 
 - Clock period: `20 ns` or `50 MHz`
