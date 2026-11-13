@@ -124,9 +124,7 @@ verilator --lint-only --Wall --sv rtl/counter.sv
 # คอมไพล์และรัน simulation
 
 verilator --binary --trace-fst --sv \
-
   rtl/counter.sv tb/counter_tb.sv \
-
   -o sim/counter_sim
 
 ./sim/counter_sim
@@ -678,21 +676,17 @@ librelane --help
 # หยุดที่ step ที่ต้องการ
 
 librelane --pdk ihp-sg13g2 config.yaml \
-
   --to OpenROAD.Floorplan
 
 # รันจาก step ที่กำหนด
 
 librelane --pdk ihp-sg13g2 config.yaml \
-
   --from OpenROAD.GlobalPlacement \
-
   --to OpenROAD.DetailedPlacement
 
 # ข้าม step
 
 librelane --pdk ihp-sg13g2 config.yaml \
-
   --skip KLayout.DRC
 
 # ดู resolved config
@@ -973,8 +967,10 @@ librelane --pdk ihp-sg13g2 --flow Chip config.yaml --validate-only
 
 klayout runs/<tag>/final/gds/chip_top.gds
 
+```
 **ตัวอย่าง `config.yaml` สำหรับ Chip Flow:**
 
+```
 DESIGN_NAME: chip_top
 
 VERILOG_FILES:
@@ -1090,21 +1086,16 @@ librelane --smoke-test                        # smoke test
 librelane --pdk ihp-sg13g2 config.yaml        # รัน full flow
 
 librelane --pdk ihp-sg13g2 config.yaml \
-
   --to OpenROAD.Floorplan                     # หยุดที่ step
 
 librelane --pdk ihp-sg13g2 config.yaml \
-
   --from OpenROAD.GlobalPlacement \
-
   --to OpenROAD.DetailedPlacement             # รันช่วงที่ระบุ
 
 librelane --pdk ihp-sg13g2 config.yaml \
-
   --skip KLayout.DRC                          # ข้าม step
 
 librelane --pdk ihp-sg13g2 --flow Chip \
-
   config.yaml                                 # Chip flow
 ```
 
